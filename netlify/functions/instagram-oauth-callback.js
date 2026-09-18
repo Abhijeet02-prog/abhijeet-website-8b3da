@@ -42,14 +42,7 @@ export default async (req) => {
     const shortRes = await fetch("https://api.instagram.com/oauth/access_token", { method: "POST", body: form });
     const shortJson = await shortRes.json();
     if (!shortJson.access_token) {
-      const debug = {
-        appId,
-        appIdLength: appId.length,
-        appSecretLength: appSecret.length,
-        redirectUri,
-        redirectUriLength: redirectUri.length
-      };
-      return html(`<h1>Token exchange failed</h1><pre>${escapeHtml(JSON.stringify(shortJson, null, 2))}</pre><pre>DEBUG: ${escapeHtml(JSON.stringify(debug, null, 2))}</pre>`, 500);
+      return html(`<h1>Token exchange failed</h1><pre>${escapeHtml(JSON.stringify(shortJson, null, 2))}</pre>`, 500);
     }
 
     // Step 2: short-lived -> 60-day long-lived token
