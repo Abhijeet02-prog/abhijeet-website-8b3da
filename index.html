@@ -544,7 +544,6 @@
   ];
 
   var INSTRUMENTS = ["Piano","Flute","Glass Harp","Melodica","Xylophone","Kalimba","Ocarina"];
-  var INSTRUMENT_PLACEHOLDERS = 5; // "12+ instruments" total — list the rest here
 
   var PASSIONS = [
     {stat:"10+ years, competitive", title:"Corporate Cricket", body:"Trained for over a decade and still playing competitively. At this point it's less a hobby than a second discipline."},
@@ -781,15 +780,12 @@
   }
 
   function pageMusic(){
-    var placeholders = '';
-    for(var i=0;i<INSTRUMENT_PLACEHOLDERS;i++){ placeholders += '<span class="pill placeholder">+ add instrument</span>'; }
     return (
       '<section class="hero">'+
         '<div class="eyebrow">Music</div>'+
         '<h1>More than a dozen instruments.<br><em>Same ear for all of them.</em></h1>'+
         '<p class="lede">Music isn\'t background here &mdash; it\'s its own serious practice, running alongside everything else. Here\'s what I currently play, more than twelve instruments and counting:</p>'+
-        '<div class="pill-grid">'+ INSTRUMENTS.map(function(i){return '<span class="pill">'+i+'</span>';}).join('') + placeholders +'</div>'+
-        '<p class="placeholder-note">The dashed pills are placeholders &mdash; add the rest of the instrument list here.</p>'+
+        '<div class="pill-grid">'+ INSTRUMENTS.map(function(i){return '<span class="pill">'+i+'</span>';}).join('') +'</div>'+
       '</section>'+
       '<section>'+
         '<div class="section-head"><div class="eyebrow">Off the page</div><h2>The music account</h2><p>Clips, covers, and whatever\'s sitting on the stand this week.</p></div>'+
@@ -807,11 +803,12 @@
         '<a href="#/contact" class="btn btn-primary" data-route>Pitch me / ask for mentoring</a>'+
       '</section>'+
       '<section>'+
-        '<div class="section-head"><h2>Portfolio &amp; founders mentored</h2><p>Placeholder cards below &mdash; replace with real names, logos and one-line descriptions as they\'re ready to be public.</p></div>'+
-        '<div class="card-grid">'+
-          [1,2,3,4].map(function(n){
-            return '<div class="info-card"><span class="stat">Placeholder</span><h3>Company / Founder '+n+'</h3><p>One line on what they do and how you\'re involved.</p></div>';
-          }).join('')+
+        '<div class="section-head"><h2>Portfolio &amp; founders mentored</h2></div>'+
+        '<div class="blog-teaser">'+
+          '<div class="eyebrow">Building in public, soon</div>'+
+          '<h3>The names are coming, once the founders are ready to be public.</h3>'+
+          '<p>I\'m already backing a few early-stage founders and keeping this section deliberately empty until they\'re ready to be named here. If you want the details sooner, just ask.</p>'+
+          '<a href="#/contact" class="btn btn-ghost" data-route>Ask who I&rsquo;m backing</a>'+
         '</div>'+
       '</section>'
     );
@@ -859,14 +856,12 @@
             '</div>'+
             '<div class="field"><label for="c-msg">Message</label><textarea id="c-msg" name="Message" required></textarea></div>'+
             '<button class="btn btn-primary" type="submit" style="justify-self:start;">Send message</button>'+
-            '<p class="placeholder-note">First submission on a new domain triggers a one-time confirmation email from FormSubmit to '+EMAIL+' &mdash; approve it once and every message after that lands straight in the inbox.</p>'+
           '</form>'+
           '<div class="side-card">'+
             '<h3 style="margin-top:0;">Prefer email?</h3>'+
             '<a class="email" href="mailto:'+EMAIL+'">'+EMAIL+'</a>'+
             '<p style="margin-top:16px; color:var(--ink-soft); font-size:14px;">Messages from the form above land here too, so use whichever\'s easier for you.</p>'+
             '<div class="social-row">'+
-              '<a href="#" data-route="false">LinkedIn &middot; add link</a>'+
               socialLink('music', 'Instagram (music)')+
               socialLink('writing', 'Instagram (writing)')+
             '</div>'+
