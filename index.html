@@ -311,7 +311,9 @@
       position: sticky;
       top: env(safe-area-inset-top, 0px);
       z-index: 50;
+      background: var(--paper);
       background: color-mix(in srgb, var(--paper) 88%, transparent);
+      -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
     }
