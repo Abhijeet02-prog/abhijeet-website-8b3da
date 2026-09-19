@@ -1,5 +1,16 @@
 import { Redis } from "@upstash/redis";
 
+// See api/instagram-media.js for why this doesn't use Redis.fromEnv():
+// Vercel's "Upstash for Redis" marketplace integration names the env vars
+// KV_REST_API_URL / KV_REST_API_TOKEN, not the UPSTASH_REDIS_REST_* names
+// fromEnv() looks for.
+function getRedis() {
+    const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+    const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+    if (!url || !token) throw new Error("no Redis REST URL/token found in environment (checked UPSTASH_REDIS_REST_* and KV_REST_API_*)");
+    return new Redis({ url, token });
+}
+
 export default async function handler(req, res) {
     const url = new URL(req.url, `https://${req.headers.host}`);
     const code = url.searchParams.get("code");
@@ -14,7 +25,7 @@ export default async function handler(req, res) {
         const tokenData = await tokenRes.json();
         if (!tokenRes.ok || !tokenData.access_token) return page(res, `<h1>Token exchange failed</h1><pre>${escapeHtml(JSON.stringify(tokenData, null, 2))}</pre>`, 500);
         const profileData = await (await fetch("https://api.linkedin.com/v2/userinfo", { headers: { Authorization: `Bearer ${tokenData.access_token}` } })).json();
-        await Redis.fromEnv().set("linkedin-token:primary", { access_token: tokenData.access_token, refresh_token: tokenData.refresh_token || null, expires_in: tokenData.expires_in || 3600, obtained_at: Date.now(), profile: profileData || null });
+        await getRedis().set("linkedin-token:primary", { access_token: tokenData.access_token, refresh_token: tokenData.refresh_token || null, expires_in: tokenData.expires_in || 3600, obtained_at: Date.now(), profile: profileData || null });
         return page(res, "<h1>LinkedIn connected</h1><p>The account is ready to post.</p>", 200);
     } catch (err) { return page(res, `<h1>Unexpected error</h1><pre>${escapeHtml(String(err))}</pre>`, 500); }
 }
