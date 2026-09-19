@@ -2,6 +2,17 @@ import { Redis } from "@upstash/redis";
 
 const ACCOUNTS = ["music", "writing"];
 
+// See api/instagram-media.js for why this doesn't use Redis.fromEnv():
+// Vercel's "Upstash for Redis" marketplace integration names the env vars
+// KV_REST_API_URL / KV_REST_API_TOKEN, not the UPSTASH_REDIS_REST_* names
+// fromEnv() looks for.
+function getRedis() {
+    const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+    const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+    if (!url || !token) throw new Error("no Redis REST URL/token found in environment (checked UPSTASH_REDIS_REST_* and KV_REST_API_*)");
+    return new Redis({ url, token });
+}
+
 export default async function handler(req, res) {
     const url = new URL(req.url, `https://${req.headers.host}`);
     const code = url.searchParams.get("code");
@@ -23,7 +34,7 @@ export default async function handler(req, res) {
         const longJson = await (await fetch(longUrl)).json();
         if (!longJson.access_token) return page(res, `<h1>Long-lived token exchange failed</h1><pre>${escapeHtml(JSON.stringify(longJson, null, 2))}</pre>`, 500);
 
-        await Redis.fromEnv().set(`instagram-token:${state}`, { access_token: longJson.access_token, obtained_at: Date.now(), expires_in: longJson.expires_in || 5184000 });
+        await getRedis().set(`instagram-token:${state}`, { access_token: longJson.access_token, obtained_at: Date.now(), expires_in: longJson.expires_in || 5184000 });
         return page(res, `<h1>Connected</h1><p>The <strong>${escapeHtml(state)}</strong> Instagram account is linked.</p>`, 200);
     } catch (err) {
         return page(res, `<h1>Unexpected error</h1><pre>${escapeHtml(String(err))}</pre>`, 500);
