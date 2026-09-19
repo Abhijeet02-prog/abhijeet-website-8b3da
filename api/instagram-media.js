@@ -9,7 +9,20 @@ export default async function handler(req, res) {
     const account = new URL(req.url, `https://${req.headers.host}`).searchParams.get("account");
     if (!ACCOUNTS.includes(account)) return res.status(400).json({ error: "invalid_account" });
 
-    const tokenData = await Redis.fromEnv().get(`instagram-token:${account}`);
+    // Redis.fromEnv() throws synchronously if UPSTASH_REDIS_REST_URL /
+    // UPSTASH_REDIS_REST_TOKEN aren't set on this project, and any network
+    // hiccup talking to Upstash throws too. Either used to crash the whole
+    // function (500 FUNCTION_INVOCATION_FAILED), which left the frontend's
+    // "Loading latest posts..." spinner unresolved instead of falling back
+    // to the plain Follow-button UI it already knows how to show. Catching
+    // it here means a misconfigured or unreachable Redis degrades to that
+    // same graceful fallback instead of a hard failure.
+    let tokenData;
+    try {
+        tokenData = await Redis.fromEnv().get(`instagram-token:${account}`);
+    } catch (err) {
+        return res.status(200).json({ connected: false, items: [], error: "redis_unavailable", detail: String(err) });
+    }
     if (!tokenData?.access_token) return res.status(200).json({ connected: false, items: [] });
 
     const featuredShortcodes = ((featuredPosts && featuredPosts[account]) || [])
