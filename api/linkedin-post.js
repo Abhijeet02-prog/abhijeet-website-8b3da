@@ -1,10 +1,26 @@
 import { Redis } from "@upstash/redis";
 
+// See api/instagram-media.js for why this doesn't use Redis.fromEnv():
+// Vercel's "Upstash for Redis" marketplace integration names the env vars
+// KV_REST_API_URL / KV_REST_API_TOKEN, not the UPSTASH_REDIS_REST_* names
+// fromEnv() looks for.
+function getRedis() {
+    const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+    const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+    if (!url || !token) throw new Error("no Redis REST URL/token found in environment (checked UPSTASH_REDIS_REST_* and KV_REST_API_*)");
+    return new Redis({ url, token });
+}
+
 export default async function handler(req, res) {
     if (req.method !== "POST") return res.status(405).json({ error: "method_not_allowed" });
     const text = String(req.body?.text || "").trim();
     if (!text) return res.status(400).json({ error: "text_required" });
-    const tokenData = await Redis.fromEnv().get("linkedin-token:primary");
+    let tokenData;
+    try {
+        tokenData = await getRedis().get("linkedin-token:primary");
+    } catch (err) {
+        return res.status(500).json({ error: "redis_unavailable", detail: String(err) });
+    }
     if (!tokenData?.access_token) return res.status(401).json({ error: "linkedin_not_connected" });
     try {
         const profileRes = await fetch("https://api.linkedin.com/v2/userinfo", { headers: { Authorization: `Bearer ${tokenData.access_token}` } });
