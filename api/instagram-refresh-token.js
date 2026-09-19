@@ -2,15 +2,26 @@ import { Redis } from "@upstash/redis";
 
 const ACCOUNTS = ["music", "writing"];
 
+// See api/instagram-media.js for why this doesn't use Redis.fromEnv():
+// Vercel's "Upstash for Redis" marketplace integration names the env vars
+// KV_REST_API_URL / KV_REST_API_TOKEN, not the UPSTASH_REDIS_REST_* names
+// fromEnv() looks for.
+function getRedis() {
+    const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+    const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+    if (!url || !token) throw new Error("no Redis REST URL/token found in environment (checked UPSTASH_REDIS_REST_* and KV_REST_API_*)");
+    return new Redis({ url, token });
+}
+
 export default async function handler(req, res) {
     if (req.headers.authorization !== `Bearer ${process.env.CRON_SECRET}`) return res.status(401).send("Unauthorized");
-    // Same reasoning as api/instagram-media.js: Redis.fromEnv() throws
-    // synchronously if Upstash isn't configured/reachable. Left uncaught,
-    // that crashes the whole daily cron run (500) instead of reporting a
-    // clear per-run status — catch it once, up front, and report it.
+    // Same reasoning as api/instagram-media.js: a bad/missing Redis config
+    // throws synchronously. Left uncaught, that crashes the whole daily
+    // cron run (500) instead of reporting a clear per-run status — catch
+    // it once, up front, and report it.
     let redis;
     try {
-        redis = Redis.fromEnv();
+        redis = getRedis();
     } catch (err) {
         return res.status(200).json({ error: "redis_unavailable", detail: String(err) });
     }
