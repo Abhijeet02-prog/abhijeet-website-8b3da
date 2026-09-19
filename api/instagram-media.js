@@ -5,21 +5,33 @@ const ACCOUNTS = ["music", "writing"];
 const DEFAULT_LIMIT = 3;
 const FIELDS = "id,caption,media_type,media_url,permalink,thumbnail_url,timestamp";
 
+// Redis.fromEnv() only looks for UPSTASH_REDIS_REST_URL / _TOKEN. Vercel's
+// own "Upstash for Redis" marketplace integration (Storage tab) instead
+// creates KV_REST_API_URL / KV_REST_API_TOKEN (legacy Vercel KV naming),
+// so fromEnv() silently found nothing and every request failed with
+// "Failed to parse URL from /pipeline". Building the client explicitly
+// from whichever pair is actually present avoids depending on which
+// naming convention this project's storage integration happens to use.
+function getRedis() {
+    const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+    const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+    if (!url || !token) throw new Error("no Redis REST URL/token found in environment (checked UPSTASH_REDIS_REST_* and KV_REST_API_*)");
+    return new Redis({ url, token });
+}
+
 export default async function handler(req, res) {
     const account = new URL(req.url, `https://${req.headers.host}`).searchParams.get("account");
     if (!ACCOUNTS.includes(account)) return res.status(400).json({ error: "invalid_account" });
 
-    // Redis.fromEnv() throws synchronously if UPSTASH_REDIS_REST_URL /
-    // UPSTASH_REDIS_REST_TOKEN aren't set on this project, and any network
-    // hiccup talking to Upstash throws too. Either used to crash the whole
-    // function (500 FUNCTION_INVOCATION_FAILED), which left the frontend's
+    // Any Redis config/network problem used to crash the whole function
+    // (500 FUNCTION_INVOCATION_FAILED), which left the frontend's
     // "Loading latest posts..." spinner unresolved instead of falling back
     // to the plain Follow-button UI it already knows how to show. Catching
     // it here means a misconfigured or unreachable Redis degrades to that
     // same graceful fallback instead of a hard failure.
     let tokenData;
     try {
-        tokenData = await Redis.fromEnv().get(`instagram-token:${account}`);
+        tokenData = await getRedis().get(`instagram-token:${account}`);
     } catch (err) {
         return res.status(200).json({ connected: false, items: [], error: "redis_unavailable", detail: String(err) });
     }
