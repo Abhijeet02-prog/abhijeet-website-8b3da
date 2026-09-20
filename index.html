@@ -638,6 +638,13 @@
       color: var(--soft);
     }
 
+    .quote-author {
+      display: block;
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
     .note-card {
       display: grid;
       gap: 14px;
@@ -717,18 +724,6 @@
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
       box-shadow: var(--shadow);
       padding: 24px;
-    }
-
-    .music-hero::before {
-      content: "";
-      position: absolute;
-      inset: 22px auto auto 18px;
-      width: 72%;
-      height: 68%;
-      border-radius: 22px;
-      background: linear-gradient(135deg, rgba(214, 120, 177, 0.24), rgba(247, 189, 90, 0.18), rgba(255, 255, 255, 0.03));
-      filter: blur(4px);
-      opacity: 0.9;
     }
 
     .music-hero>*,
@@ -1259,6 +1254,7 @@
             <span class="quote-mark">"</span>
             <p>My birth was celebrated within my family. I wish my death would be remembered by the world.</p>
             <strong>Thoughts at 02</strong>
+            <span class="quote-author">— Abhijeet Toshniwal</span>
           </article>
 
           <article class="quote-card">
@@ -1266,6 +1262,7 @@
             <p>Knowledge fills the mind, logic creates the subject. The right time is everything, whether in
               relationships or work.</p>
             <strong>Writing / reflection</strong>
+            <span class="quote-author">— Abhijeet Toshniwal</span>
           </article>
         </div>
       </div>
@@ -1286,15 +1283,6 @@
             <h3>Every instrument teaches a different way to listen.</h3>
             <p>I have spent years learning through sound — not just for performance, but for feeling, focus, and
               creative depth.</p>
-
-            <div class="wave-bars" aria-hidden="true">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
 
             <div class="music-footer-note">12+ instruments</div>
           </article>
