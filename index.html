@@ -751,18 +751,6 @@
       padding: 24px;
     }
 
-    .music-hero::before {
-      content: "";
-      position: absolute;
-      inset: 22px auto auto 18px;
-      width: 72%;
-      height: 68%;
-      border-radius: 22px;
-      background: linear-gradient(135deg, rgba(214, 120, 177, 0.24), rgba(247, 189, 90, 0.18), rgba(255, 255, 255, 0.03));
-      filter: blur(4px);
-      opacity: 0.9;
-    }
-
     .music-hero>*,
     .music-card>* {
       position: relative;
@@ -780,62 +768,6 @@
     .music-card p {
       color: rgba(246, 232, 255, 0.78);
       font-size: 15px;
-    }
-
-    .wave-bars {
-      display: flex;
-      align-items: end;
-      gap: 7px;
-      height: 58px;
-      margin-top: 18px;
-    }
-
-    .wave-bars span {
-      flex: 1;
-      border-radius: 999px 999px 0 0;
-      background: linear-gradient(180deg, rgba(247, 189, 90, 0.9), rgba(214, 120, 177, 0.5));
-      animation: pulse 1.5s ease-in-out infinite alternate;
-    }
-
-    .wave-bars span:nth-child(1) {
-      height: 30%;
-    }
-
-    .wave-bars span:nth-child(2) {
-      height: 60%;
-      animation-delay: 0.2s;
-    }
-
-    .wave-bars span:nth-child(3) {
-      height: 90%;
-      animation-delay: 0.35s;
-    }
-
-    .wave-bars span:nth-child(4) {
-      height: 50%;
-      animation-delay: 0.5s;
-    }
-
-    .wave-bars span:nth-child(5) {
-      height: 100%;
-      animation-delay: 0.15s;
-    }
-
-    .wave-bars span:nth-child(6) {
-      height: 70%;
-      animation-delay: 0.3s;
-    }
-
-    @keyframes pulse {
-      from {
-        transform: scaleY(0.88);
-        opacity: 0.8;
-      }
-
-      to {
-        transform: scaleY(1.08);
-        opacity: 1;
-      }
     }
 
     .music-card-grid {
@@ -1340,15 +1272,6 @@
             <h3>Every instrument teaches a different way to listen.</h3>
             <p>I have spent years learning through sound — not just for performance, but for feeling, focus, and
               creative depth.</p>
-
-            <div class="wave-bars" aria-hidden="true">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
 
             <div class="music-footer-note">12+ instruments</div>
             <a class="follow-link" href="https://www.instagram.com/abhijeet.acoustic02?stkn=MXMwcjFuZDNjNWMzMQ%3D%3D"
