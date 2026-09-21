@@ -639,10 +639,35 @@
     }
 
     .quote-author {
-      display: block;
-      margin-top: 6px;
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .follow-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+      color: var(--accent);
       font-size: 13px;
-      color: var(--muted);
+      font-weight: 800;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .follow-link:hover {
+      color: var(--text);
+      transform: translateX(3px);
+    }
+
+    .brand-icon {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      flex: 0 0 auto;
     }
 
     .note-card {
@@ -724,6 +749,18 @@
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
       box-shadow: var(--shadow);
       padding: 24px;
+    }
+
+    .music-hero::before {
+      content: "";
+      position: absolute;
+      inset: 22px auto auto 18px;
+      width: 72%;
+      height: 68%;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(214, 120, 177, 0.24), rgba(247, 189, 90, 0.18), rgba(255, 255, 255, 0.03));
+      filter: blur(4px);
+      opacity: 0.9;
     }
 
     .music-hero>*,
@@ -1102,7 +1139,7 @@
             into systems that scale, stories that convert, and products people remember.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#contact">Let's work together</a>
+            <a class="btn btn-primary" href="#contact">Let’s work together</a>
             <a class="btn btn-secondary" href="#work">See what I do</a>
           </div>
           <div class="hero-meta">
@@ -1181,10 +1218,24 @@
           </article>
 
           <article class="feature-card">
-            <div class="feature-icon">▣</div>
-            <h3>Operations</h3>
-            <p>Systems and processes that let teams scale without friction, confusion, or drag.</p>
-            <span class="feature-meta">Systems → scale</span>
+            <div class="feature-icon">₹</div>
+            <h3>Finance</h3>
+            <p>Practical thinking around money, markets, and building a stronger financial foundation.</p>
+            <span class="feature-meta">Money → clarity</span>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">↗</div>
+            <h3>Share market</h3>
+            <p>Learning how businesses, markets, and long-term investing create meaningful value.</p>
+            <span class="feature-meta">Markets → insight</span>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">◌</div>
+            <h3>Personal finance</h3>
+            <p>Simple habits and informed decisions for earning, saving, investing, and growing with intention.</p>
+            <span class="feature-meta">Habits → freedom</span>
           </article>
         </div>
       </div>
@@ -1251,18 +1302,24 @@
 
         <div class="quotes">
           <article class="quote-card">
-            <span class="quote-mark">"</span>
+            <span class="quote-mark">“</span>
             <p>My birth was celebrated within my family. I wish my death would be remembered by the world.</p>
-            <strong>Thoughts at 02</strong>
-            <span class="quote-author">— Abhijeet Toshniwal</span>
+            <strong class="quote-author">— Abhijeet Toshniwal</strong>
+            <a class="follow-link" href="https://www.instagram.com/thoughts_at_02?stkn=MXBjM3ltMnprYWdkYQ%3D%3D"
+              target="_blank" rel="noreferrer">
+              <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8Zm8.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
+              </svg>
+              For more such thoughts, follow
+            </a>
           </article>
 
           <article class="quote-card">
-            <span class="quote-mark">"</span>
+            <span class="quote-mark">“</span>
             <p>Knowledge fills the mind, logic creates the subject. The right time is everything, whether in
               relationships or work.</p>
-            <strong>Writing / reflection</strong>
-            <span class="quote-author">— Abhijeet Toshniwal</span>
+            <strong class="quote-author">— Abhijeet Toshniwal</strong>
           </article>
         </div>
       </div>
@@ -1284,7 +1341,24 @@
             <p>I have spent years learning through sound — not just for performance, but for feeling, focus, and
               creative depth.</p>
 
+            <div class="wave-bars" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+
             <div class="music-footer-note">12+ instruments</div>
+            <a class="follow-link" href="https://www.instagram.com/abhijeet.acoustic02?stkn=MXMwcjFuZDNjNWMzMQ%3D%3D"
+              target="_blank" rel="noreferrer">
+              <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8Zm8.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0-3 3Z" />
+              </svg>
+              For more music, follow
+            </a>
           </article>
 
           <div class="music-card-grid">
@@ -1308,8 +1382,8 @@
       <div class="container contact-wrap">
         <div class="contact-panel">
           <div class="eyebrow">Start the conversation</div>
-          <h3>Let's talk about your next move.</h3>
-          <p>Whether it is a business problem, a strategic conversation, or a creative collaboration, I'd be glad to
+          <h3>Let’s talk about your next move.</h3>
+          <p>Whether it is a business problem, a strategic conversation, or a creative collaboration, I’d be glad to
             hear what you are building.</p>
 
           <form class="contact-form" action="https://formsubmit.co/abhijeettoshniwal14@gmail.com" method="POST">
@@ -1333,7 +1407,6 @@
                 <option>Strategy</option>
                 <option>Marketing</option>
                 <option>Finance</option>
-                <option>Operations</option>
                 <option>Sales</option>
                 <option>Investing / mentoring</option>
                 <option>Writing</option>
@@ -1345,7 +1418,7 @@
             <div class="field">
               <label for="message">Message</label>
               <textarea id="message" name="message" rows="5"
-                placeholder="Tell me a little about what you're building or exploring."></textarea>
+                placeholder="Tell me a little about what you’re building or exploring." required></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Send message</button>
@@ -1362,8 +1435,14 @@
           <div class="email-box">
             <div class="label">Connect</div>
             <div class="social-links">
-              <a href="https://www.linkedin.com/in/abhijeet-toshniwal-aa3577292/" target="_blank"
-                rel="noreferrer">LinkedIn</a>
+              <a href="https://www.linkedin.com/in/abhijeet-toshniwal-aa3577292/" target="_blank" rel="noreferrer"
+                aria-label="Visit Abhijeet Toshniwal on LinkedIn" title="LinkedIn">
+                <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M5.2 3.5a2.2 2.2 0 1 1 0 4.4 2.2 2.2 0 0 1 0-4.4ZM3.3 9.6h3.8V21H3.3V9.6Zm6.2 0h3.6v1.56h.05c.5-.95 1.72-1.95 3.55-1.95 3.8 0 4.5 2.5 4.5 5.76V21h-3.8v-5.35c0-1.28-.02-2.93-1.78-2.93-1.78 0-2.05 1.39-2.05 2.83V21H9.5V9.6Z" />
+                </svg>
+                LinkedIn
+              </a>
               <a href="https://instagram.com/abhijeet.acoustic02" target="_blank" rel="noreferrer">Instagram</a>
               <a href="https://instagram.com/thoughts_at_02" target="_blank" rel="noreferrer">Writing</a>
             </div>
