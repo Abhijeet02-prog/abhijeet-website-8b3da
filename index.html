@@ -411,15 +411,16 @@
 
     .hero-copy h1 .accent {
       display: block;
-      /* The warm gold --accent used everywhere else on the site blends into
-         this section's warm sunset-toned poster art, so the italic line
-         gets its own cool blue instead — it's the same soft blue already
-         used as a decorative tint elsewhere on the page (see the
-         rgba(142, 197, 255, ...) gradients), so it still reads as part of
-         the palette, just with enough contrast against a warm background
-         to stay legible. Scoped to this one line only — the sitewide
-         --accent (eyebrows, chips, quote marks, etc.) is untouched. */
-      color: #8ec5ff;
+      /* Abhijeet's chosen color for this line: deep burnt terracotta/rust
+         (#a65332), used as-is in light mode where it sits on the pale
+         cream poster. Dark mode gets a brighter tint of the same rust hue
+         rather than the exact same hex — the darker shade reads as a dull
+         brown-on-navy with too little contrast at night, same reasoning
+         the sitewide --accent already uses two shades (light gold in dark
+         mode, deeper gold in light mode). Scoped to this one line only —
+         the sitewide --accent (eyebrows, chips, quote marks, etc.) is
+         untouched. */
+      color: #d97757;
       font-family: 'Instrument Serif', Georgia, serif;
       font-weight: 400;
       font-style: italic;
@@ -427,7 +428,7 @@
     }
 
     :root[data-theme="light"] .hero-copy h1 .accent {
-      color: #205a8f;
+      color: #a65332;
     }
 
     .hero-copy .lead {
