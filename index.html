@@ -887,11 +887,40 @@
     }
 
     .section-reels {
+      position: relative;
+      overflow: hidden;
       background:
         radial-gradient(circle at top right, rgba(214, 120, 177, 0.10), transparent 24%),
         radial-gradient(circle at bottom left, rgba(247, 189, 90, 0.09), transparent 26%),
         linear-gradient(135deg, rgba(13, 11, 21, 0.72), rgba(20, 17, 24, 0.85));
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* Reels lives under the same "music world" as the Music section, so it
+       shares the same faint poster art. Delete this ::before block plus the
+       .section-reels .container rule below to revert. */
+    .section-reels::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/backgrounds/music-desktop.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.14;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @media (max-width: 700px) {
+      .section-reels::before {
+        background-image: url('assets/backgrounds/music-mobile.jpg');
+        background-position: center top;
+      }
+    }
+
+    .section-reels .container {
+      position: relative;
+      z-index: 1;
     }
 
     .section-reels .eyebrow {
