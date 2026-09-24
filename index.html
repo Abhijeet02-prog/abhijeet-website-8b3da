@@ -1720,6 +1720,11 @@
     })();
 
     function makeDraggableFab(elementId, storageKey) {
+      // Vertical-drag only: horizontal position always stays whatever the
+      // stylesheet says (same `right` + `width` for every floating button),
+      // so every floating button's centre always lines up on one vertical
+      // axis, both by default and after dragging. Only the vertical offset
+      // is ever changed or persisted.
       const btn = document.getElementById(elementId);
       if (!btn) return;
 
@@ -1729,58 +1734,48 @@
 
       let dragging = false;
       let moved = false;
-      let startX = 0;
       let startY = 0;
-      let startLeft = 0;
       let startTop = 0;
 
       function clamp(val, min, max) {
         return Math.min(Math.max(val, min), max);
       }
 
-      function applyPosition(left, top) {
+      function applyTop(top) {
         const size = btn.offsetWidth || SIZE;
-        const maxLeft = Math.max(MARGIN, window.innerWidth - size - MARGIN);
         const maxTop = Math.max(MARGIN, window.innerHeight - size - MARGIN);
-        left = clamp(left, MARGIN, maxLeft);
         top = clamp(top, MARGIN, maxTop);
-        btn.style.left = left + 'px';
         btn.style.top = top + 'px';
-        btn.style.right = 'auto';
         btn.style.transform = 'none';
-        return { left: left, top: top };
+        return top;
       }
 
-      function savePosition(left, top) {
+      function saveTop(top) {
         try {
           const size = btn.offsetWidth || SIZE;
-          const fx = (left + size / 2) / window.innerWidth;
           const fy = (top + size / 2) / window.innerHeight;
-          localStorage.setItem(STORAGE_KEY, JSON.stringify({ fx: fx, fy: fy }));
+          localStorage.setItem(STORAGE_KEY, JSON.stringify({ fy: fy }));
         } catch (e) {
           /* storage unavailable, ignore */
         }
       }
 
-      function loadPosition() {
+      function loadTop() {
         try {
           const raw = localStorage.getItem(STORAGE_KEY);
           if (!raw) return null;
           const data = JSON.parse(raw);
-          if (typeof data.fx !== 'number' || typeof data.fy !== 'number') return null;
+          if (typeof data.fy !== 'number') return null;
           const size = btn.offsetWidth || SIZE;
-          return {
-            left: data.fx * window.innerWidth - size / 2,
-            top: data.fy * window.innerHeight - size / 2,
-          };
+          return data.fy * window.innerHeight - size / 2;
         } catch (e) {
           return null;
         }
       }
 
-      const saved = loadPosition();
-      if (saved) {
-        applyPosition(saved.left, saved.top);
+      const savedTop = loadTop();
+      if (savedTop !== null) {
+        applyTop(savedTop);
       }
 
       function onPointerDown(e) {
@@ -1788,9 +1783,7 @@
         moved = false;
         btn.classList.add('dragging');
         const rect = btn.getBoundingClientRect();
-        startLeft = rect.left;
         startTop = rect.top;
-        startX = e.clientX;
         startY = e.clientY;
         try {
           btn.setPointerCapture(e.pointerId);
@@ -1801,12 +1794,11 @@
 
       function onPointerMove(e) {
         if (!dragging) return;
-        const dx = e.clientX - startX;
         const dy = e.clientY - startY;
-        if (Math.abs(dx) > 4 || Math.abs(dy) > 4) moved = true;
+        if (Math.abs(dy) > 4) moved = true;
         if (moved) {
           e.preventDefault();
-          applyPosition(startLeft + dx, startTop + dy);
+          applyTop(startTop + dy);
         }
       }
 
@@ -1816,7 +1808,7 @@
         btn.classList.remove('dragging');
         if (moved) {
           const rect = btn.getBoundingClientRect();
-          savePosition(rect.left, rect.top);
+          saveTop(rect.top);
         }
       }
 
@@ -1833,8 +1825,8 @@
       });
 
       window.addEventListener('resize', function () {
-        const pos = loadPosition();
-        if (pos) applyPosition(pos.left, pos.top);
+        const top = loadTop();
+        if (top !== null) applyTop(top);
       });
     }
 
