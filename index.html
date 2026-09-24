@@ -740,21 +740,41 @@
     /* Experimental: faint poster art behind the section, provided by Abhijeet.
        Swapped for a portrait crop on narrow screens. Easy to remove — just
        delete this ::before block and the .section-writing .container rule
-       below to revert. */
+       below to revert.
+
+       The art is light/cream toned, so it reads fine at moderate strength
+       in light mode (dark text stays legible) but fights the near-white
+       text in dark mode — kept much fainter there, and dimmed further with
+       a dark scrim so the text always has a calm, low-contrast backdrop
+       instead of ink linework running straight through the letters. */
     .section-writing::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: url('assets/backgrounds/writing-desktop.jpg');
+      background-image:
+        linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+        url('assets/backgrounds/writing-desktop.jpg');
       background-size: cover;
       background-position: center;
-      opacity: 0.5;
+      opacity: 0.22;
       z-index: 0;
       pointer-events: none;
     }
 
+    :root[data-theme="light"] .section-writing::before {
+      background-image: url('assets/backgrounds/writing-desktop.jpg');
+      opacity: 0.32;
+    }
+
     @media (max-width: 700px) {
       .section-writing::before {
+        background-image:
+          linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+          url('assets/backgrounds/writing-mobile.jpg');
+        background-position: center top;
+      }
+
+      :root[data-theme="light"] .section-writing::before {
         background-image: url('assets/backgrounds/writing-mobile.jpg');
         background-position: center top;
       }
@@ -770,9 +790,22 @@
       color: var(--accent);
     }
 
+    /* The heading sits directly on the poster art (no card behind it), so
+       give it a soft shadow for guaranteed contrast wherever ink linework
+       or paper texture happens to cross the letters. */
+    .section-writing .section-head h2 {
+      text-shadow: 0 2px 18px rgba(11, 13, 18, 0.35);
+    }
+
+    :root[data-theme="light"] .section-writing .section-head h2 {
+      text-shadow: 0 2px 14px rgba(245, 240, 234, 0.6);
+    }
+
     .section-writing .quote-card {
       border-color: rgba(216, 167, 92, 0.18);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      background: var(--panel);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
 
     .section-writing .quote-card p {
