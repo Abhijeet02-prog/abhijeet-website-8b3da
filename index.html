@@ -435,11 +435,21 @@
       margin-top: 24px;
       max-width: 620px;
       font-size: clamp(1.08rem, 1.5vw, 1.3rem);
-      color: var(--muted);
+      /* Abhijeet's request: bold, high-contrast paragraph text over the
+         poster. Pure black (as shown in his light-mode reference shot)
+         reads perfectly there since the poster is unscrimmed/lightened in
+         light mode, but the same black would vanish into the dark,
+         scrimmed poster at night — so dark mode keeps this bold but in a
+         bright off-white instead of literal black. Scoped to this one
+         paragraph only; .hero-copy .eyebrow and the rest of the site's
+         `p` / var(--muted) text are untouched. */
+      color: #f5f0ea;
+      font-weight: 700;
       text-shadow: 0 1px 10px rgba(11, 13, 18, 0.3);
     }
 
     :root[data-theme="light"] .hero-copy .lead {
+      color: #14110d;
       text-shadow: 0 1px 8px rgba(245, 240, 234, 0.5);
     }
 
@@ -484,6 +494,31 @@
       color: var(--soft);
       letter-spacing: 0.02em;
       font-weight: 700;
+    }
+
+    /* Hero now sits on top of the poster image (see .hero::before above),
+       so the base .btn / .chip border — var(--line), only 8% opacity —
+       disappears against that busier background. Boost visibility here,
+       scoped to the hero's own buttons/chips only; .btn and .chip keep
+       their original subtle look everywhere else on the site (nav,
+       contact form, feature cards, etc.). */
+    .hero-actions .btn,
+    .hero-meta .chip {
+      border-color: rgba(255, 255, 255, 0.45);
+      background: rgba(17, 22, 33, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    :root[data-theme="light"] .hero-actions .btn,
+    :root[data-theme="light"] .hero-meta .chip {
+      border-color: rgba(17, 22, 33, 0.4);
+      background: rgba(245, 240, 234, 0.6);
+    }
+
+    .hero-actions .btn-primary:hover,
+    .hero-actions .btn-secondary:hover {
+      border-color: rgba(216, 167, 92, 0.75);
     }
 
     .hero-panel {
