@@ -279,6 +279,47 @@
       font-size: 18px;
     }
 
+    /* Hamburger menu button — hidden by default (desktop shows the inline
+       .nav-links instead), switched on in the same breakpoint that hides
+       .nav-links below. See that media query for the toggled-open panel
+       styling. */
+    .nav-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text);
+      cursor: pointer;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 0;
+      flex: 0 0 auto;
+    }
+
+    .nav-toggle-line {
+      width: 18px;
+      height: 2px;
+      background: currentColor;
+      border-radius: 2px;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-toggle[aria-expanded="true"] .nav-toggle-line:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .nav-toggle[aria-expanded="true"] .nav-toggle-line:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle[aria-expanded="true"] .nav-toggle-line:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
     .hero {
       padding: 72px 0 56px;
     }
@@ -1374,8 +1415,42 @@
         grid-template-columns: 1fr;
       }
 
+      .nav-wrap {
+        position: relative;
+      }
+
+      /* Nav links move into a dropdown panel triggered by .nav-toggle,
+         instead of just disappearing with no way to reach them. */
       .nav-links {
         display: none;
+        position: absolute;
+        top: calc(100% + 1px);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px 20px 16px;
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 14px 2px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav-links a:last-child {
+        border-bottom: none;
+      }
+
+      .nav-toggle {
+        display: flex;
       }
 
       .story {
@@ -1397,7 +1472,8 @@
       .work-grid,
       .quotes,
       .input-row,
-      .stat-grid {
+      .stat-grid,
+      .music-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1501,11 +1577,34 @@
       pointer-events: none;
     }
 
+    /* Below desktop widths the page is much taller relative to the
+       viewport, so a fixed "vertical middle of the screen" position
+       constantly drifts over headings, cards, and buttons as the page
+       scrolls. Anchoring to the bottom-right (the standard floating-
+       action-button spot) keeps both icons clear of content on tablets
+       and phones, without touching their default desktop position or
+       the drag-to-reposition behavior (a user's saved drag position
+       still applies on any screen size). */
+    @media (max-width: 1024px) {
+      .floating-linkedin {
+        top: auto;
+        bottom: 92px;
+        transform: none;
+      }
+
+      .floating-whatsapp {
+        top: auto;
+        bottom: 24px;
+        transform: none;
+      }
+    }
+
     @media (max-width: 640px) {
       .floating-linkedin {
         width: 48px;
         height: 48px;
         right: 14px;
+        bottom: 86px;
       }
 
       .floating-linkedin svg {
@@ -1517,7 +1616,6 @@
         width: 48px;
         height: 48px;
         right: 14px;
-        top: calc(50% + 60px);
       }
 
       .floating-whatsapp svg {
@@ -1556,7 +1654,7 @@
         <span>Abhijeet Toshniwal</span>
       </a>
 
-      <nav class="nav-links" aria-label="Main navigation">
+      <nav class="nav-links" id="mainNav" aria-label="Main navigation">
         <a href="#story">Story</a>
         <a href="#work">Work</a>
         <a href="#writing">Writing</a>
@@ -1567,6 +1665,12 @@
       <div class="nav-actions">
         <a class="btn btn-secondary" href="#contact">Book a call</a>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"
+          aria-controls="mainNav">
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+        </button>
       </div>
     </div>
   </header>
@@ -2008,6 +2112,42 @@
       });
 
       document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+
+    (function () {
+      const navToggle = document.getElementById('navToggle');
+      const navLinks = document.getElementById('mainNav');
+      if (!navToggle || !navLinks) return;
+
+      function closeMenu() {
+        navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+
+      function openMenu() {
+        navLinks.classList.add('open');
+        navToggle.setAttribute('aria-expanded', 'true');
+      }
+
+      navToggle.addEventListener('click', function () {
+        if (navLinks.classList.contains('open')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      navLinks.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeMenu();
+      });
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 980) closeMenu();
+      });
     })();
 
     function makeDraggableFab(elementId, storageKey) {
