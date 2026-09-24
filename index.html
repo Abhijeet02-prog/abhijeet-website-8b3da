@@ -1512,11 +1512,16 @@
         max-width: 12ch;
       }
 
-      .hero-actions,
-      .nav-actions {
+      .hero-actions {
         width: 100%;
       }
 
+      /* .nav-actions used to need width:100% back when it held only the
+         "Book a call" button (now moved into the mobile menu, see
+         .nav-cta-mobile). Left in place, it forced this flex item to
+         compete with .brand for space in the header row, squeezing
+         "Abhijeet Toshniwal" onto two lines even though there was room —
+         it only needs to hold its two icon-sized buttons now. */
       .btn {
         width: 100%;
       }
