@@ -352,14 +352,15 @@
       /* hero-desktop.jpg is the source art immediately followed by its own
          horizontal mirror flip (a seamless reflection, not a crop/blur) —
          that's what fills the full width with real artwork edge-to-edge
-         instead of empty space, and it's why the man appears at ~30%
-         across this doubled-width image. Building it much wider than any
-         realistic hero aspect ratio means background-size:cover always
-         crops horizontally rather than vertically, so this 30% position-x
+         instead of empty space. In this source photo the man stands near
+         the LEFT edge of the frame, so he ends up at ~8% across this
+         doubled-width image. Building it much wider than any realistic
+         hero aspect ratio means background-size:cover always crops
+         horizontally rather than vertically, so this 8% position-x
          reliably pins him to the same visible spot on screen at any
          viewport width, keeping him clear of the hero-panel card on the
          right instead of drifting under it. */
-      background-position: 30% center;
+      background-position: 8% center;
       opacity: 0.22;
       z-index: 0;
       pointer-events: none;
