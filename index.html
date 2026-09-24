@@ -349,7 +349,14 @@
         linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
         url('assets/backgrounds/hero-desktop.jpg');
       background-size: cover;
-      background-position: center;
+      /* The desktop poster's subject (the man on the balcony) sits at ~30%
+         across the source art. The image is intentionally built wider than
+         any realistic hero aspect ratio so background-size:cover always
+         crops horizontally rather than vertically — that guarantees this
+         30% position-x pins him to the same visible spot on screen at any
+         viewport width, keeping him clear of the hero-panel card on the
+         right instead of drifting under it. */
+      background-position: 30% center;
       opacity: 0.22;
       z-index: 0;
       pointer-events: none;
