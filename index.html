@@ -786,19 +786,34 @@
     }
 
     .section-writing .eyebrow,
-    .section-music .eyebrow {
+    .section-music .eyebrow,
+    .section-reels .eyebrow {
       color: var(--accent);
     }
 
     /* The heading sits directly on the poster art (no card behind it), so
        give it a soft shadow for guaranteed contrast wherever ink linework
-       or paper texture happens to cross the letters. */
-    .section-writing .section-head h2 {
+       or paper texture happens to cross the letters. Shared across
+       Writing, Music, and Reels now that all three use the same
+       theme-aware poster treatment. */
+    .section-writing .section-head h2,
+    .section-music .section-head h2,
+    .section-reels .section-head h2 {
       text-shadow: 0 2px 18px rgba(11, 13, 18, 0.35);
     }
 
-    :root[data-theme="light"] .section-writing .section-head h2 {
+    :root[data-theme="light"] .section-writing .section-head h2,
+    :root[data-theme="light"] .section-music .section-head h2,
+    :root[data-theme="light"] .section-reels .section-head h2 {
       text-shadow: 0 2px 14px rgba(245, 240, 234, 0.6);
+    }
+
+    .section-reels .section-head p {
+      text-shadow: 0 1px 10px rgba(11, 13, 18, 0.3);
+    }
+
+    :root[data-theme="light"] .section-reels .section-head p {
+      text-shadow: 0 1px 8px rgba(245, 240, 234, 0.5);
     }
 
     .section-writing .quote-card {
@@ -820,35 +835,44 @@
       position: relative;
       overflow: hidden;
       background:
-        radial-gradient(circle at top left, rgba(214, 120, 177, 0.12), transparent 22%),
-        radial-gradient(circle at bottom right, rgba(247, 189, 90, 0.10), transparent 26%),
-        linear-gradient(135deg, rgba(13, 11, 21, 0.52), rgba(20, 17, 24, 0.62));
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        linear-gradient(135deg, rgba(208, 169, 124, 0.08), rgba(116, 90, 76, 0.10), rgba(11, 13, 18, 0.00));
     }
 
-    /* The poster now reads at full strength (like the Writing section) so
-       it genuinely looks like the text sits on the artwork, not a grey
-       wash. Legibility comes from the cards below being real dark glass
-       panels instead of near-invisible tints, plus a shadow on the heading,
-       which has no card behind it. Swapped for a portrait crop on narrow
-       screens. Easy to remove — delete this ::before block, the
-       .section-music .container rule, and the h2 text-shadow below to
-       revert. */
+    /* Matches the Writing section's treatment exactly: theme-aware opacity
+       with a dark scrim in dark mode (art is busy/high-contrast, so it's
+       kept calm behind the near-white text) and a stronger, unscrimmed
+       version in light mode (dark text stays legible straight on the art).
+       Swapped for a portrait crop on narrow screens. Easy to remove —
+       delete this ::before block, the light-mode override, and the
+       .section-music .container rule to revert. */
     .section-music::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: url('assets/backgrounds/music-desktop.jpg');
+      background-image:
+        linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+        url('assets/backgrounds/music-desktop.jpg');
       background-size: cover;
       background-position: center;
-      opacity: 0.48;
+      opacity: 0.22;
       z-index: 0;
       pointer-events: none;
     }
 
+    :root[data-theme="light"] .section-music::before {
+      background-image: url('assets/backgrounds/music-desktop.jpg');
+      opacity: 0.32;
+    }
+
     @media (max-width: 700px) {
       .section-music::before {
+        background-image:
+          linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+          url('assets/backgrounds/music-mobile.jpg');
+        background-position: center top;
+      }
+
+      :root[data-theme="light"] .section-music::before {
         background-image: url('assets/backgrounds/music-mobile.jpg');
         background-position: center top;
       }
@@ -857,15 +881,6 @@
     .section-music .container {
       position: relative;
       z-index: 1;
-    }
-
-    .section-music .section-head h2 {
-      color: #f5e8f7;
-      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.55);
-    }
-
-    .section-music .eyebrow {
-      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
     }
 
     .music-grid {
@@ -880,10 +895,10 @@
       position: relative;
       overflow: hidden;
       border-radius: 28px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(13, 11, 18, 0.6);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(216, 167, 92, 0.18);
+      background: var(--panel);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       box-shadow: var(--shadow);
       padding: 24px;
     }
@@ -919,12 +934,11 @@
       font-size: clamp(2.1rem, 4vw, 4rem);
       line-height: 0.92;
       margin: 18px 0 16px;
-      color: #fdf4ff;
     }
 
     .music-hero p,
     .music-card p {
-      color: rgba(246, 232, 255, 0.78);
+      color: var(--muted);
       font-size: 15px;
     }
 
@@ -937,15 +951,10 @@
       min-height: 180px;
     }
 
-    .music-card .mono-line {
-      color: rgba(246, 232, 255, 0.72);
-    }
-
     .music-card h3 {
       margin-top: 18px;
       font-size: clamp(1.5rem, 2vw, 2.1rem);
       line-height: 1.1;
-      color: #f8f0ff;
     }
 
     .music-footer-note {
@@ -956,7 +965,7 @@
       font-size: 12px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #f9d88e;
+      color: var(--accent);
       font-weight: 800;
     }
 
@@ -964,30 +973,42 @@
       position: relative;
       overflow: hidden;
       background:
-        radial-gradient(circle at top right, rgba(214, 120, 177, 0.10), transparent 24%),
-        radial-gradient(circle at bottom left, rgba(247, 189, 90, 0.09), transparent 26%),
-        linear-gradient(135deg, rgba(13, 11, 21, 0.48), rgba(20, 17, 24, 0.58));
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        linear-gradient(135deg, rgba(208, 169, 124, 0.08), rgba(116, 90, 76, 0.10), rgba(11, 13, 18, 0.00));
     }
 
     /* Reels lives under the same "music world" as the Music section, so it
-       shares the same poster art at the same strength. Delete this
-       ::before block plus the .section-reels .container rule below to
-       revert. */
+       shares the same poster art and the same theme-aware treatment (dark
+       scrim in dark mode, unscrimmed and stronger in light mode). Delete
+       this ::before block plus the .section-reels .container rule below
+       to revert. */
     .section-reels::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: url('assets/backgrounds/music-desktop.jpg');
+      background-image:
+        linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+        url('assets/backgrounds/music-desktop.jpg');
       background-size: cover;
       background-position: center;
-      opacity: 0.48;
+      opacity: 0.22;
       z-index: 0;
       pointer-events: none;
     }
 
+    :root[data-theme="light"] .section-reels::before {
+      background-image: url('assets/backgrounds/music-desktop.jpg');
+      opacity: 0.32;
+    }
+
     @media (max-width: 700px) {
       .section-reels::before {
+        background-image:
+          linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+          url('assets/backgrounds/music-mobile.jpg');
+        background-position: center top;
+      }
+
+      :root[data-theme="light"] .section-reels::before {
         background-image: url('assets/backgrounds/music-mobile.jpg');
         background-position: center top;
       }
@@ -996,21 +1017,6 @@
     .section-reels .container {
       position: relative;
       z-index: 1;
-    }
-
-    .section-reels .eyebrow {
-      color: var(--accent);
-      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
-    }
-
-    .section-reels .section-head h2 {
-      color: #f5e8f7;
-      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.55);
-    }
-
-    .section-reels .section-head p {
-      color: rgba(246, 232, 255, 0.72);
-      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
     }
 
     .reels-grid {
@@ -1053,12 +1059,7 @@
 
     .reel-caption h3 {
       font-size: clamp(1.05rem, 1.6vw, 1.35rem);
-      color: #f8f0ff;
       line-height: 1.1;
-    }
-
-    .reel-caption .mono-line {
-      color: rgba(246, 232, 255, 0.55);
     }
 
     @media (max-width: 900px) {
