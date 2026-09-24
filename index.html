@@ -331,6 +331,52 @@
 
     .hero {
       padding: 72px 0 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Landing-page poster art, matching the same theme-aware treatment used
+       on Writing/Music/Reels: faint in dark mode with a dark scrim (so the
+       art doesn't fight the near-white text), stronger and unscrimmed in
+       light mode (dark text stays legible straight on the art). Swapped for
+       a portrait crop on narrow screens. Easy to remove — delete this
+       ::before block and the .hero .container rule below to revert. */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+        url('assets/backgrounds/hero-desktop.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.22;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    :root[data-theme="light"] .hero::before {
+      background-image: url('assets/backgrounds/hero-desktop.jpg');
+      opacity: 0.32;
+    }
+
+    @media (max-width: 700px) {
+      .hero::before {
+        background-image:
+          linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+          url('assets/backgrounds/hero-mobile.jpg');
+        background-position: center top;
+      }
+
+      :root[data-theme="light"] .hero::before {
+        background-image: url('assets/backgrounds/hero-mobile.jpg');
+        background-position: center top;
+      }
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
     }
 
     .hero-grid {
@@ -345,6 +391,11 @@
       letter-spacing: -0.07em;
       line-height: 0.88;
       max-width: 650px;
+      text-shadow: 0 2px 18px rgba(11, 13, 18, 0.35);
+    }
+
+    :root[data-theme="light"] .hero-copy h1 {
+      text-shadow: 0 2px 14px rgba(245, 240, 234, 0.6);
     }
 
     .hero-copy h1 .accent {
@@ -361,6 +412,19 @@
       max-width: 620px;
       font-size: clamp(1.08rem, 1.5vw, 1.3rem);
       color: var(--muted);
+      text-shadow: 0 1px 10px rgba(11, 13, 18, 0.3);
+    }
+
+    :root[data-theme="light"] .hero-copy .lead {
+      text-shadow: 0 1px 8px rgba(245, 240, 234, 0.5);
+    }
+
+    .hero-copy .eyebrow {
+      text-shadow: 0 1px 10px rgba(11, 13, 18, 0.3);
+    }
+
+    :root[data-theme="light"] .hero-copy .eyebrow {
+      text-shadow: 0 1px 8px rgba(245, 240, 234, 0.5);
     }
 
     .hero-actions {
