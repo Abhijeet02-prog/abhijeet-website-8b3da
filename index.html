@@ -968,7 +968,7 @@
 
     .marquee-head {
       text-align: center;
-      max-width: 560px;
+      max-width: 820px;
       margin: 40px auto 20px;
     }
 
@@ -977,9 +977,16 @@
     }
 
     .marquee-head h3 {
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-size: clamp(1.2rem, 2.5vw, 2rem);
       letter-spacing: -0.03em;
       line-height: 1.15;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 700px) {
+      .marquee-head h3 {
+        white-space: normal;
+      }
     }
 
     .marquee-head h3 .accent-italic {
@@ -1519,7 +1526,7 @@
 
         <div class="marquee-head">
           <div class="eyebrow">Services & practice areas</div>
-          <h3>Where I bring <span class="accent-italic">creative and strategic clarity</span></h3>
+          <h3>Where I bring <span class="accent-italic">creative & strategic clarity</span></h3>
         </div>
 
         <div class="marquee-outer">
@@ -1529,18 +1536,16 @@
             <span class="marquee-pill">Marketing</span>
             <span class="marquee-pill">Finance</span>
             <span class="marquee-pill">Share Market</span>
-            <span class="marquee-pill">Brand Building</span>
-            <span class="marquee-pill">Strategy</span>
-            <span class="marquee-pill">Marketing</span>
-            <span class="marquee-pill">Finance</span>
-            <span class="marquee-pill">Share Market</span>
-          </div>
-          <div class="marquee-row reverse">
             <span class="marquee-pill">Personal Finance</span>
             <span class="marquee-pill">Consulting</span>
             <span class="marquee-pill">Investing</span>
             <span class="marquee-pill">Writing</span>
             <span class="marquee-pill">Music</span>
+            <span class="marquee-pill">Brand Building</span>
+            <span class="marquee-pill">Strategy</span>
+            <span class="marquee-pill">Marketing</span>
+            <span class="marquee-pill">Finance</span>
+            <span class="marquee-pill">Share Market</span>
             <span class="marquee-pill">Personal Finance</span>
             <span class="marquee-pill">Consulting</span>
             <span class="marquee-pill">Investing</span>
