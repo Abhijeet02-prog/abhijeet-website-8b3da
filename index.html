@@ -268,6 +268,15 @@
       gap: 12px;
     }
 
+    /* Below the breakpoint where .nav-links becomes a dropdown, the header
+       row only has room for the theme toggle and the menu button — "Book a
+       call" moves into the dropdown itself instead of fighting them for
+       space (which used to force its label to wrap and made the whole
+       header row uneven). See the max-width: 980px block for the swap. */
+    .nav-cta-mobile {
+      display: none;
+    }
+
     .theme-toggle {
       width: 42px;
       height: 42px;
@@ -1440,17 +1449,26 @@
         display: flex;
       }
 
-      .nav-links a {
+      .nav-links a:not(.nav-cta-mobile) {
         padding: 14px 2px;
         border-bottom: 1px solid var(--line);
       }
 
-      .nav-links a:last-child {
-        border-bottom: none;
-      }
-
       .nav-toggle {
         display: flex;
+      }
+
+      /* Swap the header's "Book a call" for the one inside the dropdown,
+         so the top row (brand + theme toggle + menu button) always has
+         room to breathe. */
+      .nav-cta-desktop {
+        display: none;
+      }
+
+      .nav-cta-mobile {
+        display: inline-flex;
+        width: 100%;
+        margin-top: 14px;
       }
 
       .story {
@@ -1660,10 +1678,11 @@
         <a href="#writing">Writing</a>
         <a href="#music">Music</a>
         <a href="#contact">Contact</a>
+        <a href="#contact" class="btn btn-secondary nav-cta-mobile">Book a call</a>
       </nav>
 
       <div class="nav-actions">
-        <a class="btn btn-secondary" href="#contact">Book a call</a>
+        <a class="btn btn-secondary nav-cta-desktop" href="#contact">Book a call</a>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
         <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"
           aria-controls="mainNav">
