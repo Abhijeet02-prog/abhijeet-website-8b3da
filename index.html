@@ -957,6 +957,95 @@
       opacity: 0.7;
     }
 
+    .marquee-head {
+      text-align: center;
+      max-width: 620px;
+      margin: 56px auto 32px;
+    }
+
+    .marquee-head .eyebrow {
+      justify-content: center;
+    }
+
+    .marquee-head h3 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .marquee-head h3 .accent-italic {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+
+    .marquee-outer {
+      position: relative;
+      display: grid;
+      gap: 14px;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+
+    .marquee-row {
+      display: flex;
+      gap: 14px;
+      width: max-content;
+      animation: marquee-left 34s linear infinite;
+    }
+
+    .marquee-row.reverse {
+      animation-name: marquee-right;
+      animation-duration: 38s;
+    }
+
+    .marquee-row:hover {
+      animation-play-state: paused;
+    }
+
+    .marquee-pill {
+      flex: 0 0 auto;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 14px;
+      white-space: nowrap;
+      box-shadow: var(--shadow);
+    }
+
+    @keyframes marquee-left {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    @keyframes marquee-right {
+      from {
+        transform: translateX(-50%);
+      }
+
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .marquee-pill {
+        padding: 10px 16px;
+        font-size: 13px;
+      }
+    }
+
     .contact-wrap {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
@@ -1419,6 +1508,38 @@
             <p>Simple habits and informed decisions for earning, saving, investing, and growing with intention.</p>
             <span class="feature-meta">Habits → freedom</span>
           </article>
+        </div>
+
+        <div class="marquee-head">
+          <div class="eyebrow">Services & practice areas</div>
+          <h3>Where I bring <span class="accent-italic">creative and strategic clarity</span></h3>
+        </div>
+
+        <div class="marquee-outer">
+          <div class="marquee-row">
+            <span class="marquee-pill">Brand Building</span>
+            <span class="marquee-pill">Strategy</span>
+            <span class="marquee-pill">Marketing</span>
+            <span class="marquee-pill">Finance</span>
+            <span class="marquee-pill">Share Market</span>
+            <span class="marquee-pill">Brand Building</span>
+            <span class="marquee-pill">Strategy</span>
+            <span class="marquee-pill">Marketing</span>
+            <span class="marquee-pill">Finance</span>
+            <span class="marquee-pill">Share Market</span>
+          </div>
+          <div class="marquee-row reverse">
+            <span class="marquee-pill">Personal Finance</span>
+            <span class="marquee-pill">Consulting</span>
+            <span class="marquee-pill">Investing</span>
+            <span class="marquee-pill">Writing</span>
+            <span class="marquee-pill">Music</span>
+            <span class="marquee-pill">Personal Finance</span>
+            <span class="marquee-pill">Consulting</span>
+            <span class="marquee-pill">Investing</span>
+            <span class="marquee-pill">Writing</span>
+            <span class="marquee-pill">Music</span>
+          </div>
         </div>
       </div>
     </section>
