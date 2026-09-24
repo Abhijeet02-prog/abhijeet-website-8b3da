@@ -731,8 +731,38 @@
     }
 
     .section-writing {
+      position: relative;
+      overflow: hidden;
       background:
         linear-gradient(135deg, rgba(208, 169, 124, 0.08), rgba(116, 90, 76, 0.10), rgba(11, 13, 18, 0.00));
+    }
+
+    /* Experimental: faint poster art behind the section, provided by Abhijeet.
+       Swapped for a portrait crop on narrow screens. Easy to remove — just
+       delete this ::before block and the .section-writing .container rule
+       below to revert. */
+    .section-writing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/backgrounds/writing-desktop.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.5;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @media (max-width: 700px) {
+      .section-writing::before {
+        background-image: url('assets/backgrounds/writing-mobile.jpg');
+        background-position: center top;
+      }
+    }
+
+    .section-writing .container {
+      position: relative;
+      z-index: 1;
     }
 
     .section-writing .eyebrow,
