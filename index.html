@@ -349,11 +349,14 @@
         linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
         url('assets/backgrounds/hero-desktop.jpg');
       background-size: cover;
-      /* The desktop poster's subject (the man on the balcony) sits at ~30%
-         across the source art. The image is intentionally built wider than
-         any realistic hero aspect ratio so background-size:cover always
-         crops horizontally rather than vertically — that guarantees this
-         30% position-x pins him to the same visible spot on screen at any
+      /* hero-desktop.jpg is the source art immediately followed by its own
+         horizontal mirror flip (a seamless reflection, not a crop/blur) —
+         that's what fills the full width with real artwork edge-to-edge
+         instead of empty space, and it's why the man appears at ~30%
+         across this doubled-width image. Building it much wider than any
+         realistic hero aspect ratio means background-size:cover always
+         crops horizontally rather than vertically, so this 30% position-x
+         reliably pins him to the same visible spot on screen at any
          viewport width, keeping him clear of the hero-panel card on the
          right instead of drifting under it. */
       background-position: 30% center;
@@ -407,11 +410,23 @@
 
     .hero-copy h1 .accent {
       display: block;
-      color: var(--accent);
+      /* The warm gold --accent used everywhere else on the site blends into
+         this section's warm sunset-toned poster art, so the italic line
+         gets its own cool blue instead — it's the same soft blue already
+         used as a decorative tint elsewhere on the page (see the
+         rgba(142, 197, 255, ...) gradients), so it still reads as part of
+         the palette, just with enough contrast against a warm background
+         to stay legible. Scoped to this one line only — the sitewide
+         --accent (eyebrows, chips, quote marks, etc.) is untouched. */
+      color: #8ec5ff;
       font-family: 'Instrument Serif', Georgia, serif;
       font-weight: 400;
       font-style: italic;
       letter-spacing: -0.04em;
+    }
+
+    :root[data-theme="light"] .hero-copy h1 .accent {
+      color: #205a8f;
     }
 
     .hero-copy .lead {
