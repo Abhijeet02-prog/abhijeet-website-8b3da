@@ -754,12 +754,42 @@
     }
 
     .section-music {
+      position: relative;
+      overflow: hidden;
       background:
         radial-gradient(circle at top left, rgba(214, 120, 177, 0.12), transparent 22%),
         radial-gradient(circle at bottom right, rgba(247, 189, 90, 0.10), transparent 26%),
         linear-gradient(135deg, rgba(13, 11, 21, 0.78), rgba(20, 17, 24, 0.88));
       border-top: 1px solid rgba(255, 255, 255, 0.06);
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* Experimental: faint poster art behind the section, provided by Abhijeet.
+       Swapped for a portrait crop on narrow screens. Easy to remove — just
+       delete this ::before block and the .section-music .container rule
+       below to revert. */
+    .section-music::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/backgrounds/music-desktop.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.14;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @media (max-width: 700px) {
+      .section-music::before {
+        background-image: url('assets/backgrounds/music-mobile.jpg');
+        background-position: center top;
+      }
+    }
+
+    .section-music .container {
+      position: relative;
+      z-index: 1;
     }
 
     .section-music .section-head h2 {
