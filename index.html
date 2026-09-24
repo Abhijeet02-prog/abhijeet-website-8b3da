@@ -368,6 +368,13 @@
       flex-wrap: wrap;
       gap: 14px;
       margin-top: 30px;
+      /* Optical correction: a fully-rounded pill's true left edge is only
+         flush with the text above it at the button's vertical center —
+         near the top of the pill (where the eye actually reads it) the
+         curve pulls the visible edge inward, making the row look shifted
+         right of the paragraph even though the boxes are aligned. Nudging
+         the whole row left compensates for that curve. */
+      margin-left: -10px;
     }
 
     .hero-meta {
@@ -375,6 +382,7 @@
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 26px;
+      margin-left: -6px;
     }
 
     .chip {
