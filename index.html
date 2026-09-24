@@ -433,9 +433,9 @@
     }
 
     .stat-box-text strong {
-      font-size: 1.05rem;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
+      font-size: 1.15rem;
+      line-height: 1.28;
+      letter-spacing: -0.03em;
       white-space: normal;
     }
 
@@ -445,6 +445,20 @@
       text-transform: uppercase;
       letter-spacing: 0.08em;
       font-weight: 700;
+    }
+
+    /* Narrow two-column window (roughly 981–1149px): the mini-card hasn't
+       reached its stable width yet, so the stat boxes get squeezed. Shrink
+       the text here so nothing clips — this range previously overflowed
+       "Athlete" too. */
+    @media (min-width: 981px) and (max-width: 1149px) {
+      .stat-box strong {
+        font-size: 1.1rem;
+      }
+      .stat-box-text strong {
+        font-size: 0.72rem;
+        letter-spacing: -0.01em;
+      }
     }
 
     .section-head {
