@@ -21,6 +21,17 @@ const SYMBOLS = [
 ];
 
 export default async function handler(req, res) {
+    // TEMP DEBUG — inspect Yahoo's raw meta shape (regularMarketTime,
+    // marketState, previousClose vs chartPreviousClose, etc.) to confirm
+    // after-hours/holiday behavior before finalizing the fallback logic.
+    // Remove this branch once confirmed.
+    if (req.query?.debug) {
+        const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(req.query.debug)}`;
+        const upstream = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0 (compatible; abhijeettoshniwal.com market-ticker/1.0)" } });
+        const data = await upstream.json();
+        return res.status(200).json(data?.chart?.result?.[0]?.meta || { error: "no_meta", raw: data });
+    }
+
     const indices = await Promise.all(SYMBOLS.map(fetchQuote));
     const ok = indices.some((idx) => idx.price != null);
 
