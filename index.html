@@ -463,25 +463,6 @@
       white-space: nowrap;
     }
 
-    /* The three index figures alone don't render nearly enough text to
-       fill a wide desktop viewport, even doubled — and since .marquee-row
-       sizes itself to its own content (width:max-content) inside a grid
-       track rather than stretching to fill it, a too-short row just sits
-       flush-left with empty, un-animated track space to its right. As it
-       slides left, that gap becomes visible instead of looping seamlessly
-       (this is what "once the line ends it should keep coming" was
-       reporting). The fix isn't CSS — it's the JS below repeating the
-       item+tagline sequence enough times that the rendered row is always
-       comfortably wider than any real viewport before it ever gets
-       doubled for the loop. This class just re-centers the row's cross-
-       axis (the tagline's serif italic sits taller than the plain index
-       figures) and slows the scroll down — 34s across all that repeated
-       content would otherwise fly by. */
-    .market-marquee-row {
-      align-items: center;
-      animation-duration: 70s;
-    }
-
     .market-tagline {
       flex: 0 0 auto;
       font-family: 'Instrument Serif', Georgia, serif;
@@ -1635,6 +1616,26 @@
       gap: 56px;
       align-items: center;
       animation-duration: 46s;
+    }
+
+    /* The market ticker repeats its short (3 indices + tagline) sequence
+       many times over just to keep the row wider than the viewport (see
+       the JS render() comment) — which means its rendered width ends up
+       roughly 3-4x longer than the quote or services rows above. Left at
+       the base .marquee-row's 34s, that much extra distance in the same
+       time reads as a dramatically faster scroll (rendered ~140px/s here
+       vs ~39px/s on the other two strips) — this bumps the duration up to
+       match that same pace instead.
+       IMPORTANT: this rule (and .quote-marquee-row above) must stay AFTER
+       the base .marquee-row rule in the stylesheet. .marquee-row sets the
+       shorthand `animation: marquee-left 34s linear infinite`, which — at
+       equal specificity — overwrites an earlier longhand
+       `animation-duration` override entirely; only a later same-
+       specificity rule wins the cascade. (This is exactly the bug that
+       silently reverted this rule to 34s the first time.) */
+    .market-marquee-row {
+      align-items: center;
+      animation-duration: 120s;
     }
 
     .marquee-quote {
