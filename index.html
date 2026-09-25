@@ -1425,17 +1425,25 @@
       animation-play-state: paused;
     }
 
+    /* Pill "boxes" removed per feedback — this now reads as plain text,
+       matching the borderless look of the quote strip above it, with the
+       star separators alone doing the work of telling each word apart. */
     .marquee-pill {
       flex: 0 0 auto;
-      padding: 8px 16px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: var(--card);
       color: var(--text);
       font-weight: 700;
       font-size: 13px;
       white-space: nowrap;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Wider gap (was 9px, shared with the pill's own padding before) and
+       center alignment keep the star separators vertically centered next
+       to the plain-text words now that there's no pill padding to absorb
+       the height difference. Scoped to #work so the hero quote strip's
+       own .marquee-row (gap 56px via .quote-marquee-row) is untouched. */
+    #work .marquee-row {
+      gap: 28px;
+      align-items: center;
     }
 
     @keyframes marquee-left {
@@ -1460,8 +1468,11 @@
 
     @media (max-width: 640px) {
       .marquee-pill {
-        padding: 7px 13px;
         font-size: 12px;
+      }
+
+      #work .marquee-row {
+        gap: 18px;
       }
     }
 
