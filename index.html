@@ -329,8 +329,13 @@
       transform: translateY(-6px) rotate(-45deg);
     }
 
+    /* Top padding moved off .hero and onto .hero-grid (below) as a
+       margin-top of the same 72px, so the live market ticker can be
+       .hero's first child and sit flush against the very top of the
+       section — right under the sticky nav, right where the poster art
+       begins — instead of getting pushed down by this padding itself. */
     .hero {
-      padding: 72px 0 56px;
+      padding: 0 0 56px;
       position: relative;
       overflow: hidden;
     }
@@ -387,10 +392,75 @@
     }
 
     .hero-grid {
+      margin-top: 72px;
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
       gap: 32px;
       align-items: center;
+    }
+
+    /* Live market ticker (Nifty 50 / Sensex / Bank Nifty) — sits flush at
+       the very top of the hero, directly under the sticky nav and right
+       where the poster art begins, edge-to-edge like a news ticker. Same
+       running-strip language as "Two thoughts I keep coming back to"
+       further down (same .marquee-outer/.marquee-row scroll mechanics,
+       same ✦ .marquee-sep separators), just fed live numbers instead of
+       quotes. Data comes from api/market-indices.js, a small serverless
+       function that proxies Yahoo Finance server-side (see that file's
+       comments) — refreshed client-side every 60s by the script at the
+       bottom of the page. */
+    .market-ticker {
+      position: relative;
+      z-index: 1;
+      padding: 10px 0;
+      background: rgba(11, 13, 18, 0.4);
+      border-bottom: 1px solid var(--line);
+    }
+
+    :root[data-theme="light"] .market-ticker {
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .market-item {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .market-item .market-name {
+      color: var(--muted);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+
+    .market-item .market-price {
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .market-item .market-change {
+      font-weight: 700;
+    }
+
+    .market-item .market-change.up {
+      color: #2f9e5b;
+    }
+
+    .market-item .market-change.down {
+      color: #d1495b;
+    }
+
+    .market-item-loading {
+      flex: 0 0 auto;
+      font-size: 13px;
+      color: var(--muted);
+      font-style: italic;
+      white-space: nowrap;
     }
 
     .hero-copy h1 {
@@ -2030,6 +2100,14 @@
 
   <main id="top">
     <section class="hero section-professional">
+      <div class="market-ticker" aria-label="Live market indices">
+        <div class="marquee-outer">
+          <div class="marquee-row" id="marketMarqueeRow">
+            <span class="market-item-loading">Loading live market data…</span>
+          </div>
+        </div>
+      </div>
+
       <div class="container hero-grid">
         <div class="hero-copy">
           <div class="eyebrow">Builder. Strategist. Storyteller.</div>
@@ -2639,6 +2717,65 @@
 
     makeDraggableFab('floatingLinkedin', 'linkedinFabPos');
     makeDraggableFab('floatingWhatsapp', 'whatsappFabPos');
+
+    (function () {
+      const row = document.getElementById('marketMarqueeRow');
+      if (!row) return;
+
+      function fmtPrice(n) {
+        if (n == null) return '—';
+        return n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+
+      function fmtChange(change, changePercent) {
+        if (change == null || changePercent == null) return { text: '—', dir: '' };
+        const dir = change >= 0 ? 'up' : 'down';
+        const arrow = change >= 0 ? '▲' : '▼';
+        const sign = change >= 0 ? '+' : '';
+        return {
+          text: arrow + ' ' + sign + change.toFixed(2) + ' (' + sign + changePercent.toFixed(2) + '%)',
+          dir: dir,
+        };
+      }
+
+      function renderItem(idx) {
+        const c = fmtChange(idx.change, idx.changePercent);
+        return '<span class="market-item">' +
+          '<span class="market-name">' + idx.name + '</span>' +
+          '<span class="market-price">' + fmtPrice(idx.price) + '</span>' +
+          '<span class="market-change ' + c.dir + '">' + c.text + '</span>' +
+          '</span>';
+      }
+
+      function render(indices) {
+        const sep = '<span class="marquee-sep" aria-hidden="true">✦</span>';
+        const sequence = indices.map(renderItem).join(sep);
+        // Doubled sequence, same technique as the quote/services marquees,
+        // so the 50%-translateX scroll loops seamlessly.
+        row.innerHTML = sequence + sep + sequence + sep;
+      }
+
+      function renderUnavailable() {
+        row.innerHTML = '<span class="market-item-loading">Market data unavailable right now</span>';
+      }
+
+      async function load() {
+        try {
+          const res = await fetch('/api/market-indices', { cache: 'no-store' });
+          const data = await res.json();
+          if (!data || !data.ok) throw new Error('no_data');
+          render(data.indices);
+        } catch (err) {
+          // A transient failure on a refresh leaves the last good render in
+          // place; only the very first load (still showing the loading
+          // placeholder) falls back to the "unavailable" message.
+          if (row.querySelector('.market-item-loading')) renderUnavailable();
+        }
+      }
+
+      load();
+      setInterval(load, 60000);
+    })();
   </script>
 </body>
 
