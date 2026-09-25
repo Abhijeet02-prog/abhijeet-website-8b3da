@@ -485,14 +485,21 @@
       text-shadow: 0 2px 14px rgba(245, 240, 234, 0.6);
     }
 
-    /* Generic wine-colored accent for headings that need just the color
-       (not the italic serif treatment .accent/.accent-italic carry
-       elsewhere) — same deep wine/oxblood used throughout the site's wine
-       accents, with the same lighter-in-dark-mode / exact-hex-in-light-
-       mode split. Currently used for "Commercial instinct." in the Story
-       heading, but written generically so it can be reused elsewhere. */
+    /* Generic wine-colored accent for headings — same deep wine/oxblood
+       used throughout the site's wine accents, with the same lighter-in-
+       dark-mode / exact-hex-in-light-mode split. Also picks up the same
+       Instrument Serif italic treatment as .hero-copy h1 .accent ("with
+       creative mind and strategic clarity") per feedback, so "Commercial
+       instinct." in the Story heading matches that font exactly — just
+       inline rather than .accent's own display:block, since this sits
+       mid-sentence in the h2 instead of on its own line. Currently used
+       only there, but written generically so it can be reused elsewhere. */
     .accent-wine {
       color: #cf5975;
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: -0.04em;
     }
 
     :root[data-theme="light"] .accent-wine {
