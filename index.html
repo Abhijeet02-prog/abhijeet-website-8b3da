@@ -562,22 +562,38 @@
       color: var(--text);
     }
 
+    /* "keep coming back to" sits next to "Two thoughts I", which is the
+       base h1/h2/h3 weight (800, Manrope). Instrument Serif only ships a
+       single (regular) weight, so there's no true variable-weight match —
+       this is the browser's synthetic/faux bold, same technique used on
+       the hero's own accent line, and it's enough to read as noticeably
+       heavier than the plain-400 italic without looking as heavy as the
+       sans-serif text beside it. */
+    .hero-quotes .marquee-head h3 .accent-italic {
+      font-weight: 700;
+    }
+
     /* The Instagram follow line sits between the eyebrow and the heading.
        .follow-link's shared base style is display:inline-flex, which
        would otherwise run it right alongside the (also inline-flex)
        .eyebrow on the same line instead of stacking below it — switching
        to a shrink-to-fit flex block, centered with auto margins (the
        parent's text-align:center only centers inline-level content),
-       puts it on its own row. Its own margin-top (from the shared
-       .follow-link rule) plus this margin-bottom is what keeps it from
-       crowding either neighbor now that .hero-quotes .marquee-head has
-       its default top margin zeroed out above. */
+       puts it on its own row. The default .eyebrow (16px) + .follow-link
+       (20px) margins left a lopsided 36px gap above this line and almost
+       nothing below it; these overrides even that out to a tight, roughly
+       symmetric gap on both sides. */
+    .hero-quotes .marquee-head .eyebrow {
+      margin-bottom: 8px;
+    }
+
     .hero-quotes .marquee-head .follow-link {
       display: flex;
       width: fit-content;
       margin-left: auto;
       margin-right: auto;
-      margin-bottom: 4px;
+      margin-top: 8px;
+      margin-bottom: 10px;
     }
 
     .hero-panel {
@@ -1422,7 +1438,15 @@
       font-size: 12px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--accent);
+      /* Matches the deep wine used on "in my own words" / "keep coming
+         back to" just above this ticker, in place of the sitewide gold
+         --accent, so the "— Abhijeet Toshniwal" credit reads as part of
+         the same color story. */
+      color: #cf5975;
+    }
+
+    :root[data-theme="light"] .marquee-quote cite {
+      color: #7a263a;
     }
 
     .marquee-sep {
