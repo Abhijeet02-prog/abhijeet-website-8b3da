@@ -1461,9 +1461,16 @@
 
     .marquee-sep {
       flex: 0 0 auto;
-      color: var(--accent);
+      /* Only used between the hero quotes, so it can carry the same deep
+         wine as the rest of that ticker instead of the sitewide gold
+         --accent. */
+      color: #cf5975;
       font-size: 15px;
       opacity: 0.55;
+    }
+
+    :root[data-theme="light"] .marquee-sep {
+      color: #7a263a;
     }
 
     @media (max-width: 640px) {
