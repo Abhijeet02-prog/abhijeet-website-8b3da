@@ -353,14 +353,15 @@
          horizontal mirror flip (a seamless reflection, not a crop/blur) —
          that's what fills the full width with real artwork edge-to-edge
          instead of empty space. In this source photo the man stands near
-         the LEFT edge of the frame, so he ends up at ~8% across this
-         doubled-width image. Building it much wider than any realistic
+         the LEFT edge of the frame (measured at ~14% across the original
+         1280px-wide photo), so in the mirror-doubled 2560px canvas he
+         lands at half that, ~7%. Building it much wider than any realistic
          hero aspect ratio means background-size:cover always crops
-         horizontally rather than vertically, so this 8% position-x
+         horizontally rather than vertically, so this 7% position-x
          reliably pins him to the same visible spot on screen at any
          viewport width, keeping him clear of the hero-panel card on the
          right instead of drifting under it. */
-      background-position: 8% center;
+      background-position: 7% center;
       opacity: 0.22;
       z-index: 0;
       pointer-events: none;
