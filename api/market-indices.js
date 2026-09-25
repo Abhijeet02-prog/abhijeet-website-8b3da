@@ -16,16 +16,15 @@
 //
 // NON-NEGOTIABLE requirement: post-market hours and market holidays must
 // keep showing the exact figure from when the market was last live — never
-// blank, zero, or a "—". Confirmed live (25 Sep 2026, during market hours)
-// that Yahoo's own meta already freezes regularMarketPrice/previousClose at
-// the last traded values once trading stops for the day (regularMarketTime
-// simply stops advancing) — so a plain market close or holiday is already
-// covered for free by Yahoo itself. The real gap is an upstream hiccup: a
-// transient network error, rate-limit, or shape change from this unofficial
-// endpoint, which would otherwise blank an index out even though nothing
-// about the market actually changed. To close that gap, every successful
-// fetch is cached in Redis as "last known good", and a failed fetch falls
-// back to that cached value instead of returning nulls.
+// blank, zero, or a "—". Yahoo's own meta already freezes regularMarketPrice
+// (and the change fields below) at the last live values once trading stops
+// for the day, so a plain market close or holiday is covered for free by
+// Yahoo itself. The remaining gap is an upstream hiccup — a transient
+// network error, rate-limit, or shape change from this unofficial endpoint
+// — which would otherwise blank an index out even though nothing about the
+// market actually changed. To close that gap, every successful fetch is
+// cached in Redis as "last known good", and a failed fetch falls back to
+// that cached value instead of returning nulls.
 
 import { Redis } from "@upstash/redis";
 
@@ -51,27 +50,6 @@ function getRedis() {
 }
 
 export default async function handler(req, res) {
-    // TEMP DEBUG — pass through range/interval so we can compare Yahoo's
-    // previousClose/chartPreviousClose under different query params and
-    // find the combination that actually reflects the immediately-prior
-    // trading session (not some older reference). Remove once confirmed.
-    if (req.query?.debug) {
-        const range = req.query.range || "";
-        const interval = req.query.interval || "";
-        const qs = [range && `range=${range}`, interval && `interval=${interval}`].filter(Boolean).join("&");
-        const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(req.query.debug)}${qs ? "?" + qs : ""}`;
-        const upstream = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0 (compatible; abhijeettoshniwal.com market-ticker/1.0)" } });
-        const data = await upstream.json();
-        const result = data?.chart?.result?.[0];
-        if (!result) return res.status(200).json({ error: "no_result", raw: data });
-        if (req.query?.full) {
-            const closes = result.indicators?.quote?.[0]?.close || [];
-            const timestamps = (result.timestamp || []).map((t) => new Date(t * 1000).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }));
-            return res.status(200).json({ meta: result.meta, timestamps, closes });
-        }
-        return res.status(200).json(result.meta || { error: "no_meta", raw: data });
-    }
-
     const indices = await Promise.all(SYMBOLS.map(fetchQuote));
     const ok = indices.some((idx) => idx.price != null);
 
@@ -97,9 +75,27 @@ async function fetchQuote({ symbol, name }) {
         if (!meta || meta.regularMarketPrice == null) throw new Error("no_meta");
 
         const price = meta.regularMarketPrice;
-        const prevClose = meta.previousClose ?? meta.chartPreviousClose ?? null;
-        const change = prevClose != null ? price - prevClose : null;
-        const changePercent = prevClose ? (change / prevClose) * 100 : null;
+
+        // meta.previousClose / meta.chartPreviousClose are NOT reliable for
+        // "change since the last trading day's close": verified live
+        // (25 Sep 2026, right after a mid-week NSE holiday) that they can
+        // silently point 2+ sessions back instead of the actual last
+        // trading day, which inflated the ticker to a ~-1.7% "crash" when
+        // every index's real move that day was under 0.15%. Cross-checked
+        // against Yahoo's own daily candle history (range=5d&interval=1d)
+        // for all three symbols and confirmed meta.regularMarketChangePercent
+        // / meta.fulldayChange / meta.fulldayChangePercent are computed
+        // against the correct previous session's close, matching a
+        // from-scratch calculation off the raw candles to 3 decimal places.
+        // Use those instead.
+        const changePercent = meta.regularMarketChangePercent ?? meta.fulldayChangePercent ?? null;
+        let change = meta.fulldayChange ?? meta.regularMarketChange ?? null;
+        if (change == null && changePercent != null) {
+            // Fallback derivation in case a future symbol/response is
+            // missing the absolute-change field but has the percent.
+            const prevClose = price / (1 + changePercent / 100);
+            change = price - prevClose;
+        }
 
         const result = { symbol, name, price, change, changePercent };
 
