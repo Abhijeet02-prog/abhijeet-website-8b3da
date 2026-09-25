@@ -373,19 +373,13 @@
       opacity: 0.32;
     }
 
-    @media (max-width: 700px) {
-      .hero::before {
-        background-image:
-          linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
-          url('assets/backgrounds/hero-mobile.jpg');
-        background-position: center top;
-      }
-
-      :root[data-theme="light"] .hero::before {
-        background-image: url('assets/backgrounds/hero-mobile.jpg');
-        background-position: center top;
-      }
-    }
+    /* Mobile used to swap in a separate, narrower crop (hero-mobile.jpg)
+       here. Removed per feedback — mobile now reuses the exact same
+       mirror-doubled hero-desktop.jpg art as desktop (background-size:cover
+       + the 7% position-x set above already pin the man into frame at any
+       width), so the same artwork carries through at every screen size
+       instead of a different, flatter-looking crop kicking in below
+       700px. */
 
     .hero .container {
       position: relative;
@@ -630,6 +624,26 @@
       pointer-events: none;
     }
 
+    /* On mobile .hero-grid collapses to a single column (see the 980px
+       breakpoint below), so this panel stacks full-width under the hero
+       text instead of sitting beside it — at its normal ~75-90% opacity
+       that turns into a tall, near-solid block that buries the hero
+       poster art for its entire height. Lightening it here (mobile only;
+       desktop is untouched) plus a stronger blur keeps the card readable
+       as a glass surface while letting the art continue showing through,
+       matching the layered look the desktop version already has. */
+    @media (max-width: 700px) {
+      .hero-panel {
+        background: linear-gradient(180deg, rgba(17, 22, 33, 0.55), rgba(17, 22, 33, 0.4));
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+      }
+
+      :root[data-theme="light"] .hero-panel {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.48));
+      }
+    }
+
     .mini-card {
       position: relative;
       background: rgba(255, 255, 255, 0.04);
@@ -673,6 +687,14 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
       margin-top: 18px;
+    }
+
+    /* Education mini-card only has two entries (B.Tech, PGDM), so it gets
+       its own 2-column variant instead of the 3-column layout the "At a
+       glance" mini-card above it uses — .stat-grid itself stays untouched
+       for that card. */
+    .stat-grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .stat-box {
@@ -1057,19 +1079,10 @@
       opacity: 0.32;
     }
 
-    @media (max-width: 700px) {
-      .section-music::before {
-        background-image:
-          linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
-          url('assets/backgrounds/music-mobile.jpg');
-        background-position: center top;
-      }
-
-      :root[data-theme="light"] .section-music::before {
-        background-image: url('assets/backgrounds/music-mobile.jpg');
-        background-position: center top;
-      }
-    }
+    /* Mobile used to swap in a separate crop (music-mobile.jpg) here.
+       Removed per feedback — mobile now reuses the same music-desktop.jpg
+       art as desktop instead of a different-looking crop kicking in below
+       700px. */
 
     .section-music .container {
       position: relative;
@@ -1094,6 +1107,28 @@
       -webkit-backdrop-filter: blur(6px);
       box-shadow: var(--shadow);
       padding: 24px;
+    }
+
+    /* Same reasoning as .hero-panel above: .music-grid stacks these full-
+       width on mobile (see the 640px breakpoint below), and at the shared
+       --panel opacity (76-80%) three of them stacked back-to-back leave
+       almost none of the Music/Reels poster art visible. Overriding the
+       background directly here (rather than changing --panel itself)
+       keeps .feature-card/.work-card/.quote-card elsewhere — which don't
+       sit on any poster art — exactly as they are. */
+    @media (max-width: 700px) {
+
+      .music-hero,
+      .music-card {
+        background: rgba(17, 22, 33, 0.5);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+      }
+
+      :root[data-theme="light"] .music-hero,
+      :root[data-theme="light"] .music-card {
+        background: rgba(255, 255, 255, 0.55);
+      }
     }
 
     .music-hero {
@@ -1193,19 +1228,10 @@
       opacity: 0.32;
     }
 
-    @media (max-width: 700px) {
-      .section-reels::before {
-        background-image:
-          linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
-          url('assets/backgrounds/music-mobile.jpg');
-        background-position: center top;
-      }
-
-      :root[data-theme="light"] .section-reels::before {
-        background-image: url('assets/backgrounds/music-mobile.jpg');
-        background-position: center top;
-      }
-    }
+    /* Mobile used to swap in a separate crop (music-mobile.jpg) here.
+       Removed per feedback — mobile now reuses the same music-desktop.jpg
+       art as desktop (shared with the Music section above) instead of a
+       different-looking crop kicking in below 700px. */
 
     .section-reels .container {
       position: relative;
@@ -1954,6 +1980,20 @@
               </div>
               <div class="stat-box stat-box-single">
                 <strong>Athlete</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <div class="mini-top">
+              <span>Education</span>
+            </div>
+            <div class="stat-grid stat-grid-2">
+              <div class="stat-box stat-box-single stat-box-text">
+                <strong>B.Tech → Mechanical</strong>
+              </div>
+              <div class="stat-box stat-box-single stat-box-text">
+                <strong>PGDM → Marketing, Finance</strong>
               </div>
             </div>
           </div>
