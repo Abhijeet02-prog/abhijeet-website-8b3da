@@ -537,8 +537,13 @@
       width: min(1320px, calc(100% - 32px));
     }
 
+    /* A small top margin nudges "In my own words" down a touch from the
+       hero buttons above it — previously 0 since the Instagram follow
+       line used to sit right below it and needed the tightest possible
+       start; now that the eyebrow leads straight into the heading, a
+       little breathing room above reads better. */
     .hero-quotes .marquee-head {
-      margin-top: 0;
+      margin-top: 16px;
     }
 
     /* "In my own words" / "keep coming back to" / the Instagram follow
@@ -578,27 +583,25 @@
       font-weight: 505;
     }
 
-    /* The Instagram follow line sits between the eyebrow and the heading.
-       .follow-link's shared base style is display:inline-flex, which
-       would otherwise run it right alongside the (also inline-flex)
-       .eyebrow on the same line instead of stacking below it — switching
-       to a shrink-to-fit flex block, centered with auto margins (the
-       parent's text-align:center only centers inline-level content),
-       puts it on its own row. The default .eyebrow (16px) + .follow-link
-       (20px) margins left a lopsided 36px gap above this line and almost
-       nothing below it; these overrides even that out to a tight, roughly
-       symmetric gap on both sides. */
+    /* "In my own words" used to sit in a tight 8px gap right above the
+       Instagram follow line. That line now lives below the running quote
+       strip instead (see .hero-quotes > .follow-link below), so the
+       eyebrow goes straight into the heading and gets a normal gap. */
     .hero-quotes .marquee-head .eyebrow {
-      margin-bottom: 8px;
+      margin-bottom: 14px;
     }
 
-    .hero-quotes .marquee-head .follow-link {
+    /* The Instagram follow line now sits below the running quote strip
+       (moved out of .marquee-head, so it's a direct child of
+       .hero-quotes) rather than between the eyebrow and the heading.
+       .follow-link's shared base style is display:inline-flex, which
+       centers fine as inline content on its own, but a shrink-to-fit flex
+       block with auto margins keeps it reliably centered under the strip
+       and gives it a clean gap of its own above and below. */
+    .hero-quotes > .follow-link {
       display: flex;
       width: fit-content;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 8px;
-      margin-bottom: 10px;
+      margin: 20px auto 0;
     }
 
     .hero-panel {
@@ -2031,14 +2034,6 @@
       <div class="container hero-quotes" id="philosophy">
         <div class="marquee-head">
           <div class="eyebrow">In my own words</div>
-          <a class="follow-link" href="https://www.instagram.com/thoughts_at_02?stkn=MXBjM3ltMnprYWdkYQ%3D%3D"
-            target="_blank" rel="noreferrer">
-            <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8Zm8.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
-            </svg>
-            For more such thoughts, follow
-          </a>
           <h3>Two thoughts I <span class="accent-italic">keep coming back to</span></h3>
         </div>
 
@@ -2054,6 +2049,15 @@
             <span class="marquee-sep" aria-hidden="true">✦</span>
           </div>
         </div>
+
+        <a class="follow-link" href="https://www.instagram.com/thoughts_at_02?stkn=MXBjM3ltMnprYWdkYQ%3D%3D"
+          target="_blank" rel="noreferrer">
+          <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8Zm8.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
+          </svg>
+          For more such thoughts, follow
+        </a>
       </div>
     </section>
 
