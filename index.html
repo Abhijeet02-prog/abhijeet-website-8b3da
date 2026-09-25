@@ -538,6 +538,48 @@
       margin-top: 0;
     }
 
+    /* "In my own words" / "keep coming back to" / the Instagram follow
+       line all switch to the same deep wine/oxblood used on the hero's
+       own accent line just above, so the whole hero reads as one cohesive
+       color story instead of mixing in the sitewide gold --accent. Scoped
+       to .hero-quotes only — the identical .marquee-head/.accent-italic
+       markup in the "Services & Practice Areas" ticker further down the
+       page, and .follow-link in the Music section, keep the gold accent
+       they've always had. */
+    .hero-quotes .eyebrow,
+    .hero-quotes .marquee-head h3 .accent-italic,
+    .hero-quotes .follow-link {
+      color: #cf5975;
+    }
+
+    :root[data-theme="light"] .hero-quotes .eyebrow,
+    :root[data-theme="light"] .hero-quotes .marquee-head h3 .accent-italic,
+    :root[data-theme="light"] .hero-quotes .follow-link {
+      color: #7a263a;
+    }
+
+    .hero-quotes .follow-link:hover {
+      color: var(--text);
+    }
+
+    /* The Instagram follow line sits between the eyebrow and the heading.
+       .follow-link's shared base style is display:inline-flex, which
+       would otherwise run it right alongside the (also inline-flex)
+       .eyebrow on the same line instead of stacking below it — switching
+       to a shrink-to-fit flex block, centered with auto margins (the
+       parent's text-align:center only centers inline-level content),
+       puts it on its own row. Its own margin-top (from the shared
+       .follow-link rule) plus this margin-bottom is what keeps it from
+       crowding either neighbor now that .hero-quotes .marquee-head has
+       its default top margin zeroed out above. */
+    .hero-quotes .marquee-head .follow-link {
+      display: flex;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 4px;
+    }
+
     .hero-panel {
       position: relative;
       padding: 24px;
@@ -928,62 +970,6 @@
         linear-gradient(135deg, rgba(180, 120, 90, 0.08), rgba(125, 72, 126, 0.08), rgba(11, 13, 18, 0.00));
     }
 
-    .section-writing {
-      position: relative;
-      overflow: hidden;
-      background:
-        linear-gradient(135deg, rgba(208, 169, 124, 0.08), rgba(116, 90, 76, 0.10), rgba(11, 13, 18, 0.00));
-    }
-
-    /* Experimental: faint poster art behind the section, provided by Abhijeet.
-       Swapped for a portrait crop on narrow screens. Easy to remove — just
-       delete this ::before block and the .section-writing .container rule
-       below to revert.
-
-       The art is light/cream toned, so it reads fine at moderate strength
-       in light mode (dark text stays legible) but fights the near-white
-       text in dark mode — kept much fainter there, and dimmed further with
-       a dark scrim so the text always has a calm, low-contrast backdrop
-       instead of ink linework running straight through the letters. */
-    .section-writing::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
-        url('assets/backgrounds/writing-desktop.jpg');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.22;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    :root[data-theme="light"] .section-writing::before {
-      background-image: url('assets/backgrounds/writing-desktop.jpg');
-      opacity: 0.32;
-    }
-
-    @media (max-width: 700px) {
-      .section-writing::before {
-        background-image:
-          linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
-          url('assets/backgrounds/writing-mobile.jpg');
-        background-position: center top;
-      }
-
-      :root[data-theme="light"] .section-writing::before {
-        background-image: url('assets/backgrounds/writing-mobile.jpg');
-        background-position: center top;
-      }
-    }
-
-    .section-writing .container {
-      position: relative;
-      z-index: 1;
-    }
-
-    .section-writing .eyebrow,
     .section-music .eyebrow,
     .section-reels .eyebrow {
       color: var(--accent);
@@ -992,15 +978,12 @@
     /* The heading sits directly on the poster art (no card behind it), so
        give it a soft shadow for guaranteed contrast wherever ink linework
        or paper texture happens to cross the letters. Shared across
-       Writing, Music, and Reels now that all three use the same
-       theme-aware poster treatment. */
-    .section-writing .section-head h2,
+       Music and Reels, which use the same theme-aware poster treatment. */
     .section-music .section-head h2,
     .section-reels .section-head h2 {
       text-shadow: 0 2px 18px rgba(11, 13, 18, 0.35);
     }
 
-    :root[data-theme="light"] .section-writing .section-head h2,
     :root[data-theme="light"] .section-music .section-head h2,
     :root[data-theme="light"] .section-reels .section-head h2 {
       text-shadow: 0 2px 14px rgba(245, 240, 234, 0.6);
@@ -1012,21 +995,6 @@
 
     :root[data-theme="light"] .section-reels .section-head p {
       text-shadow: 0 1px 8px rgba(245, 240, 234, 0.5);
-    }
-
-    .section-writing .quote-card {
-      border-color: rgba(216, 167, 92, 0.18);
-      background: var(--panel);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-    }
-
-    .section-writing .quote-card p {
-      font-family: 'Instrument Serif', Georgia, serif;
-      font-style: italic;
-      font-size: clamp(1.35rem, 2vw, 1.9rem);
-      line-height: 1.2;
-      color: var(--soft);
     }
 
     .section-music {
@@ -1883,7 +1851,6 @@
       <nav class="nav-links" id="mainNav" aria-label="Main navigation">
         <a href="#story">Story</a>
         <a href="#work">Work</a>
-        <a href="#writing">Writing</a>
         <a href="#music">Music</a>
         <a href="#contact">Contact</a>
         <a href="#contact" class="btn btn-secondary nav-cta-mobile">Book a call</a>
@@ -1960,6 +1927,14 @@
       <div class="container hero-quotes" id="philosophy">
         <div class="marquee-head">
           <div class="eyebrow">In my own words</div>
+          <a class="follow-link" href="https://www.instagram.com/thoughts_at_02?stkn=MXBjM3ltMnprYWdkYQ%3D%3D"
+            target="_blank" rel="noreferrer">
+            <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8Zm8.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
+            </svg>
+            For more such thoughts, follow
+          </a>
           <h3>Two thoughts I <span class="accent-italic">keep coming back to</span></h3>
         </div>
 
@@ -2111,39 +2086,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-writing" id="writing">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">Selected work</div>
-            <h2>Thoughts shaped by narrative, rhythm, and intention.</h2>
-          </div>
-        </div>
-
-        <div class="quotes">
-          <article class="quote-card">
-            <span class="quote-mark">“</span>
-            <p>My birth was celebrated within my family. I wish my death would be remembered by the world.</p>
-            <strong class="quote-author">— Abhijeet Toshniwal</strong>
-          </article>
-
-          <article class="quote-card">
-            <span class="quote-mark">“</span>
-            <p>Knowledge fills the mind, logic creates the subject.</p>
-            <strong class="quote-author">— Abhijeet Toshniwal</strong>
-            <a class="follow-link" href="https://www.instagram.com/thoughts_at_02?stkn=MXBjM3ltMnprYWdkYQ%3D%3D"
-              target="_blank" rel="noreferrer">
-              <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8Zm8.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
-              </svg>
-              For more such thoughts, follow
-            </a>
-          </article>
         </div>
       </div>
     </section>
