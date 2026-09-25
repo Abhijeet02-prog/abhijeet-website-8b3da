@@ -1134,7 +1134,8 @@
        stronger, unscrimmed version in light mode (dark text stays legible
        straight on the art). Scoped to #work only — .section-professional
        above is shared with the hero (its own separate poster) and the
-       Contact section (no poster of its own), so neither is affected. */
+       Contact section (which now has its own poster too, via #contact::before
+       below), so neither is affected by this #work-scoped rule. */
     #work {
       position: relative;
       overflow: hidden;
@@ -1237,6 +1238,46 @@
 
     :root[data-theme="light"] #story .marquee-sep {
       color: #7a263a;
+    }
+
+    /* Contact ("Start the conversation") section poster art — the sunset
+       desk scene (architectural sketches pinned to a concrete wall, a
+       potted plant, chess pieces, a closed laptop and notebook on a stone
+       ledge, overlooking a river and city skyline). Same theme-aware
+       treatment as the Story/Capabilities/Music posters: a dark scrim +
+       reduced opacity in dark mode so the art stays calm behind the form
+       and near-white text, and a stronger, unscrimmed version in light
+       mode. The form/details boxes already sit on .contact-panel's own
+       var(--panel) card background (see the .feature-card/.contact-panel
+       rule above), so they stay fully readable over the art without any
+       change. Scoped to #contact only. */
+    #contact {
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contact::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+        url('assets/backgrounds/contact-desktop.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.22;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    :root[data-theme="light"] #contact::before {
+      background-image: url('assets/backgrounds/contact-desktop.jpg');
+      opacity: 0.32;
+    }
+
+    #contact .container {
+      position: relative;
+      z-index: 1;
     }
 
     .section-music .eyebrow,
