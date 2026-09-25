@@ -534,6 +534,14 @@
       margin-top: 48px;
     }
 
+    /* The default .container max-width (1180px) is a bit tight for the
+       quote ticker — widening it a little (to 1320px) gives the running
+       strip more room to breathe before the edge-fade mask kicks in,
+       without going full-bleed. */
+    .hero-quotes.container {
+      width: min(1320px, calc(100% - 32px));
+    }
+
     .hero-quotes .marquee-head {
       margin-top: 0;
     }
