@@ -62,7 +62,14 @@ export default async function handler(req, res) {
         const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(req.query.debug)}${qs ? "?" + qs : ""}`;
         const upstream = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0 (compatible; abhijeettoshniwal.com market-ticker/1.0)" } });
         const data = await upstream.json();
-        return res.status(200).json(data?.chart?.result?.[0]?.meta || { error: "no_meta", raw: data });
+        const result = data?.chart?.result?.[0];
+        if (!result) return res.status(200).json({ error: "no_result", raw: data });
+        if (req.query?.full) {
+            const closes = result.indicators?.quote?.[0]?.close || [];
+            const timestamps = (result.timestamp || []).map((t) => new Date(t * 1000).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }));
+            return res.status(200).json({ meta: result.meta, timestamps, closes });
+        }
+        return res.status(200).json(result.meta || { error: "no_meta", raw: data });
     }
 
     const indices = await Promise.all(SYMBOLS.map(fetchQuote));
