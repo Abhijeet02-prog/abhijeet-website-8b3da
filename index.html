@@ -1384,6 +1384,28 @@
       mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
     }
 
+    /* Services & Practice Areas pill marquee, widened to the same 1320px
+       used by the hero quotes ticker ("increase the length of the running
+       strip"). Unlike hero-quotes — its own dedicated container, sized
+       directly off the full-width .hero section — this marquee's
+       .marquee-head/.marquee-outer live inside the #work section's shared
+       .container (max 1180px), alongside the Capabilities heading and
+       feature-grid cards that must stay their normal width. So instead of
+       widening .container itself (which would also widen those), this
+       breaks just the marquee out of it: width is measured off the
+       viewport (capped at 1320px, same as hero-quotes), and the negative
+       side effect of that being wider than its 1180px parent is corrected
+       by centering it with a margin-left computed from the difference —
+       when the viewport is too narrow for 1320px the same min() shrinks
+       it back down, same graceful degradation as hero-quotes. Scoped to
+       #work so the identical .marquee-head/.marquee-outer markup used by
+       the hero ticker (and any future reuse) is unaffected. */
+    #work .marquee-head,
+    #work .marquee-outer {
+      width: min(1320px, calc(100vw - 32px));
+      margin-left: calc((100% - min(1320px, calc(100vw - 32px))) / 2);
+    }
+
     .marquee-row {
       display: flex;
       gap: 9px;
@@ -1488,15 +1510,21 @@
 
     .marquee-sep {
       flex: 0 0 auto;
-      /* Only used between the hero quotes, so it can carry the same deep
-         wine as the rest of that ticker instead of the sitewide gold
-         --accent. */
-      color: #cf5975;
+      color: var(--accent);
       font-size: 15px;
       opacity: 0.55;
     }
 
-    :root[data-theme="light"] .marquee-sep {
+    /* The hero quotes ticker carries the same deep wine used by the rest
+       of that section (eyebrow, "keep coming back to", the quote credit)
+       instead of the sitewide gold --accent — scoped to .hero-quotes only
+       so the Services & Practice Areas pill marquee below keeps its own
+       gold star separators. */
+    .hero-quotes .marquee-sep {
+      color: #cf5975;
+    }
+
+    :root[data-theme="light"] .hero-quotes .marquee-sep {
       color: #7a263a;
     }
 
@@ -2092,24 +2120,43 @@
         <div class="marquee-outer">
           <div class="marquee-row">
             <span class="marquee-pill">Brand Building</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Strategy</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Marketing</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Finance</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Share Market</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Personal Finance</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Consulting</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Investing</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Writing</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Music</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Brand Building</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Strategy</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Marketing</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Finance</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Share Market</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Personal Finance</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Consulting</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Investing</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Writing</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Music</span>
           </div>
         </div>
