@@ -1177,6 +1177,34 @@
       z-index: 1;
     }
 
+    /* Story section running strip (Brand / Decision Framework / Systems /
+       Narrative / GTM — pulled from this section's own copy). Same
+       breakout-to-1320px, edge-fade and pill treatment as the Capabilities
+       strip below it ("in the same way what we created before"), but with
+       black text (the base .marquee-pill color already) paired with the
+       deep wine star separators from the hero quotes ticker instead of
+       Capabilities' gold, so the color story matches "In my own words"
+       rather than Capabilities. Scoped to #story only — #work's own gold
+       stars and 1320px breakout are untouched. */
+    #story .marquee-outer {
+      width: min(1320px, calc(100vw - 32px));
+      margin-left: calc((100% - min(1320px, calc(100vw - 32px))) / 2);
+      margin-bottom: 28px;
+    }
+
+    #story .marquee-row {
+      gap: 28px;
+      align-items: center;
+    }
+
+    #story .marquee-sep {
+      color: #cf5975;
+    }
+
+    :root[data-theme="light"] #story .marquee-sep {
+      color: #7a263a;
+    }
+
     .section-music .eyebrow,
     .section-reels .eyebrow {
       color: var(--accent);
@@ -2394,6 +2422,30 @@
           <div>
             <div class="eyebrow">My approach</div>
             <h2>Creative mind. Commercial instinct.</h2>
+          </div>
+        </div>
+
+        <div class="marquee-outer">
+          <div class="marquee-row">
+            <span class="marquee-pill">Brand</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span class="marquee-pill">Decision Framework</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span class="marquee-pill">Systems</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span class="marquee-pill">Narrative</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span class="marquee-pill">GTM</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span class="marquee-pill">Brand</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span class="marquee-pill">Decision Framework</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span class="marquee-pill">Systems</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span class="marquee-pill">Narrative</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span class="marquee-pill">GTM</span>
           </div>
         </div>
 
