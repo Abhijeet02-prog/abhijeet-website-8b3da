@@ -567,13 +567,12 @@
        single (regular, 400) weight, so there's no true variable-weight
        match — this is the browser's synthetic/faux bold, same technique
        used on the hero's own accent line. The synthesized stroke scales
-       with how far the requested weight sits above 400, so this was
-       first set to 700 (a +300 delta), then dialed back per feedback:
-       cutting that delta by 30% (300 -> 210) lands at 610, which reads
-       clearly lighter than the original pass while still sitting above
-       the plain-400 italic weight. */
+       with how far the requested weight sits above 400: 700 (+300) ->
+       610 (+210, a 30% cut) -> now 505 (+105, a further 50% cut off the
+       610 pass), which reads as a soft, barely-there weight lift over
+       the plain-400 italic rather than a bold accent. */
     .hero-quotes .marquee-head h3 .accent-italic {
-      font-weight: 610;
+      font-weight: 505;
     }
 
     /* The Instagram follow line sits between the eyebrow and the heading.
