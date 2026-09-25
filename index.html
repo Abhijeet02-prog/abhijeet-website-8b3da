@@ -1561,8 +1561,21 @@
       flex: 0 0 auto;
       color: var(--text);
       font-weight: 700;
-      font-size: 13px;
+      font-size: 15px;
       white-space: nowrap;
+    }
+
+    /* Star separators for this strip only, sized up to match the larger
+       pill text above (same ~1.15x text:star ratio the original 13px
+       text / 15px .marquee-sep pairing had) and nudged down 1px — a taller
+       glyph box at this size otherwise sits slightly high next to the
+       bold text's cap-height even with align-items:center on the row.
+       Scoped to #work so the hero-quotes and market-ticker strips, which
+       share the base .marquee-sep rule, keep their own star size. */
+    #work .marquee-sep {
+      font-size: 17px;
+      position: relative;
+      top: 1px;
     }
 
     /* Wider gap (was 9px, shared with the pill's own padding before) and
@@ -1597,7 +1610,11 @@
 
     @media (max-width: 640px) {
       .marquee-pill {
-        font-size: 12px;
+        font-size: 14px;
+      }
+
+      #work .marquee-sep {
+        font-size: 16px;
       }
 
       #work .marquee-row {
