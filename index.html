@@ -1391,19 +1391,29 @@
        used by the hero quotes ticker ("increase the length of the running
        strip"). Unlike hero-quotes — its own dedicated container, sized
        directly off the full-width .hero section — this marquee's
-       .marquee-head/.marquee-outer live inside the #work section's shared
-       .container (max 1180px), alongside the Capabilities heading and
-       feature-grid cards that must stay their normal width. So instead of
-       widening .container itself (which would also widen those), this
-       breaks just the marquee out of it: width is measured off the
-       viewport (capped at 1320px, same as hero-quotes), and the negative
-       side effect of that being wider than its 1180px parent is corrected
-       by centering it with a margin-left computed from the difference —
-       when the viewport is too narrow for 1320px the same min() shrinks
-       it back down, same graceful degradation as hero-quotes. Scoped to
-       #work so the identical .marquee-head/.marquee-outer markup used by
-       the hero ticker (and any future reuse) is unaffected. */
-    #work .marquee-head,
+       .marquee-outer lives inside the #work section's shared .container
+       (max 1180px), alongside the Capabilities heading and feature-grid
+       cards that must stay their normal width. So instead of widening
+       .container itself (which would also widen those), this breaks just
+       the strip out of it: width is measured off the viewport (capped at
+       1320px, same as hero-quotes), and the negative side effect of that
+       being wider than its 1180px parent is corrected by centering it
+       with a margin-left computed from the difference — when the
+       viewport is too narrow for 1320px the same min() shrinks it back
+       down, same graceful degradation as hero-quotes.
+
+       NOTE: this used to also apply to #work .marquee-head, but that
+       heading block has its own max-width:820px (base .marquee-head
+       rule below), which clamps its rendered width well under the
+       1320px this rule sets — so the margin-left, computed for a
+       1320px-wide box, was centering a box that was actually only
+       820px wide, dragging "SERVICES & PRACTICE AREAS" / "Where I
+       bring..." visibly off-center to the left. The heading doesn't
+       need the breakout at all; its own margin:auto (base .marquee-head
+       rule) already centers it correctly inside the normal 1180px
+       container. Scoped to #work so the identical .marquee-outer
+       markup used by the hero ticker (and any future reuse) is
+       unaffected. */
     #work .marquee-outer {
       width: min(1320px, calc(100vw - 32px));
       margin-left: calc((100% - min(1320px, calc(100vw - 32px))) / 2);
