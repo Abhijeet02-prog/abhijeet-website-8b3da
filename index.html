@@ -485,6 +485,20 @@
       text-shadow: 0 2px 14px rgba(245, 240, 234, 0.6);
     }
 
+    /* Generic wine-colored accent for headings that need just the color
+       (not the italic serif treatment .accent/.accent-italic carry
+       elsewhere) — same deep wine/oxblood used throughout the site's wine
+       accents, with the same lighter-in-dark-mode / exact-hex-in-light-
+       mode split. Currently used for "Commercial instinct." in the Story
+       heading, but written generically so it can be reused elsewhere. */
+    .accent-wine {
+      color: #cf5975;
+    }
+
+    :root[data-theme="light"] .accent-wine {
+      color: #7a263a;
+    }
+
     .hero-copy h1 .accent {
       display: block;
       /* Abhijeet's chosen color for this line: deep wine/oxblood (#7A263A),
@@ -933,10 +947,17 @@
       align-items: stretch;
     }
 
+    /* Was a near-transparent tinted gradient, fine on a plain background —
+       but now that #story has poster art behind it (see #story::before),
+       that gradient let the busy art show straight through the text,
+       making it unreadable. Switched to the same var(--panel) solid box
+       color the .story-item cards beside it already use, so this box
+       reads as the same "card floating on the art" treatment as the rest
+       of the section instead of being the one see-through element. */
     .story-main {
       padding: 28px;
       border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, rgba(216, 167, 92, 0.1), rgba(142, 197, 255, 0.08), rgba(255, 255, 255, 0.02));
+      background: var(--panel);
       border: 1px solid var(--line);
     }
 
@@ -2421,7 +2442,7 @@
         <div class="section-head">
           <div>
             <div class="eyebrow">My approach</div>
-            <h2>Creative mind. Commercial instinct.</h2>
+            <h2>Creative mind. <span class="accent-wine">Commercial instinct.</span></h2>
           </div>
         </div>
 
