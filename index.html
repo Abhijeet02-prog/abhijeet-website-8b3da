@@ -1017,6 +1017,45 @@
         transparent;
     }
 
+    /* Capabilities section poster art — the ink-wash scene (guitar,
+       coffee, candlestick chart climbing toward a city skyline, notebook,
+       piano) sits behind the Capabilities heading and Services & Practice
+       Areas strip below it. Same theme-aware overlay treatment used for
+       Music/Reels: a dark scrim + reduced opacity in dark mode (busy,
+       high-contrast art stays calm behind near-white text), and a
+       stronger, unscrimmed version in light mode (dark text stays legible
+       straight on the art). Scoped to #work only — .section-professional
+       above is shared with the hero (its own separate poster) and the
+       Contact section (no poster of its own), so neither is affected. */
+    #work {
+      position: relative;
+      overflow: hidden;
+    }
+
+    #work::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+        url('assets/backgrounds/capabilities-desktop.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.22;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    :root[data-theme="light"] #work::before {
+      background-image: url('assets/backgrounds/capabilities-desktop.jpg');
+      opacity: 0.32;
+    }
+
+    #work .container {
+      position: relative;
+      z-index: 1;
+    }
+
     .section-art {
       background:
         linear-gradient(135deg, rgba(180, 120, 90, 0.08), rgba(125, 72, 126, 0.08), rgba(11, 13, 18, 0.00));
