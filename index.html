@@ -522,6 +522,22 @@
       border-color: rgba(216, 167, 92, 0.75);
     }
 
+    /* "In my own words" quote ticker lives INSIDE the hero section itself
+       (a sibling of .hero-grid, not its own .section) specifically so it
+       doesn't inherit an extra 84px-top + 84px-bottom block of empty
+       padding on top of the hero's own spacing — that stacked padding was
+       the "extra space" between the hero buttons and the ticker, and
+       another 84px again before Capabilities below it. Sitting inside
+       .hero means it rides the same poster background and only needs a
+       small margin of its own. */
+    .hero-quotes {
+      margin-top: 48px;
+    }
+
+    .hero-quotes .marquee-head {
+      margin-top: 0;
+    }
+
     .hero-panel {
       position: relative;
       padding: 24px;
@@ -1940,10 +1956,8 @@
           </div>
         </div>
       </div>
-    </section>
 
-    <section class="section section-professional" id="philosophy">
-      <div class="container">
+      <div class="container hero-quotes" id="philosophy">
         <div class="marquee-head">
           <div class="eyebrow">In my own words</div>
           <h3>Two thoughts I <span class="accent-italic">keep coming back to</span></h3>
