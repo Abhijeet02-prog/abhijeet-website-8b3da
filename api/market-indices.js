@@ -51,6 +51,20 @@ function getRedis() {
 }
 
 export default async function handler(req, res) {
+    // TEMP DEBUG — pass through range/interval so we can compare Yahoo's
+    // previousClose/chartPreviousClose under different query params and
+    // find the combination that actually reflects the immediately-prior
+    // trading session (not some older reference). Remove once confirmed.
+    if (req.query?.debug) {
+        const range = req.query.range || "";
+        const interval = req.query.interval || "";
+        const qs = [range && `range=${range}`, interval && `interval=${interval}`].filter(Boolean).join("&");
+        const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(req.query.debug)}${qs ? "?" + qs : ""}`;
+        const upstream = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0 (compatible; abhijeettoshniwal.com market-ticker/1.0)" } });
+        const data = await upstream.json();
+        return res.status(200).json(data?.chart?.result?.[0]?.meta || { error: "no_meta", raw: data });
+    }
+
     const indices = await Promise.all(SYMBOLS.map(fetchQuote));
     const ok = indices.some((idx) => idx.price != null);
 
