@@ -463,6 +463,35 @@
       white-space: nowrap;
     }
 
+    /* The three index figures alone don't render nearly enough text to
+       fill a wide desktop viewport, even doubled — and since .marquee-row
+       sizes itself to its own content (width:max-content) inside a grid
+       track rather than stretching to fill it, a too-short row just sits
+       flush-left with empty, un-animated track space to its right. As it
+       slides left, that gap becomes visible instead of looping seamlessly
+       (this is what "once the line ends it should keep coming" was
+       reporting). The fix isn't CSS — it's the JS below repeating the
+       item+tagline sequence enough times that the rendered row is always
+       comfortably wider than any real viewport before it ever gets
+       doubled for the loop. This class just re-centers the row's cross-
+       axis (the tagline's serif italic sits taller than the plain index
+       figures) and slows the scroll down — 34s across all that repeated
+       content would otherwise fly by. */
+    .market-marquee-row {
+      align-items: center;
+      animation-duration: 70s;
+    }
+
+    .market-tagline {
+      flex: 0 0 auto;
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
     .hero-copy h1 {
       font-size: clamp(3.2rem, 7vw, 7rem);
       letter-spacing: -0.07em;
@@ -2102,7 +2131,7 @@
     <section class="hero section-professional">
       <div class="market-ticker" aria-label="Live market indices">
         <div class="marquee-outer">
-          <div class="marquee-row" id="marketMarqueeRow">
+          <div class="marquee-row market-marquee-row" id="marketMarqueeRow">
             <span class="market-item-loading">Loading live market data…</span>
           </div>
         </div>
@@ -2747,12 +2776,24 @@
           '</span>';
       }
 
+      const TAGLINE = 'Because every economic shift eventually reflects in the markets.';
+      // How many times the (3 indices + tagline) sequence repeats in HALF
+      // the row. Just doubling that one short sequence (as the quote and
+      // services strips do with their own, much longer content) isn't
+      // enough text to fill a wide desktop viewport — the row would sit
+      // narrower than its track and leave a visible gap as it scrolls (see
+      // the .market-marquee-row comment in the CSS). Repeating it this
+      // many times per half keeps the row comfortably wider than any
+      // realistic screen even before the two identical halves are joined.
+      const REPEAT = 4;
+
       function render(indices) {
         const sep = '<span class="marquee-sep" aria-hidden="true">✦</span>';
-        const sequence = indices.map(renderItem).join(sep);
-        // Doubled sequence, same technique as the quote/services marquees,
-        // so the 50%-translateX scroll loops seamlessly.
-        row.innerHTML = sequence + sep + sequence + sep;
+        const tagline = '<span class="market-tagline">' + TAGLINE + '</span>';
+        const unit = indices.map(renderItem).concat([tagline]).join(sep) + sep;
+        let half = '';
+        for (let i = 0; i < REPEAT; i++) half += unit;
+        row.innerHTML = half + half;
       }
 
       function renderUnavailable() {
