@@ -1402,6 +1402,61 @@
       }
     }
 
+    /* "In my own words" quote ticker (new #philosophy section, landing
+       page) — reuses the same .marquee-outer / .marquee-row scroll
+       mechanics as the Services & Practice Areas pill marquee above
+       (edge fade, hover-to-pause, seamless 50%-translate loop), just
+       with flowing quote text instead of pills, so the motion language
+       stays consistent site-wide. Scoped additions only — .marquee-row,
+       .marquee-outer and the pill marquee above are untouched. */
+    .quote-marquee-row {
+      gap: 56px;
+      align-items: center;
+      animation-duration: 46s;
+    }
+
+    .marquee-quote {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 14px;
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.05rem, 2.1vw, 1.55rem);
+      line-height: 1.3;
+      color: var(--text);
+      white-space: nowrap;
+      letter-spacing: -0.01em;
+    }
+
+    .marquee-quote cite {
+      font-family: 'Manrope', sans-serif;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .marquee-sep {
+      flex: 0 0 auto;
+      color: var(--accent);
+      font-size: 15px;
+      opacity: 0.55;
+    }
+
+    @media (max-width: 640px) {
+      .marquee-quote {
+        font-size: 1.05rem;
+      }
+
+      .quote-marquee-row {
+        gap: 36px;
+      }
+    }
+
     .contact-wrap {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
@@ -1881,6 +1936,28 @@
                 <strong>Athlete</strong>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-professional" id="philosophy">
+      <div class="container">
+        <div class="marquee-head">
+          <div class="eyebrow">In my own words</div>
+          <h3>Two thoughts I <span class="accent-italic">keep coming back to</span></h3>
+        </div>
+
+        <div class="marquee-outer">
+          <div class="marquee-row quote-marquee-row">
+            <span class="marquee-quote">“Knowledge fills the mind, Logic creates the subject.”<cite>— Abhijeet Toshniwal</cite></span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span class="marquee-quote">“My birth was celebrated within my family. I wish my death would be remembered by the world.”<cite>— Abhijeet Toshniwal</cite></span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span class="marquee-quote">“Knowledge fills the mind, Logic creates the subject.”<cite>— Abhijeet Toshniwal</cite></span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span class="marquee-quote">“My birth was celebrated within my family. I wish my death would be remembered by the world.”<cite>— Abhijeet Toshniwal</cite></span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
           </div>
         </div>
       </div>
