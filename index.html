@@ -1141,6 +1141,42 @@
         linear-gradient(135deg, rgba(180, 120, 90, 0.08), rgba(125, 72, 126, 0.08), rgba(11, 13, 18, 0.00));
     }
 
+    /* Story ("Creative mind. Commercial instinct.") section poster art —
+       the sunset rooftop-desk scene (chess pieces, sketches, a candlestick
+       chart arcing toward the skyline). Same theme-aware treatment as the
+       Capabilities (#work) and Music/Reels posters: a dark scrim + reduced
+       opacity in dark mode so the art stays calm behind near-white text,
+       and a stronger, unscrimmed version in light mode where dark text
+       stays legible straight on the art. Scoped to #story only. */
+    #story {
+      position: relative;
+      overflow: hidden;
+    }
+
+    #story::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+        url('assets/backgrounds/story-desktop.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.22;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    :root[data-theme="light"] #story::before {
+      background-image: url('assets/backgrounds/story-desktop.jpg');
+      opacity: 0.32;
+    }
+
+    #story .container {
+      position: relative;
+      z-index: 1;
+    }
+
     .section-music .eyebrow,
     .section-reels .eyebrow {
       color: var(--accent);
