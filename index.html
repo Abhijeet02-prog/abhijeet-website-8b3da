@@ -1214,14 +1214,16 @@
        Capabilities' gold. Scoped to #story only — #work's own gold stars
        and 1320px breakout are untouched.
        Sits at the BOTTOM of the section (after .story), not under the
-       heading — moved there per feedback ("at the footer, not the
-       header"), so margin-top (not margin-bottom) is what separates it
-       from the content above; the section's own bottom padding (84px,
-       .section) provides the space below it before the next section. */
+       main heading — moved there per feedback ("at the footer, not the
+       header") and given its own lead-in line ("Built to endure, not
+       just to perform.") via the shared .marquee-head, whose own
+       margin (40px auto 20px) supplies the spacing both above and below
+       it, so no extra margin is needed here; the section's own bottom
+       padding (84px, .section) provides the space below the strip
+       before the next section. */
     #story .marquee-outer {
       width: min(1320px, calc(100vw - 32px));
       margin-left: calc((100% - min(1320px, calc(100vw - 32px))) / 2);
-      margin-top: 40px;
     }
 
     #story .marquee-row {
@@ -2494,6 +2496,10 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="marquee-head">
+          <h3>Built to endure, <span class="accent-wine">not just to perform.</span></h3>
         </div>
 
         <div class="marquee-outer">
