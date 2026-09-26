@@ -1335,30 +1335,26 @@
       z-index: 1;
     }
 
-    .section-music .eyebrow,
-    .section-reels .eyebrow {
+    .section-music .eyebrow {
       color: var(--accent);
     }
 
     /* The heading sits directly on the poster art (no card behind it), so
        give it a soft shadow for guaranteed contrast wherever ink linework
-       or paper texture happens to cross the letters. Shared across
-       Music and Reels, which use the same theme-aware poster treatment. */
-    .section-music .section-head h2,
-    .section-reels .section-head h2 {
+       or paper texture happens to cross the letters. */
+    .section-music .section-head h2 {
       text-shadow: 0 2px 18px rgba(11, 13, 18, 0.35);
     }
 
-    :root[data-theme="light"] .section-music .section-head h2,
-    :root[data-theme="light"] .section-reels .section-head h2 {
+    :root[data-theme="light"] .section-music .section-head h2 {
       text-shadow: 0 2px 14px rgba(245, 240, 234, 0.6);
     }
 
-    .section-reels .section-head p {
+    .section-music .section-head p {
       text-shadow: 0 1px 10px rgba(11, 13, 18, 0.3);
     }
 
-    :root[data-theme="light"] .section-reels .section-head p {
+    :root[data-theme="light"] .section-music .section-head p {
       text-shadow: 0 1px 8px rgba(245, 240, 234, 0.5);
     }
 
@@ -1405,153 +1401,24 @@
       z-index: 1;
     }
 
-    .music-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    .music-hero,
-    .music-card {
-      position: relative;
-      overflow: hidden;
-      border-radius: 28px;
-      border: 1px solid rgba(216, 167, 92, 0.18);
-      background: var(--panel);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      box-shadow: var(--shadow);
-      padding: 24px;
-    }
-
-    /* Same reasoning as .hero-panel above: .music-grid stacks these full-
-       width on mobile (see the 640px breakpoint below), and at the shared
-       --panel opacity (76-80%) three of them stacked back-to-back leave
-       almost none of the Music/Reels poster art visible. Overriding the
-       background directly here (rather than changing --panel itself)
-       keeps .feature-card/.work-card/.quote-card elsewhere — which don't
-       sit on any poster art — exactly as they are. */
-    @media (max-width: 700px) {
-
-      .music-hero,
-      .music-card {
-        background: rgba(17, 22, 33, 0.5);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-      }
-
-      :root[data-theme="light"] .music-hero,
-      :root[data-theme="light"] .music-card {
-        background: rgba(255, 255, 255, 0.55);
-      }
-    }
-
-    .music-hero {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .music-footer-row {
-      margin-top: auto;
-      padding-top: 28px;
+    /* Music and Reels used to be two separate full-height sections (a text
+       block + two feature cards, then a whole extra section for the three
+       video reels). Consolidated into one compact section — same content
+       (the words, the follow link, all three reels), just without the
+       redundant instrument cards and the second section's worth of poster
+       art/padding, so "beyond the work" no longer eats ~40% of the scroll
+       right before Contact. */
+    .music-intro-row {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: space-between;
       flex-wrap: wrap;
-      gap: 12px 18px;
-      width: 100%;
+      gap: 14px 24px;
+      margin: 4px 0 32px;
     }
 
-    .music-footer-row .music-footer-note,
-    .music-footer-row .follow-link {
+    .music-intro-row .follow-link {
       margin-top: 0;
-    }
-
-    .music-hero>*,
-    .music-card>* {
-      position: relative;
-      z-index: 1;
-    }
-
-    .music-hero h3 {
-      font-size: clamp(2.1rem, 4vw, 4rem);
-      line-height: 0.92;
-      margin: 18px 0 16px;
-    }
-
-    .music-hero p,
-    .music-card p {
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .music-card-grid {
-      display: grid;
-      gap: 18px;
-    }
-
-    .music-card {
-      min-height: 180px;
-    }
-
-    .music-card h3 {
-      margin-top: 18px;
-      font-size: clamp(1.5rem, 2vw, 2.1rem);
-      line-height: 1.1;
-    }
-
-    .music-footer-note {
-      margin-top: 18px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 800;
-    }
-
-    .section-reels {
-      position: relative;
-      overflow: hidden;
-      background:
-        linear-gradient(135deg, rgba(208, 169, 124, 0.08), rgba(116, 90, 76, 0.10), rgba(11, 13, 18, 0.00));
-    }
-
-    /* Reels lives under the same "music world" as the Music section, so it
-       shares the same poster art and the same theme-aware treatment (dark
-       scrim in dark mode, unscrimmed and stronger in light mode). Delete
-       this ::before block plus the .section-reels .container rule below
-       to revert. */
-    .section-reels::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
-        url('assets/backgrounds/music-desktop.jpg');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.22;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    :root[data-theme="light"] .section-reels::before {
-      background-image: url('assets/backgrounds/music-desktop.jpg');
-      opacity: 0.32;
-    }
-
-    /* Mobile used to swap in a separate crop (music-mobile.jpg) here.
-       Removed per feedback — mobile now reuses the same music-desktop.jpg
-       art as desktop (shared with the Music section above) instead of a
-       different-looking crop kicking in below 700px. */
-
-    .section-reels .container {
-      position: relative;
-      z-index: 1;
     }
 
     .reels-grid {
@@ -2131,8 +1998,7 @@
       .work-grid,
       .quotes,
       .input-row,
-      .stat-grid,
-      .music-grid {
+      .stat-grid {
         grid-template-columns: 1fr;
       }
 
@@ -2671,53 +2537,19 @@
             <div class="eyebrow">Beyond work</div>
             <h2>Music, movement, and a wider rhythm.</h2>
           </div>
+          <p>Three reels. One doorway into a wider rhythm of sound, focus, and creative depth beyond the work.</p>
         </div>
 
-        <div class="music-grid">
-          <article class="music-hero">
-            <div class="mono-line">Sound · expression · discipline</div>
-            <h3>Every instrument teaches a different way to listen.</h3>
-            <p>I have spent years learning through sound — not just for performance, but for feeling, focus, and
-              creative depth.</p>
-
-            <div class="music-footer-row">
-              <div class="music-footer-note">12+ instruments</div>
-              <a class="follow-link" href="https://www.instagram.com/abhijeet.acoustic02?stkn=MXMwcjFuZDNjNWMzMQ%3D%3D"
-                target="_blank" rel="noreferrer">
-                <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8Zm8.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
-                </svg>
-                For more music, follow
-              </a>
-            </div>
-          </article>
-
-          <div class="music-card-grid">
-            <article class="music-card">
-              <div class="mono-line">Piano</div>
-              <h3>Structure, harmony, and sensation.</h3>
-              <p>One of the clearest ways I work with emotion and attention.</p>
-            </article>
-
-            <article class="music-card">
-              <div class="mono-line">Flute / strings</div>
-              <h3>Air, texture, and quiet momentum.</h3>
-              <p>Sound with breath, space, and presence — less noise, more meaning.</p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-reels" id="reels">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">On camera</div>
-            <h2>A closer look, <span class="accent-wine">in motion.</span></h2>
-          </div>
-          <p>Three reels. One doorway into my world of music.</p>
+        <div class="music-intro-row">
+          <div class="mono-line">12+ instruments · Piano · Flute · Strings</div>
+          <a class="follow-link" href="https://www.instagram.com/abhijeet.acoustic02?stkn=MXMwcjFuZDNjNWMzMQ%3D%3D"
+            target="_blank" rel="noreferrer">
+            <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8Zm8.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
+            </svg>
+            For more music, follow
+          </a>
         </div>
 
         <div class="reels-grid">
