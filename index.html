@@ -1647,17 +1647,54 @@
        redundant instrument cards and the second section's worth of poster
        art/padding, so "beyond the work" no longer eats ~40% of the scroll
        right before Contact. */
-    .music-intro-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 14px 24px;
-      margin: 4px 0 0;
+    /* Two-column "Beyond work" band. Left: eyebrow, heading, instrument
+       line. Right: the paragraph with the Instagram link directly beneath
+       it on the same left edge. Columns are bottom-aligned, so the
+       instrument line and the Instagram link sit on one baseline. Stacks
+       to a single column on tablets and phones. */
+    .section-head.music-band {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 20px 64px;
+      align-items: end;
+      margin-bottom: 0;
     }
 
-    .music-intro-row .follow-link {
-      margin-top: 0;
+    /* Heading keeps its two intended lines ("Music, movement, & a" /
+       "wider rhythm.") instead of wrapping "a" onto a line of its own. */
+    .music-band h2 {
+      white-space: nowrap;
+    }
+
+    /* Instrument line (left) and Instagram link (right) share one fixed
+       height so their bottoms line up exactly across the two columns. */
+    .music-band-left .mono-line,
+    .music-band-right .follow-link {
+      display: flex;
+      align-items: center;
+      height: 24px;
+    }
+
+    .music-band-left .mono-line {
+      margin-top: 22px;
+    }
+
+    .music-band-right p {
+      max-width: 560px;
+    }
+
+    .music-band-right .follow-link {
+      margin-top: 18px;
+    }
+
+    @media (max-width: 860px) {
+      .section-head.music-band {
+        grid-template-columns: 1fr;
+      }
+
+      .music-band h2 {
+        white-space: normal;
+      }
     }
 
     .gallery-card {
@@ -2808,17 +2845,15 @@
 
     <section class="section section-music" id="music">
       <div class="container">
-        <div class="section-head">
-          <div>
+        <div class="section-head music-band">
+          <div class="music-band-left">
             <div class="eyebrow">Beyond work</div>
             <h2>Music, movement, &amp; a<br><span class="accent-wine">wider rhythm.</span></h2>
+            <div class="mono-line">12+ instruments · Keys · Flute · Strings</div>
           </div>
-          <p>Off the clock, I make music. It’s where I practise what my client work quietly depends on: patience, timing, and knowing what to leave out. At GIM, I led the official band across 15+ campus events.</p>
-        </div>
-
-        <div class="music-intro-row">
-          <div class="mono-line">12+ instruments · Keys · Flute · Strings</div>
-          <a class="follow-link" href="https://www.instagram.com/abhijeet.acoustic02?stkn=MXMwcjFuZDNjNWMzMQ%3D%3D"
+          <div class="music-band-right">
+            <p>Off the clock, I make music. It’s where I practise what my client work quietly depends on: patience, timing, and knowing what to leave out. At GIM, I led the official band across 15+ campus events.</p>
+            <a class="follow-link" href="https://www.instagram.com/abhijeet.acoustic02?stkn=MXMwcjFuZDNjNWMzMQ%3D%3D"
             target="_blank" rel="noreferrer">
             <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
               <path
@@ -2826,6 +2861,7 @@
             </svg>
             Watch me play on Instagram
           </a>
+          </div>
         </div>
       </div>
     </section>
