@@ -205,25 +205,16 @@
       min-height: 78px;
     }
 
+    /* Wordmark only (the "AT" badge was removed): the name sits on the
+       container's left edge, in line with the page content below it, and
+       is set a touch larger so it holds the corner on its own. */
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      font-size: 1.15rem;
       font-weight: 800;
       letter-spacing: -0.04em;
-    }
-
-    .brand-mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, rgba(216, 167, 92, 0.25), rgba(142, 197, 255, 0.18));
-      border: 1px solid rgba(216, 167, 92, 0.3);
-      color: var(--text);
-      font-size: 14px;
-      font-weight: 900;
+      white-space: nowrap;
     }
 
     .nav-links {
@@ -2471,7 +2462,6 @@
   <header class="site-header">
     <div class="container nav-wrap">
       <a href="#top" class="brand" aria-label="Abhijeet Toshniwal home">
-        <span class="brand-mark">AT</span>
         <span>Abhijeet Toshniwal</span>
       </a>
 
