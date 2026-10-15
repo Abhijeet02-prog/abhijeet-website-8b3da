@@ -403,7 +403,7 @@
     .market-ticker {
       position: relative;
       z-index: 1;
-      padding: 10px 0;
+      padding: 12px 0;
       background: rgba(11, 13, 18, 0.4);
       border-bottom: 1px solid var(--line);
     }
@@ -454,14 +454,69 @@
       white-space: nowrap;
     }
 
-    .market-tagline {
-      flex: 0 0 auto;
+    /* Split strip: a fixed sentence on the left (aligned to the page's
+       .container margin, like the nav and hero text) and the scrolling
+       ticker on the right. Only .market-marquee-row animates; .market-track
+       clips it (overflow: hidden) so the numbers never slide under the
+       sentence. A short edge fade on each side of the track softens where
+       the numbers enter and leave. */
+    .market-ticker-inner {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: 24px;
+    }
+
+    .market-lead {
+      max-width: 470px;
+      padding-right: 24px;
+      border-right: 1px solid var(--line);
       font-family: 'Instrument Serif', Georgia, serif;
       font-style: italic;
       font-weight: 400;
-      font-size: 14px;
-      color: var(--muted);
-      white-space: nowrap;
+      font-size: 16px;
+      line-height: 1.3;
+      color: var(--soft);
+    }
+
+    .market-track {
+      position: relative;
+      overflow: hidden;
+      min-width: 0;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+    }
+
+    /* Tablets and phones: the sentence takes a fixed share of the row and
+       wraps inside it, so the ticker keeps a readable width beside it. */
+    @media (max-width: 900px) {
+      .market-ticker-inner {
+        grid-template-columns: minmax(0, 38%) minmax(0, 1fr);
+        gap: 16px;
+      }
+
+      .market-lead {
+        max-width: none;
+        padding-right: 16px;
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .market-ticker-inner {
+        grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+        gap: 12px;
+      }
+
+      .market-lead {
+        padding-right: 12px;
+        font-size: 13px;
+        line-height: 1.25;
+      }
+
+      .market-item {
+        font-size: 12px;
+      }
     }
 
     .hero-copy h1 {
@@ -1978,24 +2033,26 @@
       animation-duration: 46s;
     }
 
-    /* The market ticker repeats its short (3 indices + tagline) sequence
-       many times over just to keep the row wider than the viewport (see
-       the JS render() comment) — which means its rendered width ends up
-       roughly 3-4x longer than the quote or services rows above. Left at
-       the base .marquee-row's 34s, that much extra distance in the same
-       time reads as a dramatically faster scroll (rendered ~140px/s here
-       vs ~39px/s on the other two strips) — this bumps the duration up to
-       match that same pace instead.
-       IMPORTANT: this rule (and .quote-marquee-row above) must stay AFTER
-       the base .marquee-row rule in the stylesheet. .marquee-row sets the
-       shorthand `animation: marquee-left 34s linear infinite`, which — at
-       equal specificity — overwrites an earlier longhand
-       `animation-duration` override entirely; only a later same-
-       specificity rule wins the cascade. (This is exactly the bug that
-       silently reverted this rule to 34s the first time.) */
+    /* Market ticker row. Its animation-duration here is only a fallback:
+       the script at the bottom of the page measures the row and sets the
+       duration so it always scrolls at a steady ~40px/s, whatever the
+       screen width. Must stay AFTER the base .marquee-row rule, whose
+       `animation` shorthand would otherwise reset the duration. */
     .market-marquee-row {
       align-items: center;
-      animation-duration: 120s;
+      gap: 22px;
+      /* Trailing space equal to the gap, so the row is exactly two equal
+         halves (each ending in one gap). The -50% slide then lands
+         precisely on the start of the second half, so the loop has no
+         jump. */
+      padding-right: 22px;
+      animation-duration: 75s;
+    }
+
+    /* While loading / unavailable there's only one short message in the
+       row, so hold it still instead of sliding it off to the left. */
+    .market-marquee-row.is-idle {
+      animation: none;
     }
 
     .marquee-quote {
@@ -2488,10 +2545,13 @@
 
   <main id="top">
     <section class="hero section-professional">
-      <div class="market-ticker" aria-label="Live market indices">
-        <div class="marquee-outer">
-          <div class="marquee-row market-marquee-row" id="marketMarqueeRow">
-            <span class="market-item-loading">Loading live market data…</span>
+      <div class="market-ticker">
+        <div class="container market-ticker-inner">
+          <p class="market-lead">Because every economic shift eventually reflects in the market.</p>
+          <div class="market-track" aria-label="Live market indices">
+            <div class="marquee-row market-marquee-row is-idle" id="marketMarqueeRow">
+              <span class="market-item-loading">Loading live market data…</span>
+            </div>
           </div>
         </div>
       </div>
@@ -3348,35 +3408,67 @@
           '</span>';
       }
 
-      const TAGLINE = 'Because every economic shift eventually reflects in the markets.';
-      // How many times the (3 indices + tagline) sequence repeats in HALF
-      // the row. Just doubling that one short sequence (as the quote and
-      // services strips do with their own, much longer content) isn't
-      // enough text to fill a wide desktop viewport — the row would sit
-      // narrower than its track and leave a visible gap as it scrolls (see
-      // the .market-marquee-row comment in the CSS). Repeating it this
-      // many times per half keeps the row comfortably wider than any
-      // realistic screen even before the two identical halves are joined.
-      const REPEAT = 4;
+      // The sentence that used to scroll with the numbers is now fixed text
+      // (.market-lead in the markup), so the row carries only the indices.
+      //
+      // Seamless loop: the row holds two identical halves and the CSS
+      // animation slides it left by exactly 50%, so the end of the first
+      // half lands where the start was. Each half must be at least as wide
+      // as the visible track or a gap would show, so the 3-index sequence
+      // is repeated until it is.
+      const track = row.parentElement;
+      const SPEED = 40; // px per second, same unhurried pace as before
+      let lastDuration = 0;
+
+      function setDuration() {
+        const halfWidth = row.scrollWidth / 2;
+        if (!halfWidth) return;
+        const d = halfWidth / SPEED;
+        // Only touch the duration when it meaningfully changes: altering it
+        // mid-animation shifts the current position, which would read as a
+        // jump on every 60s data refresh.
+        if (Math.abs(d - lastDuration) / (lastDuration || 1) > 0.02) {
+          row.style.animationDuration = d.toFixed(2) + 's';
+          lastDuration = d;
+        }
+      }
 
       function render(indices) {
         const sep = '<span class="marquee-sep" aria-hidden="true">✦</span>';
-        const tagline = '<span class="market-tagline">' + TAGLINE + '</span>';
-        const unit = indices.map(renderItem).concat([tagline]).join(sep) + sep;
-        let half = '';
-        for (let i = 0; i < REPEAT; i++) half += unit;
+        const unit = indices.map(renderItem).join(sep) + sep;
+        let repeat = 2;
+        let half = unit + unit;
+        row.classList.remove('is-idle');
         row.innerHTML = half + half;
+        // Grow each half until it is wider than the visible track.
+        while (row.scrollWidth / 2 < track.clientWidth + 40 && repeat < 12) {
+          repeat++;
+          half += unit;
+          row.innerHTML = half + half;
+        }
+        setDuration();
       }
 
       function renderUnavailable() {
+        row.classList.add('is-idle');
         row.innerHTML = '<span class="market-item-loading">Market data unavailable right now</span>';
       }
+
+      let lastIndices = null;
+      let resizeTimer;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          if (lastIndices) render(lastIndices);
+        }, 200);
+      });
 
       async function load() {
         try {
           const res = await fetch('/api/market-indices', { cache: 'no-store' });
           const data = await res.json();
           if (!data || !data.ok) throw new Error('no_data');
+          lastIndices = data.indices;
           render(data.indices);
         } catch (err) {
           // A transient failure on a refresh leaves the last good render in
