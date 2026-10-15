@@ -1593,7 +1593,11 @@
       text-shadow: 0 1px 8px rgba(245, 240, 234, 0.5);
     }
 
+    /* Slim "Beyond work" band: the three video reels were removed so this
+       is now just the heading, one line, the instrument summary and the
+       Instagram link, so it gets less vertical padding than a full section. */
     .section-music {
+      padding: 64px 0;
       position: relative;
       overflow: hidden;
       background:
@@ -1649,66 +1653,11 @@
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 14px 24px;
-      margin: 4px 0 32px;
+      margin: 4px 0 0;
     }
 
     .music-intro-row .follow-link {
       margin-top: 0;
-    }
-
-    .reels-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .reel-card {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .reel-frame {
-      position: relative;
-      overflow: hidden;
-      border-radius: 26px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(0, 0, 0, 0.2);
-      box-shadow: var(--shadow);
-      aspect-ratio: 9 / 16;
-    }
-
-    .reel-frame video {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      background: #000;
-    }
-
-    .reel-caption {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 0 4px;
-    }
-
-    .reel-caption h3 {
-      font-size: clamp(1.05rem, 1.6vw, 1.35rem);
-      line-height: 1.1;
-    }
-
-    @media (max-width: 900px) {
-      .reels-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .reels-grid {
-        grid-template-columns: 1fr;
-      }
     }
 
     .gallery-card {
@@ -2423,7 +2372,6 @@
         <a href="#work">Work</a>
         <a href="#experience">Experience</a>
         <a href="#story">Story</a>
-        <a href="#music">Music</a>
         <a href="#contact">Contact</a>
         <a href="#contact" class="btn btn-secondary nav-cta-mobile">Book a call</a>
       </nav>
@@ -2865,7 +2813,7 @@
             <div class="eyebrow">Beyond work</div>
             <h2>Music, movement, &amp; a<br><span class="accent-wine">wider rhythm.</span></h2>
           </div>
-          <p>Off the clock, I make music. It’s where I practise what my client work quietly depends on: patience, timing, and knowing what to leave out.</p>
+          <p>Off the clock, I make music. It’s where I practise what my client work quietly depends on: patience, timing, and knowing what to leave out. At GIM, I led the official band across 15+ campus events.</p>
         </div>
 
         <div class="music-intro-row">
@@ -2876,46 +2824,8 @@
               <path
                 d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8Zm8.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
             </svg>
-            For more music, follow
+            Watch me play on Instagram
           </a>
-        </div>
-
-        <div class="reels-grid">
-          <article class="reel-card">
-            <div class="reel-frame">
-              <video controls playsinline preload="metadata" poster="assets/reels/posters/keyboard.jpg">
-                <source src="assets/reels/keyboard.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="reel-caption">
-              <h3>Keyboard</h3>
-              <div class="mono-line">01</div>
-            </div>
-          </article>
-
-          <article class="reel-card">
-            <div class="reel-frame">
-              <video controls playsinline preload="metadata" poster="assets/reels/posters/the-artistic-room.jpg">
-                <source src="assets/reels/the-artistic-room.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="reel-caption">
-              <h3>The Artistic Room</h3>
-              <div class="mono-line">02</div>
-            </div>
-          </article>
-
-          <article class="reel-card">
-            <div class="reel-frame">
-              <video controls playsinline preload="metadata" poster="assets/reels/posters/flute.jpg">
-                <source src="assets/reels/flute.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="reel-caption">
-              <h3>Flute</h3>
-              <div class="mono-line">03</div>
-            </div>
-          </article>
         </div>
       </div>
     </section>
