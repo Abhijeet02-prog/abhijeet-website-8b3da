@@ -37,7 +37,10 @@
       --radius-lg: 28px;
       --radius-md: 18px;
       --radius-sm: 12px;
-      --container: 1180px;
+      --container: 1440px;
+      /* Even side margin: 16px on phones, growing with the window to a
+         max of 64px, so wide laptops don't show large empty bands. */
+      --gutter: clamp(16px, 4.5vw, 72px);
     }
 
     :root[data-theme="light"] {
@@ -100,7 +103,7 @@
        device's safe area (notch / rounded corners in landscape). */
     .container {
       width: min(var(--container),
-          calc(100% - max(16px, env(safe-area-inset-left, 0px)) - max(16px, env(safe-area-inset-right, 0px))));
+          calc(100% - max(var(--gutter), env(safe-area-inset-left, 0px)) - max(var(--gutter), env(safe-area-inset-right, 0px))));
       margin: 0 auto;
     }
 
@@ -690,9 +693,7 @@
        quote ticker — widening it a little (to 1320px) gives the running
        strip more room to breathe before the edge-fade mask kicks in,
        without going full-bleed. */
-    .hero-quotes.container {
-      width: min(1320px, calc(100% - 32px));
-    }
+    /* Quote ticker now uses the standard (wider) container width. */
 
     /* A small top margin nudges "In my own words" down a touch from the
        hero buttons above it — previously 0 since the Instagram follow
@@ -1588,8 +1589,8 @@
        padding (84px, .section) provides the space below the strip
        before the next section. */
     #story .marquee-outer {
-      width: min(1320px, calc(100vw - 32px));
-      margin-left: calc((100% - min(1320px, calc(100vw - 32px))) / 2);
+      width: 100%;
+      margin-left: 0;
     }
 
     #story .marquee-row {
@@ -1958,8 +1959,8 @@
        markup used by the hero ticker (and any future reuse) is
        unaffected. */
     #work .marquee-outer {
-      width: min(1320px, calc(100vw - 32px));
-      margin-left: calc((100% - min(1320px, calc(100vw - 32px))) / 2);
+      width: 100%;
+      margin-left: 0;
     }
 
     .marquee-row {
@@ -2485,7 +2486,7 @@
        and phones, without touching their default desktop position or
        the drag-to-reposition behavior (a user's saved drag position
        still applies on any screen size). */
-    @media (max-width: 1024px) {
+    @media (max-width: 1100px) {
       .floating-linkedin {
         top: auto;
         bottom: 92px;
@@ -2579,17 +2580,44 @@
       padding: 10px 0;
     }
 
-    /* Wider content column on large monitors so the page doesn't sit as a
-       thin strip in the middle of the screen. */
+    /* Content tops out at 1440px (1600px on very large monitors) so
+       line lengths stay readable; below that it fills the window minus
+       the even --gutter on each side; wider caps on big monitors. */
     @media (min-width: 1800px) {
       :root {
-        --container: 1320px;
+        --container: 1600px;
       }
     }
 
     @media (min-width: 2400px) {
       :root {
-        --container: 1440px;
+        --container: 1760px;
+      }
+    }
+
+    /* Desktop floating buttons: 44px and centred in the side margin, so
+       they always sit beside the content rather than over it (the gutter
+       is wider than 44px at every width where this applies). */
+    @media (min-width: 1101px) {
+      .floating-linkedin,
+      .floating-whatsapp {
+        width: 44px;
+        height: 44px;
+        right: max(4px, calc((var(--gutter) - 44px) / 2));
+      }
+
+      .floating-whatsapp {
+        top: calc(50% + 56px);
+      }
+
+      .floating-linkedin svg {
+        width: 21px;
+        height: 21px;
+      }
+
+      .floating-whatsapp svg {
+        width: 22px;
+        height: 22px;
       }
     }
 
@@ -2611,7 +2639,7 @@
 
     /* Floating LinkedIn / WhatsApp buttons: keep clear of the iPhone home
        indicator, and stop focused fields from scrolling underneath them. */
-    @media (max-width: 1024px) {
+    @media (max-width: 1100px) {
       html {
         scroll-padding-bottom: 150px;
       }
