@@ -1028,6 +1028,27 @@
       line-height: 1.35;
     }
 
+    /* Small company label above each proof number, so it's clear which
+       organisation each figure comes from. */
+    .stat-grid-proof .stat-org {
+      display: block;
+      margin-bottom: 8px;
+      font-style: normal;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* Very narrow phones (~360px): the boxes are only ~110px wide, so
+       shrink the numbers a step so "12% → 7%" doesn't overflow its box. */
+    @media (max-width: 420px) {
+      .stat-grid-proof .stat-box strong {
+        font-size: 1.15rem;
+      }
+    }
+
     .mini-foot {
       margin-top: 14px;
       font-size: 13px;
@@ -2507,20 +2528,24 @@
             </div>
             <div class="stat-grid stat-grid-proof">
               <div class="stat-box">
+                <em class="stat-org">ICICI Bank</em>
                 <strong>₹750 Cr</strong>
                 <span>Relationship book managed</span>
               </div>
               <div class="stat-box">
+                <em class="stat-org">ICICI Bank</em>
                 <strong>10</strong>
                 <span>UHNW families served</span>
               </div>
               <div class="stat-box">
-                <strong>28</strong>
-                <span>Branches coordinated</span>
-              </div>
-              <div class="stat-box">
+                <em class="stat-org">EdgeX Academy</em>
                 <strong>100</strong>
                 <span>B-schools in growth pipeline</span>
+              </div>
+              <div class="stat-box">
+                <em class="stat-org">Reliance Retail</em>
+                <strong>12% → 7%</strong>
+                <span>Supply-chain cost target</span>
               </div>
             </div>
           </div>
