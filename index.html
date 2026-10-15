@@ -1219,38 +1219,6 @@
       font-size: 12px;
     }
 
-    /* Credibility strip: plain-text organisation names (no logos) plus a
-       one-line certifications row, closing out #experience. */
-    .cred-strip {
-      margin-top: 44px;
-      padding-top: 30px;
-      border-top: 1px solid var(--line);
-      text-align: center;
-    }
-
-    .cred-names {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 10px 20px;
-      margin-top: 14px;
-      font-size: clamp(1rem, 1.7vw, 1.3rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--text);
-    }
-
-    .cred-names .marquee-sep {
-      color: var(--accent);
-      font-size: 0.7em;
-    }
-
-    .cred-certs {
-      margin-top: 14px;
-      font-size: 14px;
-    }
-
     .story-extra {
       margin-top: 16px;
       padding-top: 16px;
@@ -1273,17 +1241,6 @@
     @media (max-width: 640px) {
       .role-card {
         padding: 22px;
-      }
-
-      /* On phones the names wrap onto several lines, where separator stars
-         would dangle at line ends, so drop them and let the gap space the
-         names instead. */
-      .cred-names .marquee-sep {
-        display: none;
-      }
-
-      .cred-names {
-        gap: 8px 18px;
       }
     }
 
@@ -2776,22 +2733,6 @@
               line.</p>
             <span class="role-date">2021</span>
           </article>
-        </div>
-
-        <div class="cred-strip">
-          <div class="eyebrow">Worked with &amp; trained at</div>
-          <div class="cred-names">
-            <span>ICICI Bank</span>
-            <span class="marquee-sep" aria-hidden="true">✦</span>
-            <span>Reliance Retail</span>
-            <span class="marquee-sep" aria-hidden="true">✦</span>
-            <span>EdgeX Academy</span>
-            <span class="marquee-sep" aria-hidden="true">✦</span>
-            <span>Goa Institute of Management</span>
-            <span class="marquee-sep" aria-hidden="true">✦</span>
-            <span>VIT</span>
-          </div>
-          <p class="cred-certs">Certified: NISM Series V-A · Wharton, Introduction to Marketing · SolidWorks CSWA</p>
         </div>
       </div>
     </section>
