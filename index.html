@@ -1096,6 +1096,9 @@
     }
 
     .role-org {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       color: var(--accent);
       font-size: 12px;
       text-transform: uppercase;
@@ -1109,10 +1112,13 @@
       font-weight: 600;
     }
 
+    /* Sits in .role-org's flex row, which centres it against the company
+       name; line-height: 1 keeps the pill's own box from adding offset. */
     .role-tag {
-      display: inline-block;
-      margin-left: 8px;
-      padding: 3px 9px;
+      display: inline-flex;
+      align-items: center;
+      line-height: 1;
+      padding: 6px 10px 5px;
       border-radius: 999px;
       border: 1px solid rgba(216, 167, 92, 0.4);
       color: var(--accent);
@@ -1120,7 +1126,6 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-weight: 800;
-      vertical-align: 1px;
     }
 
     .role-card h3 {
