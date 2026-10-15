@@ -1009,6 +1009,263 @@
       margin-bottom: 6px;
     }
 
+    /* "At a glance" proof card in the hero: four headline numbers from
+       the CV in a 2x2 grid. Stays two columns even on phones (the generic
+       .stat-grid collapses to one column at <=640px), since short numbers
+       read better side by side than stacked. */
+    .stat-grid.stat-grid-proof {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stat-grid-proof .stat-box strong {
+      font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+      white-space: nowrap;
+    }
+
+    .stat-grid-proof .stat-box span {
+      display: block;
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .mini-foot {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Track record (#experience): role cards built from the CV. Two
+       full-time roles get large cards with a headline number; internships
+       and projects sit underneath in a compact three-up "Earlier" row, so
+       the full-time work reads as the bigger story. */
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .role-card,
+    .role-mini {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .role-card:hover,
+    .role-mini:hover {
+      transform: translateY(-4px);
+      border-color: rgba(216, 167, 92, 0.35);
+    }
+
+    .role-card {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .role-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .role-org {
+      color: var(--accent);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 800;
+    }
+
+    .role-date {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .role-tag {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(216, 167, 92, 0.4);
+      color: var(--accent);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 800;
+      vertical-align: 1px;
+    }
+
+    .role-card h3 {
+      font-size: clamp(1.45rem, 2vw, 1.9rem);
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+    }
+
+    .role-stat {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .role-stat strong {
+      font-size: clamp(2.2rem, 3.6vw, 3rem);
+      line-height: 1;
+      letter-spacing: -0.06em;
+      color: var(--text);
+    }
+
+    .role-stat span {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+
+    .role-points {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .role-points li {
+      position: relative;
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .role-points li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      top: 1px;
+      color: var(--accent);
+      font-size: 11px;
+    }
+
+    .role-earlier-head {
+      margin: 34px 0 14px;
+    }
+
+    .role-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .role-mini {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .role-mini strong {
+      font-size: 1.6rem;
+      letter-spacing: -0.05em;
+      line-height: 1.1;
+      color: var(--text);
+    }
+
+    .role-mini h4 {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .role-mini p {
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .role-mini .role-date {
+      margin-top: auto;
+      font-size: 12px;
+    }
+
+    /* Credibility strip: plain-text organisation names (no logos) plus a
+       one-line certifications row, closing out #experience. */
+    .cred-strip {
+      margin-top: 44px;
+      padding-top: 30px;
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .cred-names {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 10px 20px;
+      margin-top: 14px;
+      font-size: clamp(1rem, 1.7vw, 1.3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .cred-names .marquee-sep {
+      color: var(--accent);
+      font-size: 0.7em;
+    }
+
+    .cred-certs {
+      margin-top: 14px;
+      font-size: 14px;
+    }
+
+    .story-extra {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      font-size: 15px;
+    }
+
+    @media (max-width: 900px) {
+      .role-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .role-mini-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .role-card {
+        padding: 22px;
+      }
+
+      /* On phones the names wrap onto several lines, where separator stars
+         would dangle at line ends, so drop them and let the gap space the
+         names instead. */
+      .cred-names .marquee-sep {
+        display: none;
+      }
+
+      .cred-names {
+        gap: 8px 18px;
+      }
+    }
+
     .work-card,
     .note-card {
       padding: 22px;
@@ -2185,8 +2442,9 @@
       </a>
 
       <nav class="nav-links" id="mainNav" aria-label="Main navigation">
-        <a href="#story">Story</a>
         <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#story">Story</a>
         <a href="#music">Music</a>
         <a href="#contact">Contact</a>
         <a href="#contact" class="btn btn-secondary nav-cta-mobile">Book a call</a>
@@ -2245,17 +2503,24 @@
           <div class="mini-card">
             <div class="mini-top">
               <span>At a glance</span>
-              <span>Cross-function</span>
+              <span>Track record</span>
             </div>
-            <div class="stat-grid">
-              <div class="stat-box stat-box-single stat-box-text">
-                <strong>Business Strategist</strong>
+            <div class="stat-grid stat-grid-proof">
+              <div class="stat-box">
+                <strong>₹750 Cr</strong>
+                <span>Relationship book managed</span>
               </div>
-              <div class="stat-box stat-box-single">
-                <strong>Artist</strong>
+              <div class="stat-box">
+                <strong>10</strong>
+                <span>UHNW families served</span>
               </div>
-              <div class="stat-box stat-box-single">
-                <strong>Athlete</strong>
+              <div class="stat-box">
+                <strong>28</strong>
+                <span>Branches coordinated</span>
+              </div>
+              <div class="stat-box">
+                <strong>100</strong>
+                <span>B-schools in growth pipeline</span>
               </div>
             </div>
           </div>
@@ -2272,6 +2537,7 @@
                 <strong>PGDM → Marketing, Finance</strong>
               </div>
             </div>
+            <div class="mini-foot">VIT · Goa Institute of Management · NISM V-A certified</div>
           </div>
         </div>
       </div>
@@ -2313,51 +2579,51 @@
             <div class="eyebrow">Capabilities</div>
             <h2>Art in the strategy. Precision in the execution.</h2>
           </div>
-          <p>My work blends creative intuition with business rigor — helping founders clarify their story, sharpen their
+          <p>My work blends creative intuition with business rigor, helping founders clarify their story, sharpen their
             growth, and build with more conviction.</p>
         </div>
 
         <div class="feature-grid">
           <article class="feature-card">
-            <div class="feature-icon">✦</div>
-            <h3>Brand building</h3>
-            <p>Positioning, voice, and identity that make businesses instantly more legible and memorable.</p>
-            <span class="feature-meta">Positioning → clarity</span>
-          </article>
-
-          <article class="feature-card">
             <div class="feature-icon">◎</div>
-            <h3>Strategy</h3>
-            <p>Clearer decisions, sharper priorities, and a more intentional path for growth.</p>
-            <span class="feature-meta">Direction → traction</span>
+            <h3>Growth strategy</h3>
+            <p>Choosing the market, the channel and the first move, then turning it into a plan a team can repeat.</p>
+            <span class="feature-meta">100 B-schools → one pipeline</span>
           </article>
 
           <article class="feature-card">
             <div class="feature-icon">↗</div>
-            <h3>Marketing</h3>
-            <p>Go-to-market systems designed to convert attention into trust and trust into demand.</p>
-            <span class="feature-meta">Attention → demand</span>
+            <h3>Partnerships</h3>
+            <p>Institutional and B2B partnerships that open a whole channel, not just a single deal.</p>
+            <span class="feature-meta">Campus channel · EdgeX Academy</span>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">◇</div>
+            <h3>Client relationships</h3>
+            <p>High-trust relationships with founders and families, coordinated across every specialist team they need.</p>
+            <span class="feature-meta">10 UHNW families · ICICI Bank</span>
           </article>
 
           <article class="feature-card">
             <div class="feature-icon">₹</div>
-            <h3>Finance</h3>
-            <p>Practical thinking around money, markets, and building a stronger financial foundation.</p>
-            <span class="feature-meta">Money → clarity</span>
+            <h3>Finance &amp; wealth</h3>
+            <p>Deposits, credit, trade, forex and investments, with the judgement to make money decisions clearer.</p>
+            <span class="feature-meta">₹750 Cr book · NISM V-A</span>
           </article>
 
           <article class="feature-card">
-            <div class="feature-icon">↗</div>
-            <h3>Share market</h3>
-            <p>Learning how businesses, markets, and long-term investing create meaningful value.</p>
-            <span class="feature-meta">Markets → insight</span>
+            <div class="feature-icon">∑</div>
+            <h3>Cost &amp; operations</h3>
+            <p>Cost models and process changes that hold up on a spreadsheet and on the shop floor.</p>
+            <span class="feature-meta">12% → 7% cost target · Reliance</span>
           </article>
 
           <article class="feature-card">
-            <div class="feature-icon">◌</div>
-            <h3>Personal finance</h3>
-            <p>Simple habits and informed decisions for earning, saving, investing, and growing with intention.</p>
-            <span class="feature-meta">Habits → freedom</span>
+            <div class="feature-icon">✦</div>
+            <h3>Brand &amp; storytelling</h3>
+            <p>Positioning, voice and narrative that make a business instantly more legible and memorable.</p>
+            <span class="feature-meta">Positioning → clarity</span>
           </article>
         </div>
 
@@ -2370,19 +2636,19 @@
           <div class="marquee-row">
             <span class="marquee-pill">Brand Building</span>
             <span class="marquee-sep" aria-hidden="true">✦</span>
-            <span class="marquee-pill">Strategy</span>
+            <span class="marquee-pill">Growth Strategy</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span class="marquee-pill">Partnerships</span>
             <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Marketing</span>
             <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Finance</span>
             <span class="marquee-sep" aria-hidden="true">✦</span>
-            <span class="marquee-pill">Share Market</span>
+            <span class="marquee-pill">Client Relationships</span>
             <span class="marquee-sep" aria-hidden="true">✦</span>
-            <span class="marquee-pill">Personal Finance</span>
+            <span class="marquee-pill">Cost Modelling</span>
             <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Consulting</span>
-            <span class="marquee-sep" aria-hidden="true">✦</span>
-            <span class="marquee-pill">Investing</span>
             <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Writing</span>
             <span class="marquee-sep" aria-hidden="true">✦</span>
@@ -2390,19 +2656,19 @@
             <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Brand Building</span>
             <span class="marquee-sep" aria-hidden="true">✦</span>
-            <span class="marquee-pill">Strategy</span>
+            <span class="marquee-pill">Growth Strategy</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span class="marquee-pill">Partnerships</span>
             <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Marketing</span>
             <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Finance</span>
             <span class="marquee-sep" aria-hidden="true">✦</span>
-            <span class="marquee-pill">Share Market</span>
+            <span class="marquee-pill">Client Relationships</span>
             <span class="marquee-sep" aria-hidden="true">✦</span>
-            <span class="marquee-pill">Personal Finance</span>
+            <span class="marquee-pill">Cost Modelling</span>
             <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Consulting</span>
-            <span class="marquee-sep" aria-hidden="true">✦</span>
-            <span class="marquee-pill">Investing</span>
             <span class="marquee-sep" aria-hidden="true">✦</span>
             <span class="marquee-pill">Writing</span>
             <span class="marquee-sep" aria-hidden="true">✦</span>
@@ -2412,22 +2678,118 @@
       </div>
     </section>
 
+    <section class="section section-professional" id="experience">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Track record</div>
+            <h2>Real rooms.<br><span class="accent-wine">Real numbers.</span></h2>
+          </div>
+          <p>From a factory line to private banking for India’s wealthiest families to building growth channels, every
+            role has been about turning complexity into decisions that move numbers.</p>
+        </div>
+
+        <div class="role-grid">
+          <article class="role-card">
+            <div class="role-top">
+              <span class="role-org">EdgeX Academy<span class="role-tag">Current</span></span>
+              <span class="role-date">Sep 2026 – Present</span>
+            </div>
+            <h3>Consultant, Business Growth</h3>
+            <div class="role-stat"><strong>100</strong><span>MBA institutions mapped</span></div>
+            <ul class="role-points">
+              <li>Building the campus growth channel through partnerships with B-school clubs, placement teams and
+                faculty.</li>
+              <li>Turned 100 MBA institutions into a prioritised outreach pipeline.</li>
+              <li>Designed the ambassador, referral and GD Labs programmes for campus acquisition.</li>
+            </ul>
+          </article>
+
+          <article class="role-card">
+            <div class="role-top">
+              <span class="role-org">ICICI Bank</span>
+              <span class="role-date">May 2026 – Sep 2026</span>
+            </div>
+            <h3>Family Office Specialist, Relationship Manager</h3>
+            <div class="role-stat"><strong>₹750 Cr</strong><span>Relationship book</span></div>
+            <ul class="role-points">
+              <li>Managed 10 UHNW family relationships and brought in 5 new-to-bank families, typically with investable
+                surplus above ₹100 Cr.</li>
+              <li>Coordinated deposits, credit, trade, forex and investment solutions across the book.</li>
+              <li>Family Office point of contact for 28 branches in the Alipore zone.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="role-earlier-head">
+          <div class="eyebrow">Earlier</div>
+        </div>
+
+        <div class="role-mini-grid">
+          <article class="role-mini">
+            <div class="role-org">ICICI Bank</div>
+            <strong>42+ clients</strong>
+            <h4>Summer Intern, Trade &amp; Treasury</h4>
+            <p>Analysed churn across import-export clients and proposed three fixes to reduce regulatory pendency.</p>
+            <span class="role-date">2025</span>
+          </article>
+
+          <article class="role-mini">
+            <div class="role-org">Reliance Retail</div>
+            <strong>12% → 7%</strong>
+            <h4>Live Project, Reliance ResQ</h4>
+            <p>Rebuilt the supply-chain cost model around distribution-centre monetisation and centralised JIT
+              inventory.</p>
+            <span class="role-date">2024</span>
+          </article>
+
+          <article class="role-mini">
+            <div class="role-org">Disha Auto Components</div>
+            <strong>₹30K / month</strong>
+            <h4>R&amp;D and Operations Intern</h4>
+            <p>Automated stencilling on the line and designed a conveyor to cut paint curing from 8 hours to 10
+              minutes.</p>
+            <span class="role-date">2021</span>
+          </article>
+        </div>
+
+        <div class="cred-strip">
+          <div class="eyebrow">Worked with &amp; trained at</div>
+          <div class="cred-names">
+            <span>ICICI Bank</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span>Reliance Retail</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span>EdgeX Academy</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span>Goa Institute of Management</span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span>VIT</span>
+          </div>
+          <p class="cred-certs">Certified: NISM Series V-A · Wharton, Introduction to Marketing · SolidWorks CSWA</p>
+        </div>
+      </div>
+    </section>
+
     <section class="section section-art" id="story">
       <div class="container">
         <div class="section-head">
           <div>
-            <div class="eyebrow">My approach</div>
+            <div class="eyebrow">My story</div>
             <h2>Creative mind. <span class="accent-wine">Commercial instinct.</span></h2>
           </div>
         </div>
 
         <div class="story">
           <div class="story-main">
-            <h3>Built for the long arc, not just the next sprint.</h3>
-            <p>I believe strong businesses are built by combining human judgment with structure. The goal is not to be
-              louder — it is to be clearer, more intentional, and more difficult to copy.</p>
-            <p>That means paying attention to the unseen parts: brand, decision framework, systems, and the narrative
-              that keeps a team aligned.</p>
+            <h3>An engineer who learned business from the money side.</h3>
+            <p>I started as a mechanical engineer at VIT, where my first wins were on a factory floor: automating a
+              production step and redesigning paint curing from 8 hours to 10 minutes.</p>
+            <p>A PGDM in marketing and finance at Goa Institute of Management took me into private banking at ICICI,
+              working with some of India’s wealthiest families. Today I build growth engines, with one rule from both
+              worlds: clarity before scale.</p>
+            <p class="story-extra">Along the way: Senior Core Committee at OxyGIM, a blood-donation camp with 500+
+              volunteers, and outreach to 700+ residents across five mining-affected villages in Goa.</p>
           </div>
 
           <div class="story-list">
