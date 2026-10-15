@@ -1049,6 +1049,26 @@
       }
     }
 
+    /* Ventures box: two company names instead of a single number, so the
+       names are smaller and allowed to wrap (the proof numbers stay
+       nowrap). */
+    .stat-grid-proof .stat-box-ventures strong {
+      font-size: 0.92rem;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      white-space: normal;
+    }
+
+    .stat-grid-proof .stat-box-ventures strong + strong {
+      margin-top: 8px;
+    }
+
+    @media (max-width: 420px) {
+      .stat-grid-proof .stat-box-ventures strong {
+        font-size: 0.82rem;
+      }
+    }
+
     .mini-foot {
       margin-top: 14px;
       font-size: 13px;
@@ -2479,10 +2499,10 @@
                 <strong>₹750 Cr</strong>
                 <span>Relationship book managed</span>
               </div>
-              <div class="stat-box">
-                <em class="stat-org">ICICI Bank</em>
-                <strong>10</strong>
-                <span>UHNW families served</span>
+              <div class="stat-box stat-box-ventures">
+                <em class="stat-org">Business / Ventures</em>
+                <strong>Disha Auto Components Pvt.&nbsp;Ltd.</strong>
+                <strong>Aurangabad Pipes Pvt.&nbsp;Ltd.</strong>
               </div>
               <div class="stat-box">
                 <em class="stat-org">EdgeX Academy</em>
