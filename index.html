@@ -1117,6 +1117,52 @@
       }
     }
 
+    /* Education: each institution sits directly under its own degree box,
+       aligned with the box's text; a dot sits centred in the gap between
+       the two columns. When the boxes stack (phones), each place stays
+       with its degree and the dot is dropped. */
+    /* Boxes share one row and places share the next, so both pairs line
+       up even when one degree name wraps. .edu-col is display: contents,
+       so on phones (single column) the order is degree, place, degree,
+       place. */
+    .stat-grid.edu-grid {
+      grid-auto-flow: column;
+      grid-template-rows: auto auto;
+      row-gap: 10px;
+    }
+
+    .edu-col {
+      display: contents;
+    }
+
+    .edu-place {
+      position: relative;
+      padding: 0 13px; /* box padding 12px + 1px border */
+      font-size: 13px;
+      line-height: 1.4;
+      color: var(--muted);
+    }
+
+    .edu-col + .edu-col .edu-place::before {
+      content: '·';
+      position: absolute;
+      left: -6px;
+      top: 0;
+      transform: translateX(-50%);
+      color: var(--muted);
+    }
+
+    @media (max-width: 640px) {
+      .stat-grid.edu-grid {
+        grid-auto-flow: row;
+        grid-template-rows: none;
+      }
+
+      .edu-col + .edu-col .edu-place::before {
+        display: none;
+      }
+    }
+
     .mini-foot {
       margin-top: 14px;
       font-size: 13px;
@@ -2859,15 +2905,20 @@
             <div class="mini-top">
               <span>Education</span>
             </div>
-            <div class="stat-grid stat-grid-2">
-              <div class="stat-box stat-box-single stat-box-text">
-                <strong>B.Tech → Mechanical</strong>
+            <div class="stat-grid stat-grid-2 edu-grid">
+              <div class="edu-col">
+                <div class="stat-box stat-box-single stat-box-text">
+                  <strong>B.Tech → Mechanical</strong>
+                </div>
+                <div class="edu-place">VIT, Vellore</div>
               </div>
-              <div class="stat-box stat-box-single stat-box-text">
-                <strong>PGDM → Marketing, Finance</strong>
+              <div class="edu-col">
+                <div class="stat-box stat-box-single stat-box-text">
+                  <strong>PGDM → Marketing, Finance</strong>
+                </div>
+                <div class="edu-place">Goa Institute of Management,&nbsp;Goa</div>
               </div>
             </div>
-            <div class="mini-foot">VIT, Vellore · Goa Institute of Management, Goa</div>
           </div>
         </div>
       </div>
