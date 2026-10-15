@@ -1204,6 +1204,44 @@
       font-size: 11px;
     }
 
+    /* Full-width family-business card at the top of the Track record grid:
+       company names on the left, short description on the right. */
+    .role-card-wide {
+      grid-column: 1 / -1;
+    }
+
+    .role-wide-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+      gap: 16px 40px;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .role-wide-body h3 {
+      font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+    }
+
+    .role-wide-body h3 span {
+      display: block;
+    }
+
+    .role-wide-body h3 span + span {
+      margin-top: 8px;
+    }
+
+    .role-wide-body p {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 900px) {
+      .role-wide-body {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .role-earlier-head {
       margin: 34px 0 14px;
     }
@@ -2494,15 +2532,15 @@
               <span>Track record</span>
             </div>
             <div class="stat-grid stat-grid-proof">
-              <div class="stat-box">
-                <em class="stat-org">ICICI Bank</em>
-                <strong>₹750 Cr</strong>
-                <span>Relationship book managed</span>
-              </div>
               <div class="stat-box stat-box-ventures">
                 <em class="stat-org">Business / Ventures</em>
                 <strong>Disha Auto Components Pvt.&nbsp;Ltd.</strong>
                 <strong>Aurangabad Pipes Pvt.&nbsp;Ltd.</strong>
+              </div>
+              <div class="stat-box">
+                <em class="stat-org">ICICI Bank</em>
+                <strong>₹750 Cr</strong>
+                <span>Relationship book managed</span>
               </div>
               <div class="stat-box">
                 <em class="stat-org">EdgeX Academy</em>
@@ -2682,6 +2720,19 @@
         </div>
 
         <div class="role-grid">
+          <article class="role-card role-card-wide">
+            <div class="role-top">
+              <span class="role-org">Family businesses</span>
+              <span class="role-date">Manufacturing</span>
+            </div>
+            <div class="role-wide-body">
+              <h3><span>Disha Auto Components Pvt.&nbsp;Ltd.</span><span>Aurangabad Pipes Pvt.&nbsp;Ltd.</span></h3>
+              <p>I grew up inside our family’s manufacturing businesses. They’re where I first saw how a shop floor,
+                a balance sheet and long-standing customer relationships hold a company together, and where I did my
+                first real work as an engineer.</p>
+            </div>
+          </article>
+
           <article class="role-card">
             <div class="role-top">
               <span class="role-org">EdgeX Academy<span class="role-tag">Current</span></span>
@@ -2736,9 +2787,9 @@
           </article>
 
           <article class="role-mini">
-            <div class="role-org">Disha Auto Components</div>
+            <div class="role-org">Disha Auto Components · Family business</div>
             <strong>8 hrs → 10 min</strong>
-            <h4>R&amp;D and Operations Intern</h4>
+            <h4>R&amp;D and Operations</h4>
             <p>Designed a conveyor concept to cut paint curing time, and automated stencilling on the production
               line.</p>
             <span class="role-date">2021</span>
@@ -2758,9 +2809,10 @@
 
         <div class="story">
           <div class="story-main">
-            <h3>An engineer who learned business from the money side.</h3>
-            <p>I started as a mechanical engineer at VIT, where my first wins were on a factory floor: automating a
-              production step and redesigning paint curing from 8 hours to 10 minutes.</p>
+            <h3>Raised in manufacturing. Trained in money.</h3>
+            <p>I grew up around our family businesses, Disha Auto Components and Aurangabad Pipes, and trained as a
+              mechanical engineer at VIT. My first wins were on our own factory floor: automating a production step
+              and redesigning paint curing from 8 hours to 10 minutes.</p>
             <p>A PGDM in marketing and finance at Goa Institute of Management took me into private banking at ICICI,
               working with some of India’s wealthiest families. Today I build growth engines, with one rule from both
               worlds: clarity before scale.</p>
