@@ -2774,6 +2774,99 @@
     .js .defer-bg:not(.bg-in)::before {
       background-image: none !important;
     }
+
+    /* ---- UX pass (Oct 2026) ---------------------------------------- */
+
+    /* Quotes block now lives in its own section between Story and Music
+       (was inside the hero, between the hero and Capabilities). */
+    .section-quotes {
+      padding: 64px 0;
+    }
+
+    .section-quotes .hero-quotes {
+      margin-top: 0;
+    }
+
+    .section-quotes .hero-quotes .marquee-head {
+      margin-top: 0;
+    }
+
+    /* Nav: the section currently on screen is highlighted. */
+    .nav-links a.is-active {
+      color: var(--text);
+    }
+
+    .nav-links a.is-active::after {
+      transform: scaleX(1);
+    }
+
+    /* Contact form: inline confirmation instead of leaving the site. */
+    .form-status {
+      margin-top: 14px;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .form-status.is-success {
+      color: #2f9e5b;
+    }
+
+    .form-status.is-error {
+      color: #d1495b;
+    }
+
+    .contact-form.is-sent .input-row,
+    .contact-form.is-sent .field,
+    .contact-form.is-sent button[type="submit"] {
+      display: none;
+    }
+
+    .contact-form.is-sent .form-status {
+      margin-top: 4px;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(47, 158, 91, 0.08);
+      font-size: 16px;
+    }
+
+    .contact-form button[disabled] {
+      opacity: 0.6;
+      cursor: progress;
+    }
+
+    /* Phones: shorter hero so visitors reach the work sooner. Smaller
+       headline, less top space, and the "Current focus" card is left out
+       (the At a glance and Education cards stay). */
+    @media (max-width: 640px) {
+      .hero-grid {
+        margin-top: 36px;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(2.35rem, 11vw, 3rem);
+      }
+
+      .hero-copy .lead {
+        font-size: 16px;
+      }
+
+      .hero-actions {
+        margin-top: 22px;
+      }
+
+      .hero-panel .mini-focus {
+        display: none;
+      }
+
+      .hero-panel .mini-focus + .mini-card {
+        margin-top: 0;
+      }
+
+      .section-quotes {
+        padding: 48px 0;
+      }
+    }
   </style>
 </head>
 
@@ -2843,7 +2936,7 @@
           <div class="eyebrow">Builder. Strategist. Storyteller.</div>
           <h1>
             I build businesses
-            <span class="accent">with creative mind and strategic clarity.</span>
+            <span class="accent">with a creative mind and strategic clarity.</span>
           </h1>
           <p class="lead">
             I work at the intersection of business, brand, and imagination, helping ambitious founders turn raw ideas
@@ -2856,7 +2949,7 @@
         </div>
 
         <div class="hero-panel" aria-label="Profile overview panel">
-          <div class="mini-card">
+          <div class="mini-card mini-focus">
             <div class="mini-top">
               <span>Current focus</span>
               <span>2026</span>
@@ -2914,35 +3007,6 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="container hero-quotes" id="philosophy">
-        <div class="marquee-head">
-          <div class="eyebrow">In my own words</div>
-          <h3>Two thoughts I <span class="accent-italic">keep coming back to</span></h3>
-        </div>
-
-        <div class="marquee-outer">
-          <div class="marquee-row quote-marquee-row">
-            <span class="marquee-quote">“Knowledge fills the mind, Logic creates the subject.”<cite>— Abhijeet Toshniwal</cite></span>
-            <span class="marquee-sep" aria-hidden="true">✦</span>
-            <span class="marquee-quote">“My birth was celebrated within my family. I wish my death would be remembered by the world.”<cite>— Abhijeet Toshniwal</cite></span>
-            <span class="marquee-sep" aria-hidden="true">✦</span>
-            <span class="marquee-quote">“Knowledge fills the mind, Logic creates the subject.”<cite>— Abhijeet Toshniwal</cite></span>
-            <span class="marquee-sep" aria-hidden="true">✦</span>
-            <span class="marquee-quote">“My birth was celebrated within my family. I wish my death would be remembered by the world.”<cite>— Abhijeet Toshniwal</cite></span>
-            <span class="marquee-sep" aria-hidden="true">✦</span>
-          </div>
-        </div>
-
-        <a class="follow-link" href="https://www.instagram.com/thoughts_at_02?stkn=MXBjM3ltMnprYWdkYQ%3D%3D"
-          target="_blank" rel="noreferrer">
-          <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8Zm8.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
-          </svg>
-          For more such thoughts, follow
-        </a>
       </div>
     </section>
 
@@ -3251,6 +3315,37 @@
       </div>
     </section>
 
+    <section class="section section-quotes" aria-label="In my own words">
+      <div class="container hero-quotes" id="philosophy">
+        <div class="marquee-head">
+          <div class="eyebrow">In my own words</div>
+          <h3>Two thoughts I <span class="accent-italic">keep coming back to</span></h3>
+        </div>
+
+        <div class="marquee-outer">
+          <div class="marquee-row quote-marquee-row">
+            <span class="marquee-quote">“Knowledge fills the mind, Logic creates the subject.”<cite>— Abhijeet Toshniwal</cite></span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span class="marquee-quote">“My birth was celebrated within my family. I wish my death would be remembered by the world.”<cite>— Abhijeet Toshniwal</cite></span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span class="marquee-quote">“Knowledge fills the mind, Logic creates the subject.”<cite>— Abhijeet Toshniwal</cite></span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+            <span class="marquee-quote">“My birth was celebrated within my family. I wish my death would be remembered by the world.”<cite>— Abhijeet Toshniwal</cite></span>
+            <span class="marquee-sep" aria-hidden="true">✦</span>
+          </div>
+        </div>
+
+        <a class="follow-link" href="https://www.instagram.com/thoughts_at_02?stkn=MXBjM3ltMnprYWdkYQ%3D%3D"
+          target="_blank" rel="noreferrer">
+          <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8Zm8.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
+          </svg>
+          For more such thoughts, follow
+        </a>
+      </div>
+    </section>
+
     <section class="section defer-bg section-music" id="music">
       <div class="container">
         <div class="section-head music-band">
@@ -3318,6 +3413,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Send message</button>
+            <p class="form-status" role="status" aria-live="polite" hidden></p>
           </form>
         </div>
 
@@ -3771,6 +3867,69 @@
 
       load();
       setInterval(load, 60000);
+    })();
+
+    // Nav: highlight the link for the section currently on screen.
+    (function () {
+      const links = Array.prototype.slice.call(document.querySelectorAll('#mainNav a[href^="#"]:not(.btn)'));
+      if (!links.length || !('IntersectionObserver' in window)) return;
+      const byId = {};
+      links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+      const sections = Object.keys(byId).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+      function setActive(id) {
+        links.forEach(function (a) {
+          const on = a === byId[id];
+          a.classList.toggle('is-active', on);
+          if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+        });
+      }
+      const visible = {};
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { visible[e.target.id] = e.isIntersecting; });
+        const current = sections.filter(function (sec) { return visible[sec.id]; })[0];
+        setActive(current ? current.id : null);
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      sections.forEach(function (sec) { io.observe(sec); });
+    })();
+
+    // Contact form: send in the background and confirm on the page,
+    // instead of redirecting to the form service. Without JavaScript (or
+    // if fetch is unavailable) the form still posts the normal way.
+    (function () {
+      const form = document.querySelector('.contact-form');
+      if (!form || !window.fetch || !window.FormData) return;
+      const status = form.querySelector('.form-status');
+      const button = form.querySelector('button[type="submit"]');
+      const endpoint = form.getAttribute('action').replace('formsubmit.co/', 'formsubmit.co/ajax/');
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        button.disabled = true;
+        button.textContent = 'Sending…';
+        status.hidden = true;
+        status.className = 'form-status';
+        try {
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: new FormData(form)
+          });
+          const data = await res.json().catch(function () { return {}; });
+          if (!res.ok || String(data.success) === 'false') throw new Error('send_failed');
+          form.reset();
+          form.classList.add('is-sent');
+          status.className = 'form-status is-success';
+          status.textContent = 'Thanks, your message is on its way. I’ll get back to you soon.';
+          status.hidden = false;
+          status.setAttribute('tabindex', '-1');
+          status.focus({ preventScroll: true });
+        } catch (err) {
+          status.className = 'form-status is-error';
+          status.innerHTML = 'Something went wrong sending your message. Please try again, or email me at <a href="mailto:abhijeettoshniwal14@gmail.com">abhijeettoshniwal14@gmail.com</a>.';
+          status.hidden = false;
+          button.disabled = false;
+          button.textContent = 'Send message';
+        }
+      });
     })();
 
     // Floating LinkedIn / WhatsApp buttons step aside over the contact
