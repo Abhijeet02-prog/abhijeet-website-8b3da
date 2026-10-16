@@ -1016,6 +1016,14 @@
       border: 1px solid var(--line);
     }
 
+    /* Story text box stretches to the height of the three steps beside
+       it; centring its content keeps the spacing even above and below. */
+    .story-main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
     .story-main h3 {
       font-size: clamp(2.2rem, 3vw, 3.2rem);
       margin-bottom: 16px;
@@ -1362,12 +1370,6 @@
       font-size: 12px;
     }
 
-    .story-extra {
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid var(--line);
-      font-size: 15px;
-    }
 
     @media (max-width: 900px) {
       .role-grid {
@@ -3292,8 +3294,6 @@
             <p>A PGDM in marketing and finance at Goa Institute of Management took me into private banking at ICICI,
               working with some of India’s wealthiest families. Today I build growth engines, with one rule from both
               worlds: clarity before scale.</p>
-            <p class="story-extra">Along the way: Senior Core Committee at OxyGIM, a blood-donation camp with 500+
-              volunteers, and outreach to 700+ residents across five mining-affected villages in Goa.</p>
           </div>
 
           <div class="story-list">
