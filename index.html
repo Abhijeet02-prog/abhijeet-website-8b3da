@@ -2768,6 +2768,76 @@
       pointer-events: none;
     }
 
+    /* Track record ("Real rooms. Real numbers.") background art: the city-skyline scene. Same treatment as the other illustrated sections: dark scrim
+       and low opacity in dark mode, stronger unscrimmed art in light mode. */
+    #experience {
+      position: relative;
+      overflow: hidden;
+    }
+
+    #experience::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+        url('assets/backgrounds/hero-desktop.jpg');
+      background-image:
+        linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+        image-set(url('assets/backgrounds/hero-desktop.webp') type('image/webp'), url('assets/backgrounds/hero-desktop.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: center;
+      opacity: 0.22;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    :root[data-theme="light"] #experience::before {
+      background-image: url('assets/backgrounds/hero-desktop.jpg');
+      background-image: image-set(url('assets/backgrounds/hero-desktop.webp') type('image/webp'), url('assets/backgrounds/hero-desktop.jpg') type('image/jpeg'));
+      opacity: 0.32;
+    }
+
+    #experience .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* "In my own words" background art: the pen-and-notebook ink scene. Same treatment as the other illustrated sections: dark scrim
+       and low opacity in dark mode, stronger unscrimmed art in light mode. */
+    .section-quotes {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-quotes::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+        url('assets/backgrounds/writing-desktop.jpg');
+      background-image:
+        linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+        image-set(url('assets/backgrounds/writing-desktop.webp') type('image/webp'), url('assets/backgrounds/writing-desktop.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: center;
+      opacity: 0.22;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    :root[data-theme="light"] .section-quotes::before {
+      background-image: url('assets/backgrounds/writing-desktop.jpg');
+      background-image: image-set(url('assets/backgrounds/writing-desktop.webp') type('image/webp'), url('assets/backgrounds/writing-desktop.jpg') type('image/jpeg'));
+      opacity: 0.32;
+    }
+
+    .section-quotes .container {
+      position: relative;
+      z-index: 1;
+    }
+
     /* Background art below the hero loads only as its section nears the
        viewport. Only active when the <head> script has set .js on <html>,
        so without JavaScript the art simply loads as normal. */
@@ -3116,7 +3186,7 @@
       </div>
     </section>
 
-    <section class="section section-professional" id="experience">
+    <section class="section defer-bg section-professional" id="experience">
       <div class="container">
         <div class="section-head">
           <div>
@@ -3338,7 +3408,7 @@
       </div>
     </section>
 
-    <section class="section section-quotes" aria-label="In my own words">
+    <section class="section defer-bg section-quotes" aria-label="In my own words">
       <div class="container hero-quotes" id="philosophy">
         <div class="marquee-head">
           <div class="eyebrow">In my own words</div>
