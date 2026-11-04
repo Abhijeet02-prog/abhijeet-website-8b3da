@@ -5,9 +5,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <script>document.documentElement.classList.add('js');</script>
-  <title>Abhijeet Toshniwal | Personal Brand</title>
+  <title>Abhijeet Toshniwal | Marketing Director, Aurangabad Pipes · Growth Consultant</title>
   <meta name="description"
-    content="Abhijeet Toshniwal — consultant, investor, writer, musician, and builder of thoughtful businesses." />
+    content="Abhijeet Toshniwal — engineer turned banker turned marketer. Marketing Director at Aurangabad Pipes, growth consultant at EdgeX Academy, and a daily writer on markets, the economy and business." />
   <meta property="og:title" content="Abhijeet Toshniwal" />
   <meta property="og:description"
     content="Consultant, investor, writer, and musician building businesses with intent and clarity." />
@@ -2939,6 +2939,192 @@
         padding: 48px 0;
       }
     }
+
+    /* ---- Nov 2026: background photos removed (for now) --------------
+       Every section's ::before photo is switched off here in one place,
+       instead of deleting each rule, so the art can come back by deleting
+       this block. Text shadows that only existed to lift copy off the
+       photos go too. The body's soft radial gradients stay. */
+    .hero::before,
+    .defer-bg::before,
+    :root[data-theme="light"] .hero::before,
+    :root[data-theme="light"] .defer-bg::before {
+      background-image: none !important;
+      display: none !important;
+    }
+
+    .hero-copy h1,
+    .hero-copy .lead,
+    .section-head h2,
+    .section-head p,
+    .eyebrow,
+    :root[data-theme="light"] .hero-copy h1,
+    :root[data-theme="light"] .hero-copy .lead {
+      text-shadow: none !important;
+    }
+
+    /* Hairline between sections now that photos no longer separate them. */
+    main > .section {
+      border-top: 1px solid var(--line);
+    }
+
+    /* "Now" status badge above the hero eyebrow. */
+    .now-badge {
+      display: flex;
+      width: fit-content;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding: 7px 14px 7px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--card-strong);
+      color: var(--soft);
+      font-size: 13px;
+      font-weight: 700;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .now-badge:hover {
+      border-color: rgba(216, 167, 92, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .now-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #3ccf8e;
+      box-shadow: 0 0 0 0 rgba(60, 207, 142, 0.6);
+      animation: nowPulse 2.4s ease-out infinite;
+      flex: none;
+    }
+
+    @keyframes nowPulse {
+      0% { box-shadow: 0 0 0 0 rgba(60, 207, 142, 0.55); }
+      70% { box-shadow: 0 0 0 8px rgba(60, 207, 142, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(60, 207, 142, 0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .now-dot { animation: none; }
+    }
+
+    /* Proof strip under the hero buttons. */
+    .proof-strip {
+      list-style: none;
+      margin: 32px 0 0;
+      padding: 20px 0 0;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 36px;
+      max-width: 620px;
+    }
+
+    .proof-strip li {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .proof-strip strong {
+      font-size: 1.5rem;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      color: var(--text);
+    }
+
+    .proof-strip span {
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+
+    /* Experience: current-role emphasis, chips, skill tags. */
+    .role-card-now {
+      border-color: rgba(216, 167, 92, 0.3);
+    }
+
+    .role-tag-now {
+      color: #3ccf8e;
+      border-color: rgba(60, 207, 142, 0.35);
+    }
+
+    :root[data-theme="light"] .role-tag-now {
+      color: #1a7a52;
+      border-color: rgba(26, 122, 82, 0.35);
+    }
+
+    .role-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .role-chips span {
+      padding: 5px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      color: var(--soft);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .skill-tags {
+      list-style: none;
+      margin: auto 0 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tags li {
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(216, 167, 92, 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .section-foot {
+      margin-top: 28px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .text-link {
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 15px;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .text-link:hover {
+      border-bottom-color: currentColor;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 640px) {
+      .section-foot { justify-content: flex-start; }
+      .proof-strip { gap: 14px 24px; }
+      .proof-strip strong { font-size: 1.25rem; }
+    }
   </style>
 </head>
 
@@ -2972,6 +3158,7 @@
       <nav class="nav-links" id="mainNav" aria-label="Main navigation">
         <a href="#work">Work</a>
         <a href="#experience">Experience</a>
+        <a href="profile.html">Profile</a>
         <a href="#story">Story</a>
         <a href="#contact">Contact</a>
         <a href="#contact" class="btn btn-secondary nav-cta-mobile">Book a call</a>
@@ -3005,7 +3192,11 @@
 
       <div class="container hero-grid">
         <div class="hero-copy">
-          <div class="eyebrow">Builder. Strategist. Storyteller.</div>
+          <a class="now-badge" href="profile.html#experience">
+            <span class="now-dot" aria-hidden="true"></span>
+            <span>Now · Marketing Director, Aurangabad Pipes</span>
+          </a>
+          <div class="eyebrow">Engineer → Banker → Marketer</div>
           <h1>
             I build businesses
             <span class="accent">with a creative mind and strategic clarity.</span>
@@ -3016,18 +3207,24 @@
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#contact">Let’s work together</a>
-            <a class="btn btn-secondary" href="#work">See what I do</a>
+            <a class="btn btn-secondary" href="profile.html">View full profile →</a>
           </div>
+          <ul class="proof-strip" aria-label="Highlights">
+            <li><strong>3,700+</strong><span>LinkedIn followers</span></li>
+            <li><strong>250k+</strong><span>Post impressions</span></li>
+            <li><strong>Daily</strong><span>Writing on markets &amp; economy</span></li>
+          </ul>
         </div>
 
         <div class="hero-panel" aria-label="Profile overview panel">
           <div class="mini-card mini-focus">
             <div class="mini-top">
-              <span>Current focus</span>
-              <span>2026</span>
+              <span>Current role</span>
+              <span>Since Nov 2026</span>
             </div>
-            <div class="mini-title">Brand. Growth. Systems.</div>
-            <div class="mini-sub">Using unconventional thinking to build durable businesses.</div>
+            <div class="mini-title">Marketing Director.</div>
+            <div class="mini-sub">Aurangabad Pipes Pvt. Ltd. — seamless steel tubes &amp; pipes, 25+ years in the
+              industry. Alongside: Growth Consultant at EdgeX Academy.</div>
           </div>
 
           <div class="mini-card">
@@ -3198,46 +3395,62 @@
         </div>
 
         <div class="role-grid">
-          <article class="role-card role-card-wide">
+          <article class="role-card role-card-wide role-card-now">
             <div class="role-top">
-              <span class="role-org">Business / Ventures</span>
-              <span class="role-date">Manufacturing</span>
+              <span class="role-org">Aurangabad Pipes Pvt.&nbsp;Ltd.<span class="role-tag role-tag-now">Current</span></span>
+              <span class="role-date">Nov 2026 – Present · Aurangabad, Maharashtra</span>
             </div>
             <div class="role-wide-body">
-              <h3><span>Disha Auto Components Pvt.&nbsp;Ltd.</span><span>Aurangabad Pipes Pvt.&nbsp;Ltd.</span></h3>
-              <p>I grew up in a business environment, close to these manufacturing companies. They’re where I first
-                saw how a shop floor, a balance sheet and long-standing customer relationships hold a company
-                together, and where I did my first real work as an engineer.</p>
+              <div>
+                <h3>Marketing Director</h3>
+                <div class="role-chips" aria-label="Company credentials">
+                  <span>25+ years</span><span>ISO 9001:2015</span><span>IBR</span><span>PED</span>
+                </div>
+              </div>
+              <p>I look after marketing and new business. We make seamless steel tubes and pipes, hot-finished and
+                cold-drawn, in carbon and alloy steel, for boilers, heat exchangers, process piping, automotive and
+                mechanical use. My job is to take that track record to people who haven’t heard of us yet, in India
+                and overseas, and make the brand look as good as the product already is.</p>
             </div>
+            <ul class="skill-tags" aria-label="Skills">
+              <li>B2B Marketing</li><li>Go-to-Market</li><li>Business Development</li><li>Brand</li><li>Exports</li>
+            </ul>
           </article>
 
           <article class="role-card">
             <div class="role-top">
-              <span class="role-org">EdgeX Academy<span class="role-tag">Current</span></span>
-              <span class="role-date">Sep 2026 – Present</span>
+              <span class="role-org">EdgeX Academy<span class="role-tag role-tag-now">Current</span></span>
+              <span class="role-date">Sep 2026 – Present · Part-time</span>
             </div>
-            <h3>Consultant, Business Growth</h3>
+            <h3>Growth Consultant</h3>
             <div class="role-stat"><strong>100</strong><span>MBA institutions mapped</span></div>
             <ul class="role-points">
-              <li>Building the campus growth channel through partnerships with B-school clubs, placement teams and
-                faculty.</li>
-              <li>Turned 100 MBA institutions into a prioritised outreach pipeline.</li>
+              <li>Helping a Bengaluru EdTech team, founded by ISB and IIM alumni, decide where to grow next.</li>
+              <li>Building the campus channel through partnerships with B-school clubs, placement teams and
+                faculty, turning 100 MBA institutions into a prioritised pipeline.</li>
               <li>Designed the ambassador, referral and GD Labs programmes for campus acquisition.</li>
+            </ul>
+            <ul class="skill-tags" aria-label="Skills">
+              <li>Business Growth</li><li>Growth Marketing</li><li>Partnerships</li>
             </ul>
           </article>
 
           <article class="role-card">
             <div class="role-top">
               <span class="role-org">ICICI Bank<span class="role-tag">Previous</span></span>
-              <span class="role-date">May 2026 – Sep 2026</span>
+              <span class="role-date">Apr 2026 – Sep 2026 · Kolkata</span>
             </div>
-            <h3>Family Office Specialist, Relationship Manager</h3>
+            <h3>Family Office Specialist, Alipore Zone</h3>
             <div class="role-stat"><strong>₹750 Cr</strong><span>Relationship book</span></div>
             <ul class="role-points">
               <li>Managed 10 UHNW family relationships and brought in 5 new-to-bank families, typically with investable
                 surplus above ₹100 Cr.</li>
-              <li>Coordinated deposits, credit, trade, forex and investment solutions across the book.</li>
+              <li>Coordinated deposits, credit, trade, forex and investment solutions with branch teams and ICICI
+                Securities.</li>
               <li>Family Office point of contact for 28 branches in the Alipore zone.</li>
+            </ul>
+            <ul class="skill-tags" aria-label="Skills">
+              <li>Wealth Management</li><li>Relationship Management</li><li>Finance</li>
             </ul>
           </article>
         </div>
@@ -3248,11 +3461,11 @@
 
         <div class="role-mini-grid">
           <article class="role-mini">
-            <div class="role-org">ICICI Bank</div>
+            <div class="role-org">ICICI Bank · Mumbai</div>
             <strong>42+ clients</strong>
-            <h4>Summer Intern, Trade &amp; Treasury</h4>
+            <h4>Sales &amp; Marketing Intern</h4>
             <p>Analysed churn across import-export clients and proposed three fixes to reduce regulatory pendency.</p>
-            <span class="role-date">2025</span>
+            <span class="role-date">Apr – Jun 2025</span>
           </article>
 
           <article class="role-mini">
@@ -3267,11 +3480,15 @@
           <article class="role-mini">
             <div class="role-org">Disha Auto Components</div>
             <strong>8 hrs → 10 min</strong>
-            <h4>R&amp;D and Operations</h4>
+            <h4>Research &amp; Development Engineer (Intern)</h4>
             <p>Designed a conveyor concept to cut paint curing time, and automated stencilling on the production
               line.</p>
-            <span class="role-date">2021</span>
+            <span class="role-date">Jan – May 2024</span>
           </article>
+        </div>
+
+        <div class="section-foot">
+          <a class="text-link" href="profile.html">Education, certifications &amp; skills on the full profile →</a>
         </div>
       </div>
     </section>
@@ -3292,8 +3509,9 @@
               as a mechanical engineer at VIT. My first wins were on the factory floor at Disha: automating a
               production step and redesigning paint curing from 8 hours to 10 minutes.</p>
             <p>A PGDM in marketing and finance at Goa Institute of Management took me into private banking at ICICI,
-              working with some of India’s wealthiest families. Today I build growth engines, with one rule from both
-              worlds: clarity before scale.</p>
+              working with some of India’s wealthiest families. Now that road has brought me back home to Aurangabad
+              and back to manufacturing, leading marketing at Aurangabad Pipes, with one rule from both worlds:
+              clarity before scale.</p>
           </div>
 
           <div class="story-list">
@@ -3640,7 +3858,11 @@
   <footer class="site-footer">
     <div class="container footer-bar">
       <div>© <span id="year"></span> Abhijeet Toshniwal</div>
-      <div>Consulting · Investing · Writing · Music</div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="profile.html">Profile</a>
+        <a href="https://www.linkedin.com/in/abhijeet-toshniwal-aa3577292/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
   </footer>
 
