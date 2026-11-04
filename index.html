@@ -3166,6 +3166,14 @@
     .past-box span { display: block; margin-top: 4px; font-size: 11px; color: var(--muted); line-height: 1.35; }
     .feature-card-now { border-color: rgba(216, 167, 92, 0.45); }
     @media (max-width: 420px) { .past-grid { grid-template-columns: 1fr; } }
+    /* Hero: the right-hand card's top edge lines up with the top of the
+       "I build" headline. The offset is measured by a small script (badge
+       and eyebrow height vary with font loading), and only applies while
+       the hero is two columns. */
+    @media (min-width: 981px) {
+      .hero-grid { align-items: start; }
+      .hero-panel { margin-top: var(--h1-offset, 0px); }
+    }
   </style>
 </head>
 
@@ -4018,6 +4026,24 @@
         });
       }, { rootMargin: '800px 0px' });
       sections.forEach(function (el) { io.observe(el); });
+    })();
+    // Keep the hero card's top aligned with the top of the headline.
+    (function () {
+      var grid = document.querySelector('.hero-grid');
+      var h1 = document.querySelector('.hero-copy h1');
+      var copy = document.querySelector('.hero-copy');
+      if (!grid || !h1 || !copy) return;
+      function align() {
+        var off = h1.getBoundingClientRect().top - copy.getBoundingClientRect().top;
+        // Nudge down to the glyph tops: the h1's tight line-height puts its
+        // box slightly above the letters.
+        var fs = parseFloat(getComputedStyle(h1).fontSize) || 0;
+        grid.style.setProperty('--h1-offset', Math.max(0, Math.round(off + fs * 0.06)) + 'px');
+      }
+      align();
+      window.addEventListener('resize', align);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(align);
+      window.addEventListener('load', align);
     })();
   </script>
 
