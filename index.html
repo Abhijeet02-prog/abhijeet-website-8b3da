@@ -3263,9 +3263,9 @@
       .pt-timeline li { grid-template-columns: 1fr; gap: 2px; }
       .pt-org { text-align: left; }
     }
-    /* Homepage hero background (Nov 2026): pipes, flute and tennis ball.
-       The subject sits on the right of the image and the left is open dark
-       space, so it is anchored right to keep that space behind the headline. */
+    /* Homepage hero background: stacked seamless tubes of different sizes
+       with a faint candlestick chart rising across the wall. The pipes sit
+       on the right; the open wall on the left holds the headline. */
     .hero::before,
     :root[data-theme="light"] .hero::before {
       background-image: url('assets/backgrounds/home-hero.jpg');
@@ -3275,12 +3275,12 @@
     }
     .hero::before { opacity: 0.85; }
     :root[data-theme="light"] .hero::before { opacity: 0.25; }
-    /* Work / Capabilities background (Nov 2026): stacked seamless tubes.
-       Stack sits on the right; the open space on the left holds the heading. */
+    /* Work / Capabilities background: steel tube, book and notebook (the
+       stacked-tubes photo now leads the hero, so it isn't repeated here). */
     #work::before,
     :root[data-theme="light"] #work::before {
-      background-image: url('assets/backgrounds/work-bg.jpg');
-      background-image: image-set(url('assets/backgrounds/work-bg.webp') type('image/webp'), url('assets/backgrounds/work-bg.jpg') type('image/jpeg'));
+      background-image: url('assets/backgrounds/profile-bg.jpg');
+      background-image: image-set(url('assets/backgrounds/profile-bg.webp') type('image/webp'), url('assets/backgrounds/profile-bg.jpg') type('image/jpeg'));
       background-size: cover;
       background-position: right center;
     }
