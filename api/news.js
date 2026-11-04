@@ -17,16 +17,30 @@ import { Redis } from "@upstash/redis";
 
 const TOPICS = [
     { id: "markets", label: "Markets", query: "Sensex OR Nifty OR \"stock market\"" },
-    { id: "policy", label: "Policy", query: "RBI OR SEBI OR \"finance ministry\"" },
+    { id: "policy", label: "Policy", query: "(RBI OR SEBI OR \"finance ministry\" OR Sitharaman) India" },
     { id: "oil", label: "Oil", query: "\"crude oil\" OR Brent OR OPEC" },
-    { id: "economy", label: "Economy", query: "\"Indian economy\" OR inflation OR GDP OR GST" },
+    { id: "economy", label: "Economy", query: "India (economy OR inflation OR GDP OR PMI OR \"GST collections\" OR exports)" },
 ];
 
 const PER_TOPIC = 3;
 const IST_OFFSET_MS = 5.5 * 60 * 60 * 1000;
 const CUTOFF_HOUR_IST = 11;
-const KEY_PREFIX = "news-edition:";
-const LAST_KEY = "news-edition:last";
+const KEY_PREFIX = "news-edition:v2:";
+const LAST_KEY = "news-edition:v2:last";
+
+// Reputable business/news publishers get priority; others only fill gaps.
+const TRUSTED = [
+    "reuters", "bloomberg", "mint", "livemint", "business standard", "economic times", "the economic times",
+    "moneycontrol", "businessline", "hindu businessline", "the hindu", "financial express", "ndtv profit",
+    "cnbc", "business today", "hindustan times", "indian express", "times of india", "the times of india",
+    "financial times", "wall street journal", "cnbc-tv18", "zee business", "india today", "pti", "ani", "the week",
+];
+// Never shown: social posts, press-release wires and tax-consultancy blogs.
+const BLOCKED = ["linkedin", "facebook", "youtube", "x.com", "twitter", "instagram", "medium", "taxscan",
+    "taxcorp", "scribd", "prnewswire", "globenewswire", "openPR"].map((s) => s.toLowerCase());
+
+const isTrusted = (src = "") => TRUSTED.some((t) => src.toLowerCase().includes(t));
+const isBlocked = (src = "") => BLOCKED.some((b) => src.toLowerCase().includes(b));
 
 function getRedis() {
     const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
@@ -86,7 +100,8 @@ async function fetchTopic(topic, cutoff, seen) {
     if (!r.ok) throw new Error(`google news ${r.status}`);
     const items = parseRss(await r.text())
         .filter((it) => it.published <= cutoff && it.published >= cutoff - 24 * 3600 * 1000)
-        .sort((a, b) => b.published - a.published);
+        .filter((it) => !isBlocked(it.source))
+        .sort((a, b) => (isTrusted(b.source) - isTrusted(a.source)) || (b.published - a.published));
     const picked = [];
     for (const it of items) {
         const key = normal(it.title);
@@ -95,6 +110,7 @@ async function fetchTopic(topic, cutoff, seen) {
         picked.push(it);
         if (picked.length === PER_TOPIC) break;
     }
+    picked.sort((a, b) => b.published - a.published);
     return { id: topic.id, label: topic.label, items: picked };
 }
 
