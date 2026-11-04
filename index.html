@@ -3171,6 +3171,46 @@
       .hero-grid { align-items: start; }
       .hero-panel { margin-top: var(--h1-offset, 0px); }
     }
+    /* Homepage News teaser: lead headline per topic, links to news.html.
+       Background art: the market-skyline image, same treatment as others. */
+    .section-news { position: relative; overflow: hidden; }
+    .section-news::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)), url('assets/backgrounds/hero-desktop.jpg');
+      background-image: linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+        image-set(url('assets/backgrounds/hero-desktop.webp') type('image/webp'), url('assets/backgrounds/hero-desktop.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: 90% center;
+      opacity: 0.22;
+      z-index: 0;
+      pointer-events: none;
+    }
+    :root[data-theme="light"] .section-news::before {
+      background-image: url('assets/backgrounds/hero-desktop.jpg');
+      background-image: image-set(url('assets/backgrounds/hero-desktop.webp') type('image/webp'), url('assets/backgrounds/hero-desktop.jpg') type('image/jpeg'));
+      opacity: 0.32;
+    }
+    .section-news .container { position: relative; z-index: 1; }
+    .news-teaser { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+    .nt-card {
+      display: flex; flex-direction: column; gap: 10px; min-height: 170px; padding: 22px;
+      background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    a.nt-card:hover { transform: translateY(-4px); border-color: rgba(216, 167, 92, 0.35); }
+    .nt-topic { color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+    .nt-title { color: var(--text); font-size: 16px; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; }
+    .nt-src { margin-top: auto; color: var(--muted); font-size: 12px; font-weight: 600; }
+    .nt-sk { display: block; height: 14px; border-radius: 6px; background: var(--card-strong); animation: ntPulse 1.4s ease-in-out infinite; }
+    .nt-sk + .nt-sk { width: 70%; }
+    @keyframes ntPulse { 50% { opacity: 0.45; } }
+    .nt-foot { margin-top: 22px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .nt-edition { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; font-weight: 700; }
+    .nt-edition::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #3ccf8e; }
+    @media (max-width: 1100px) { .news-teaser { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px) { .news-teaser { grid-template-columns: 1fr; } .nt-card { min-height: 0; } }
   </style>
 </head>
 
@@ -3205,8 +3245,8 @@
         <a href="#top">Home</a>
         <a href="#work">Work</a>
         <a href="#story">Story</a>
+        <a href="#news">News</a>
         <a href="profile.html">Profile</a>
-        <a href="news.html">News</a>
         <a href="#contact">Contact</a>
         <a href="#contact" class="btn btn-secondary nav-cta-mobile">Book a call</a>
       </nav>
@@ -3517,6 +3557,29 @@
           </svg>
           For more such thoughts, follow
         </a>
+      </div>
+    </section>
+
+    <section class="section defer-bg section-news" id="news" aria-labelledby="news-teaser-h">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">News · daily at 11:00 AM IST</div>
+            <h2 id="news-teaser-h">Today’s <span class="accent-wine">briefing.</span></h2>
+          </div>
+          <p>The lead headline on markets, policy, oil and the economy, refreshed every morning at 11. The full
+            briefing has three stories per topic and how they connect.</p>
+        </div>
+        <div class="news-teaser" id="newsTeaser" aria-live="polite">
+          <div class="nt-card"><span class="nt-topic">Markets</span><span class="nt-sk"></span><span class="nt-sk"></span></div>
+          <div class="nt-card"><span class="nt-topic">Policy</span><span class="nt-sk"></span><span class="nt-sk"></span></div>
+          <div class="nt-card"><span class="nt-topic">Oil</span><span class="nt-sk"></span><span class="nt-sk"></span></div>
+          <div class="nt-card"><span class="nt-topic">Economy</span><span class="nt-sk"></span><span class="nt-sk"></span></div>
+        </div>
+        <div class="nt-foot">
+          <span class="nt-edition" id="newsTeaserMeta">Today’s edition</span>
+          <a class="btn btn-secondary" href="news.html">Open the full briefing →</a>
+        </div>
       </div>
     </section>
 
@@ -4063,6 +4126,29 @@
       window.addEventListener('resize', update);
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(update);
       update();
+    })();
+    // Homepage News teaser: the lead story per topic from today's edition.
+    (function () {
+      var box = document.getElementById('newsTeaser');
+      var meta = document.getElementById('newsTeaserMeta');
+      if (!box) return;
+      function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : t; return d.innerHTML; }
+      function fail() {
+        box.innerHTML = '<a class="nt-card" href="news.html"><span class="nt-topic">Briefing</span>' +
+          '<span class="nt-title">Today’s headlines are a click away.</span><span class="nt-src">Open the News page →</span></a>';
+      }
+      fetch('/api/news').then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (ed) {
+        var cards = (ed && ed.topics || []).filter(function (t) { return t.items.length; });
+        if (!cards.length) return fail();
+        box.innerHTML = cards.map(function (t) {
+          var it = t.items[0];
+          return '<a class="nt-card" href="' + esc(it.link) + '" target="_blank" rel="noreferrer noopener">' +
+            '<span class="nt-topic">' + esc(t.label) + '</span><span class="nt-title">' + esc(it.title) + '</span>' +
+            '<span class="nt-src">' + esc(it.source || 'News') + '</span></a>';
+        }).join('');
+        var day = new Date(ed.cutoff).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', timeZone: 'Asia/Kolkata' });
+        meta.textContent = (ed.stale ? 'Last edition · ' : 'Edition of ') + day + ', 11:00 AM IST';
+      }).catch(fail);
     })();
   </script>
 
