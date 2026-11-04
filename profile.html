@@ -278,6 +278,11 @@
       font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.4;
     }
 
+    .points { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; max-width: 64ch; }
+    .points li { position: relative; padding-left: 18px; color: var(--soft); opacity: 0.9; font-size: 15px; line-height: 1.6; }
+    .points li::before { content: "✦"; position: absolute; left: 0; top: 1px; color: var(--accent); font-size: 10px; }
+    .points strong { color: var(--text); }
+
     .tags { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
     .tags li {
       padding: 5px 12px; border-radius: 999px; background: rgba(216, 167, 92, 0.1); color: var(--accent);
@@ -414,7 +419,6 @@
       <a href="index.html" class="brand" aria-label="Abhijeet Toshniwal home">Abhijeet Toshniwal</a>
       <nav class="nav-links" aria-label="Main navigation">
         <a href="index.html#work">Work</a>
-        <a href="index.html#experience">Experience</a>
         <a href="profile.html" aria-current="page">Profile</a>
         <a href="index.html#story">Story</a>
         <a href="index.html#contact">Contact</a>
@@ -488,15 +492,10 @@
           building campus partnerships.</p>
         <p>I studied mechanical engineering at VIT Vellore, then marketing and finance at Goa Institute of
           Management.</p>
-        <div class="stat-row">
-          <div class="stat"><strong>3,700+</strong><span>LinkedIn followers</span></div>
-          <div class="stat"><strong>250k+</strong><span>Post impressions</span></div>
-          <div class="stat"><strong>500+</strong><span>Connections</span></div>
-        </div>
       </section>
 
       <section id="experience" aria-labelledby="exp-h">
-        <div class="block-head"><h2 id="exp-h">Experience</h2><span class="count">5 roles</span></div>
+        <div class="block-head"><h2 id="exp-h">Experience</h2><span class="count">5 roles · 1 project</span></div>
         <ol class="timeline">
           <li class="entry">
             <div class="entry-date">Nov 2026 — Now<small>Full-time</small></div>
@@ -525,6 +524,7 @@
                 which campuses to partner with, and how the brand should come across.</p>
               <p>One programme I like pointing students to is GD Labs: live group-discussion practice with a real
                 moderator and written feedback after every session.</p>
+              <ul class="points"><li><strong>100</strong> MBA institutions mapped into a prioritised campus pipeline</li><li>Built partnerships with B-school clubs, placement teams and faculty</li><li>Designed the ambassador, referral and GD Labs programmes for campus acquisition</li></ul>
               <ul class="tags"><li>Business Growth</li><li>Growth Marketing</li><li>Campus Partnerships</li><li>Brand</li></ul>
             </div>
           </li>
@@ -538,6 +538,7 @@
                 needs. That meant a lot of listening, building trust over time, and working closely with branch
                 teams and ICICI Securities on requirements that were rarely simple. A close look at how wealth is
                 built and protected, one relationship at a time.</p>
+              <ul class="points"><li><strong>₹750 Cr</strong> relationship book across 10 UHNW families</li><li>Brought in 5 new-to-bank families, typically with investable surplus above ₹100 Cr</li><li>Coordinated deposits, credit, trade, forex and investments for 28 branches</li></ul>
               <ul class="tags"><li>Wealth Management</li><li>Relationship Management</li><li>Finance</li></ul>
             </div>
           </li>
@@ -547,7 +548,17 @@
               <h3>Sales &amp; Marketing Intern</h3>
               <div class="org-line"><span class="org">ICICI Bank</span></div>
               <div class="where">Mumbai, Maharashtra · On-site</div>
+              <ul class="points"><li>Analysed churn across <strong>42+</strong> import-export clients</li><li>Proposed three fixes to reduce regulatory pendency</li></ul>
               <ul class="tags"><li>Marketing</li><li>Marketing Strategy</li></ul>
+            </div>
+          </li>
+          <li class="entry">
+            <div class="entry-date">2024<small>Live project</small></div>
+            <div>
+              <h3>Live Project, Reliance ResQ</h3>
+              <div class="org-line"><span class="org">Reliance Retail</span></div>
+              <ul class="points"><li>Rebuilt the supply-chain cost model around distribution-centre monetisation and centralised JIT inventory</li><li>Cost target brought from <strong>12% to 7%</strong></li></ul>
+              <ul class="tags"><li>Supply Chain</li><li>Cost Modelling</li></ul>
             </div>
           </li>
           <li class="entry">
@@ -558,6 +569,7 @@
               <div class="where">Aurangabad, Maharashtra · On-site</div>
               <p>Watched parts go from a drawing to a machine to a customer, and learned how much care sits behind
                 every piece that ships.</p>
+              <ul class="points"><li>Designed a conveyor concept that cut paint curing from <strong>8 hours to 10 minutes</strong></li><li>Automated stencilling on the production line</li></ul>
               <ul class="tags"><li>Research &amp; Development</li><li>CAD/CAM</li></ul>
             </div>
           </li>
@@ -572,7 +584,6 @@
             <div>
               <h3>Goa Institute of Management (GIM)</h3>
               <div class="where">PGDM · Marketing &amp; Finance</div>
-              <p>Led the official campus band across 15+ events.</p>
             </div>
           </li>
           <li class="entry">
