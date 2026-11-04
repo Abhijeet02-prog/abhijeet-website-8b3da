@@ -445,6 +445,8 @@
       pointer-events: none;
     }
     :root[data-theme="light"] .news-band::before { opacity: 0.32; }
+    /* Nov 2026: replaced by the page-wide harbour background below. */
+    .news-band::before, :root[data-theme="light"] .news-band::before { display: none; }
     .band-top::before {
       background-image: linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)), url('assets/backgrounds/hero-desktop.jpg');
       background-image: linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
@@ -489,6 +491,21 @@
     .news-foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
       padding-top: 24px; border-top: 1px solid var(--line); }
     @media (max-width: 860px) { .news-hero { grid-template-columns: 1fr; align-items: start; } }
+    /* Page background (Nov 2026): trading desk overlooking an oil terminal
+       at dusk. Fixed behind the page so it stays put while scrolling. */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: url('assets/backgrounds/news-bg.jpg');
+      background-image: image-set(url('assets/backgrounds/news-bg.webp') type('image/webp'), url('assets/backgrounds/news-bg.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: center;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    :root[data-theme="light"] body::before { opacity: 0.22; }
   </style>
 </head>
 

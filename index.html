@@ -3275,6 +3275,39 @@
     }
     .hero::before { opacity: 0.85; }
     :root[data-theme="light"] .hero::before { opacity: 0.25; }
+    /* Work / Capabilities background (Nov 2026): stacked seamless tubes.
+       Stack sits on the right; the open space on the left holds the heading. */
+    #work::before,
+    :root[data-theme="light"] #work::before {
+      background-image: url('assets/backgrounds/work-bg.jpg');
+      background-image: image-set(url('assets/backgrounds/work-bg.webp') type('image/webp'), url('assets/backgrounds/work-bg.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right center;
+    }
+    #work::before { opacity: 0.6; }
+    :root[data-theme="light"] #work::before { opacity: 0.25; }
+    /* Story background (Nov 2026): two chairs in warm evening light.
+       Chairs sit bottom-right; the open wall on the left holds the copy. */
+    #story::before,
+    :root[data-theme="light"] #story::before {
+      background-image: url('assets/backgrounds/story-bg.jpg');
+      background-image: image-set(url('assets/backgrounds/story-bg.webp') type('image/webp'), url('assets/backgrounds/story-bg.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right bottom;
+    }
+    #story::before { opacity: 0.6; }
+    :root[data-theme="light"] #story::before { opacity: 0.25; }
+    /* Music background (Nov 2026): flute on a stage beside a piano.
+       Subject sits bottom-right; the dark stage on the left holds the copy. */
+    .section-music::before,
+    :root[data-theme="light"] .section-music::before {
+      background-image: url('assets/backgrounds/music-bg.jpg');
+      background-image: image-set(url('assets/backgrounds/music-bg.webp') type('image/webp'), url('assets/backgrounds/music-bg.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right bottom;
+    }
+    .section-music::before { opacity: 0.65; }
+    :root[data-theme="light"] .section-music::before { opacity: 0.25; }
   </style>
 </head>
 

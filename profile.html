@@ -443,6 +443,22 @@
       }
     }
     strong, b, a { -webkit-hyphens: manual; hyphens: manual; }
+    /* Page background (Nov 2026): steel tube, book and notebook. Fixed
+       behind the page so it stays put while the content scrolls. The
+       subject sits bottom-right, leaving open dark space on the left. */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: url('assets/backgrounds/profile-bg.jpg');
+      background-image: image-set(url('assets/backgrounds/profile-bg.webp') type('image/webp'), url('assets/backgrounds/profile-bg.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right bottom;
+      opacity: 0.45;
+      pointer-events: none;
+    }
+    :root[data-theme="light"] body::before { opacity: 0.22; }
   </style>
 </head>
 
