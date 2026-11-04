@@ -4,6 +4,10 @@
         {
             "path": "/api/instagram-refresh-token",
             "schedule": "0 6 * * *"
+        },
+        {
+            "path": "/api/news",
+            "schedule": "31 5 * * *"
         }
     ]
 }
