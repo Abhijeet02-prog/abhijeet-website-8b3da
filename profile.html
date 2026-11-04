@@ -328,6 +328,15 @@
     .chain.is-live { flex-direction: column; align-items: flex-start; gap: 6px; }
     .chain.is-live i { padding-left: 2px; }
 
+    .news-link {
+      display: grid; gap: 6px; margin-top: 24px; padding: 22px 24px; border-radius: 16px;
+      border: 1px solid rgba(216, 167, 92, 0.4); background: var(--card-strong);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .news-link:hover { border-color: rgba(216, 167, 92, 0.7); transform: translateY(-2px); }
+    .news-link strong { font-size: 1.3rem; letter-spacing: -0.03em; color: var(--text); }
+    .news-link span:last-child { color: var(--muted); font-size: 15px; }
+
     .briefing { margin-top: 28px; }
     .briefing-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
     .briefing-meta { color: var(--muted); font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
@@ -436,6 +445,7 @@
         <a href="index.html">Home</a>
         <a href="index.html#work">Work</a>
         <a href="profile.html" aria-current="page">Profile</a>
+        <a href="news.html">News</a>
         <a href="index.html#story">Story</a>
         <a href="index.html#contact">Contact</a>
       </nav>
@@ -659,26 +669,12 @@
         <div class="block-head"><h2 id="writing-h">Writing <span class="serif accent-wine">daily</span></h2></div>
         <p>Most days I post about oil, gold, IPOs, the RBI, banking, crypto, geopolitics and, now and then, sport.
           People ask why I don’t pick a lane. I don’t see separate lanes. I like tracing the chain and putting it in
-          plain words:</p>
-        <div class="chain-wrap">
-          <div class="chain-label" id="chainLabel">How I connect the dots</div>
-          <div class="chain" id="chain" aria-label="Chain of effects">
-            <span>A tanker is hit near Hormuz</span><i>→</i><span>the rupee</span><i>→</i><span>inflation</span><i>→</i><span>what a factory pays for its inputs</span>
-          </div>
-        </div>
-        <div class="briefing" id="briefing" aria-live="polite">
-          <div class="briefing-head">
-            <span class="eyebrow">Today’s briefing</span>
-            <span class="briefing-meta" id="briefingMeta">Updated daily at 11:00 AM IST</span>
-          </div>
-          <div class="briefing-grid" id="briefingGrid">
-            <div class="brief-topic is-loading"><h3>Markets</h3><span class="sk"></span><span class="sk"></span></div>
-            <div class="brief-topic is-loading"><h3>Policy</h3><span class="sk"></span><span class="sk"></span></div>
-            <div class="brief-topic is-loading"><h3>Oil</h3><span class="sk"></span><span class="sk"></span></div>
-            <div class="brief-topic is-loading"><h3>Economy</h3><span class="sk"></span><span class="sk"></span></div>
-          </div>
-          <p class="briefing-note">Headlines link to the original publishers. Curated automatically, not investment advice.</p>
-        </div>
+          plain words.</p>
+        <a class="news-link" href="news.html">
+          <span class="eyebrow">News</span>
+          <strong>Today’s briefing →</strong>
+          <span>The day’s top headlines on markets, policy, oil and the economy, refreshed every morning at 11:00 AM IST.</span>
+        </a>
         <div class="more"><a class="text-link" href="https://www.linkedin.com/in/abhijeet-toshniwal-aa3577292/recent-activity/all/"
             target="_blank" rel="noreferrer">Read the latest posts on LinkedIn →</a></div>
       </section>
@@ -700,6 +696,7 @@
       <div>© <span id="year"></span> Abhijeet Toshniwal</div>
       <nav aria-label="Footer">
         <a href="index.html">Home</a>
+        <a href="news.html">News</a>
         <a href="https://www.linkedin.com/in/abhijeet-toshniwal-aa3577292/" target="_blank" rel="noreferrer">LinkedIn</a>
         <a href="index.html#contact">Contact</a>
       </nav>
@@ -740,50 +737,6 @@
           var el = document.getElementById(id);
           if (el) io.observe(el);
         });
-      }
-    })();
-    // Today's briefing: one edition per day, cut at 11:00 AM IST (see api/news.js).
-    (function () {
-      var grid = document.getElementById('briefingGrid');
-      var meta = document.getElementById('briefingMeta');
-      if (!grid) return;
-      function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : t; return d.innerHTML; }
-      function ago(ts) {
-        var h = Math.round((Date.now() - ts) / 3600000);
-        return h < 1 ? 'just now' : h < 24 ? h + 'h ago' : Math.round(h / 24) + 'd ago';
-      }
-      function fail() {
-        grid.innerHTML = '<div class="brief-topic"><p class="brief-empty">Today’s headlines couldn’t load right now. ' +
-          'My daily take is always on <a class="text-link" href="https://www.linkedin.com/in/abhijeet-toshniwal-aa3577292/recent-activity/all/" target="_blank" rel="noreferrer">LinkedIn</a>.</p></div>';
-      }
-      fetch('/api/news').then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (ed) {
-        if (!ed || !ed.topics || !ed.topics.some(function (t) { return t.items.length; })) return fail();
-        var d = new Date(ed.cutoff);
-        var day = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', timeZone: 'Asia/Kolkata' });
-        meta.textContent = (ed.stale ? 'Last edition · ' : 'Edition of ') + day + ', 11:00 AM IST';
-        grid.innerHTML = ed.topics.map(function (t) {
-          var items = t.items.length ? t.items.map(function (it) {
-            return '<a class="brief-item" href="' + esc(it.link) + '" target="_blank" rel="noreferrer noopener"><strong>' +
-              esc(it.title) + '</strong><span>' + esc(it.source || 'News') + ' · ' + ago(it.published) + '</span></a>';
-          }).join('') : '<p class="brief-empty">No major headlines in this edition.</p>';
-          return '<div class="brief-topic"><h3>' + esc(t.label) + '</h3>' + items + '</div>';
-        }).join('');
-        buildChain(ed);
-      }).catch(fail);
-      function short(t) { return t.length > 70 ? t.slice(0, 67).replace(/\s+\S*$/, '') + '…' : t; }
-      function buildChain(ed) {
-        var order = ['oil', 'markets', 'economy', 'policy'];
-        var links = order.map(function (id) {
-          var t = ed.topics.filter(function (x) { return x.id === id; })[0];
-          return t && t.items[0] ? { label: t.label, it: t.items[0] } : null;
-        }).filter(Boolean);
-        if (links.length < 2) return;
-        var chain = document.getElementById('chain');
-        chain.classList.add('is-live');
-        chain.innerHTML = links.map(function (l) {
-          return '<span><b>' + esc(l.label) + '</b><a href="' + esc(l.it.link) + '" target="_blank" rel="noreferrer noopener">' + esc(short(l.it.title)) + '</a></span>';
-        }).join('<i>↓</i>');
-        document.getElementById('chainLabel').textContent = 'Today’s chain · how the lead stories connect';
       }
     })();
   </script>

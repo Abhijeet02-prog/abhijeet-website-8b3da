@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Today’s Briefing | Abhijeet Toshniwal</title>
+  <meta name="description"
+    content="A daily market and economy briefing, refreshed every morning at 11:00 AM IST: the top headlines on Indian markets, policy, oil and the economy, picked by Abhijeet Toshniwal's site." />
+  <meta property="og:title" content="Today’s Briefing — Abhijeet Toshniwal" />
+  <meta property="og:description"
+    content="Engineer → Banker → Marketer. Marketing Director, Aurangabad Pipes. Growth @ EdgeX Academy." />
+  <meta property="og:type" content="profile" />
+  <meta name="theme-color" content="#0b0d12" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap"
+    rel="stylesheet" />
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) { }
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <style>
+    /* Same design tokens as index.html so both pages read as one site. */
+    :root {
+      --bg: #0b0d12;
+      --bg-elev: #111621;
+      --panel: rgba(17, 22, 33, 0.8);
+      --card: rgba(255, 255, 255, 0.02);
+      --card-strong: rgba(255, 255, 255, 0.04);
+      --line: rgba(255, 255, 255, 0.08);
+      --text: #edf2f7;
+      --muted: #a9b1bf;
+      --soft: #dfe6f0;
+      --accent: #d8a75c;
+      --wine: #cf5975;
+      --live: #3ccf8e;
+      --hover: rgba(255, 255, 255, 0.035);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius-md: 18px;
+      --container: 1240px;
+      --gutter: clamp(16px, 4.5vw, 72px);
+      --header-h: 78px;
+    }
+
+    :root[data-theme="light"] {
+      --bg: #f5f0ea;
+      --bg-elev: #fffdf9;
+      --panel: rgba(255, 255, 255, 0.76);
+      --card: rgba(17, 22, 33, 0.03);
+      --card-strong: rgba(17, 22, 33, 0.05);
+      --line: rgba(17, 22, 33, 0.09);
+      --text: #111827;
+      --muted: #4b5563;
+      --soft: #1f2937;
+      --accent: #b7741f;
+      --wine: #8a2240;
+      --live: #1a7a52;
+      --hover: rgba(17, 22, 33, 0.035);
+      --shadow: 0 18px 50px rgba(17, 24, 39, 0.09);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 24px); }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(216, 167, 92, 0.12), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(142, 197, 255, 0.10), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      font-family: 'Manrope', sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    p { margin: 0; color: var(--muted); font-size: 16px; }
+    h1, h2, h3, h4 { margin: 0; letter-spacing: -0.04em; font-weight: 800; }
+
+    .container {
+      width: min(var(--container),
+          calc(100% - max(var(--gutter), env(safe-area-inset-left, 0px)) - max(var(--gutter), env(safe-area-inset-right, 0px))));
+      margin: 0 auto;
+    }
+
+    .serif {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: -0.02em;
+    }
+
+    .accent-wine { color: var(--wine); }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    /* ---- Header (mirrors the homepage header) ---- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(11, 13, 18, 0.62);
+      border-bottom: 1px solid var(--line);
+    }
+
+    :root[data-theme="light"] .site-header { background: rgba(245, 240, 234, 0.75); }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: var(--header-h);
+    }
+
+    .brand { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.04em; white-space: nowrap; }
+
+    .nav-links { display: flex; align-items: center; gap: 24px; color: var(--muted); font-size: 14px; font-weight: 700; }
+    .nav-links a { position: relative; transition: color 0.2s ease; }
+    .nav-links a::after {
+      content: ""; position: absolute; left: 0; bottom: -3px; width: 100%; height: 1px;
+      background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.2s ease;
+    }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--text); }
+    .nav-links a:hover::after, .nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      border-radius: 999px; border: 1px solid var(--line); padding: 13px 20px;
+      font-weight: 800; font-size: 14px; background: var(--card); color: var(--text);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); border-color: rgba(216, 167, 92, 0.45); }
+
+    .theme-toggle {
+      width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line);
+      background: var(--card); color: var(--text); cursor: pointer; font-size: 18px;
+    }
+
+    .home-link { display: none; }
+
+    /* ---- Two-column layout: sticky identity rail + scrolling content ---- */
+    .profile-layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.4fr);
+      gap: clamp(32px, 6vw, 96px);
+      padding: 64px 0 96px;
+      align-items: start;
+    }
+
+    .rail {
+      min-width: 0;
+      position: sticky;
+      top: calc(var(--header-h) + 40px);
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .rail h1 {
+      font-size: clamp(2.6rem, 4.6vw, 4.2rem);
+      line-height: 0.92;
+      letter-spacing: -0.065em;
+    }
+
+    .rail h1 .serif { display: block; font-size: 0.92em; color: var(--accent); margin-top: 4px; }
+
+    .headline { font-size: 17px; color: var(--soft); max-width: 420px; }
+
+    .meta-row { display: flex; flex-wrap: wrap; gap: 8px 16px; color: var(--muted); font-size: 13px; font-weight: 600; }
+    .meta-row span { display: inline-flex; align-items: center; gap: 6px; }
+
+    .now-card {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 14px 16px; border-radius: 14px; border: 1px solid var(--line); background: var(--card-strong);
+    }
+    .now-card strong { display: block; font-size: 14px; color: var(--text); }
+    .now-card span { font-size: 13px; color: var(--muted); }
+
+    .now-dot {
+      width: 8px; height: 8px; margin-top: 6px; border-radius: 50%; background: var(--live); flex: none;
+      animation: nowPulse 2.4s ease-out infinite;
+    }
+    @keyframes nowPulse {
+      0% { box-shadow: 0 0 0 0 rgba(60, 207, 142, 0.55); }
+      70% { box-shadow: 0 0 0 8px rgba(60, 207, 142, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(60, 207, 142, 0); }
+    }
+
+    /* Scroll-spy section nav: a line that grows on the active item. */
+    .toc { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+    .toc a {
+      display: flex; align-items: center; gap: 14px; padding: 7px 0;
+      color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+    .toc a::before {
+      content: ""; height: 1px; width: 28px; background: currentColor; opacity: 0.5;
+      transition: width 0.25s ease, opacity 0.25s ease;
+    }
+    .toc a:hover, .toc a.active { color: var(--text); }
+    .toc a:hover::before, .toc a.active::before { width: 60px; opacity: 1; }
+
+    .rail-social { display: flex; gap: 10px; flex-wrap: wrap; }
+    .icon-btn {
+      width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line); background: var(--card);
+      display: inline-flex; align-items: center; justify-content: center; color: var(--muted);
+      transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .icon-btn:hover { color: var(--text); border-color: rgba(216, 167, 92, 0.45); transform: translateY(-2px); }
+    .icon-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+    /* ---- Content ---- */
+    .content { display: grid; gap: 88px; min-width: 0; }
+
+    .block-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 26px; }
+    .block-head h2 { font-size: clamp(1.9rem, 3vw, 2.6rem); line-height: 1; }
+    .block-head .count { color: var(--muted); font-size: 13px; font-weight: 700; }
+
+    .about p + p { margin-top: 18px; }
+    .about p { font-size: 17px; line-height: 1.75; }
+    .about strong { color: var(--text); font-weight: 700; }
+
+    .stat-row {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 32px;
+    }
+    .stat {
+      padding: 18px; border-radius: 16px; border: 1px solid var(--line); background: var(--card);
+    }
+    .stat strong { display: block; font-size: 1.7rem; line-height: 1.1; letter-spacing: -0.05em; color: var(--text); }
+    .stat span { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
+
+    /* Timeline list: date column + body. Hovering one entry dims the others. */
+    .timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+    .entry {
+      display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 28px;
+      padding: 24px 26px; border-radius: 16px; border: 1px solid var(--line); background: var(--card);
+      transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+    }
+    @media (hover: hover) {
+      .timeline:hover .entry { opacity: 0.6; }
+      .timeline:hover .entry:hover { opacity: 1; background: var(--hover); border-color: rgba(216, 167, 92, 0.35); }
+    }
+    .entry-date {
+      color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+      line-height: 1.5; padding-top: 3px;
+    }
+    .entry-date small { display: block; margin-top: 2px; font-weight: 600; letter-spacing: 0.02em; text-transform: none; font-size: 13px; }
+    .entry h3 { font-size: 1.25rem; line-height: 1.3; letter-spacing: -0.02em; color: var(--text); }
+    .org-line { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 10px; margin-top: 4px; }
+    .entry .org { color: var(--accent); font-weight: 700; font-size: 15px; }
+    .entry .where { margin-top: 6px; font-size: 13px; color: var(--muted); font-weight: 600; }
+    .entry p { margin-top: 14px; font-size: 15px; line-height: 1.7; color: var(--soft); opacity: 0.88; max-width: 64ch; }
+    .entry p + p { margin-top: 10px; }
+
+    .tag-now {
+      display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 999px;
+      border: 1px solid rgba(60, 207, 142, 0.4); color: var(--live);
+      font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.4;
+    }
+
+    .points { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; max-width: 64ch; }
+    .points li { position: relative; padding-left: 18px; color: var(--soft); opacity: 0.9; font-size: 15px; line-height: 1.6; }
+    .points li::before { content: "✦"; position: absolute; left: 0; top: 1px; color: var(--accent); font-size: 10px; }
+    .points strong { color: var(--text); }
+
+    .tags { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tags li {
+      padding: 5px 12px; border-radius: 999px; background: rgba(216, 167, 92, 0.1); color: var(--accent);
+      font-size: 12px; font-weight: 700;
+    }
+
+    /* Certifications: compact two-up cards. */
+    .cert-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .cert {
+      padding: 18px; border-radius: 16px; border: 1px solid var(--line); background: var(--card);
+      display: flex; flex-direction: column; gap: 6px; transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .cert:hover { border-color: rgba(216, 167, 92, 0.35); transform: translateY(-2px); }
+    .cert h3 { font-size: 15px; letter-spacing: -0.01em; line-height: 1.35; }
+    .cert .issuer { color: var(--accent); font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+    .cert .when { color: var(--muted); font-size: 12px; font-weight: 600; margin-top: auto; }
+
+    .skill-groups { display: grid; gap: 22px; }
+    .skill-groups h3 { font-size: 12px; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
+    .chips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    @media (max-width: 1180px) and (min-width: 981px) { .chips { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .chips span {
+      display: flex; align-items: center; min-height: 64px; padding: 14px 16px;
+      border-radius: 10px; border: 1px solid var(--line); background: var(--card);
+      color: var(--soft); font-size: 14px; font-weight: 700; line-height: 1.35;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .chips span:hover { border-color: rgba(216, 167, 92, 0.4); transform: translateY(-2px); }
+    .chips.top span { border-color: rgba(216, 167, 92, 0.45); background: rgba(216, 167, 92, 0.08); color: var(--text); }
+
+    /* Writing: chain-of-dots visual. */
+    .chain {
+      margin: 24px 0 0; padding: 20px; border-radius: 16px; border: 1px solid var(--line); background: var(--card);
+      display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; color: var(--soft);
+    }
+    .chain i { font-style: normal; color: var(--accent); }
+    .chain-wrap { margin-top: 24px; }
+    .chain-wrap .chain { margin-top: 0; }
+    .chain-label { color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+    .chain a { color: var(--soft); border-bottom: 1px dashed var(--line); transition: color 0.2s ease; }
+    .chain a:hover { color: var(--accent); }
+    .chain b { color: var(--accent); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-right: 6px; }
+    .chain.is-live { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .chain.is-live i { padding-left: 2px; }
+
+    .briefing { margin-top: 28px; }
+    .briefing-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+    .briefing-meta { color: var(--muted); font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+    .briefing-meta::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--live); }
+    .briefing-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .brief-topic { padding: 20px; border-radius: 16px; border: 1px solid var(--line); background: var(--card); display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+    .brief-topic h3 { font-size: 12px; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+    .brief-item { display: block; padding: 10px 0; border-top: 1px solid var(--line); }
+    .brief-item:first-of-type { border-top: 0; padding-top: 2px; }
+    .brief-item strong { display: block; color: var(--text); font-size: 15px; font-weight: 700; line-height: 1.45; letter-spacing: -0.01em; transition: color 0.2s ease; }
+    .brief-item:hover strong { color: var(--accent); }
+    .brief-item span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; font-weight: 600; }
+    .brief-empty { color: var(--muted); font-size: 14px; }
+    .sk { display: block; height: 14px; border-radius: 6px; background: var(--card-strong); margin: 10px 0 4px; animation: skPulse 1.4s ease-in-out infinite; }
+    .sk + .sk { width: 70%; }
+    @keyframes skPulse { 50% { opacity: 0.45; } }
+    .briefing-note { margin-top: 12px; font-size: 12px; }
+    @media (max-width: 640px) { .briefing-grid { grid-template-columns: 1fr; } .chips { grid-template-columns: 1fr 1fr; } .chips span { min-height: 56px; font-size: 13px; } }
+
+    .featured {
+      margin-top: 24px; padding: 24px; border-radius: var(--radius-md); border: 1px solid var(--line);
+      background: var(--panel); box-shadow: var(--shadow);
+    }
+    .featured h3 { font-size: 1.35rem; line-height: 1.2; margin: 8px 0 10px; }
+
+    .text-link { color: var(--accent); font-weight: 800; font-size: 15px; border-bottom: 1px solid transparent; transition: border-color 0.2s ease; }
+    .text-link:hover { border-bottom-color: currentColor; }
+    .more { margin-top: 20px; }
+
+    .cta {
+      padding: clamp(28px, 4vw, 44px); border-radius: var(--radius-md); border: 1px solid var(--line);
+      background: var(--panel); box-shadow: var(--shadow); display: grid; gap: 18px;
+    }
+    .cta h2 { font-size: clamp(1.9rem, 3.2vw, 2.8rem); line-height: 1.02; }
+    .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .site-footer { border-top: 1px solid var(--line); padding: 28px 0 40px; }
+    .footer-bar { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; color: var(--muted); font-size: 14px; }
+    .footer-bar nav { display: flex; gap: 20px; }
+    .footer-bar a:hover { color: var(--text); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .now-dot { animation: none; }
+      * { transition: none !important; }
+    }
+
+    /* ---- Tablet / phone ---- */
+    @media (max-width: 980px) {
+      .nav-links { display: none; }
+      .home-link { display: inline-flex; }
+      .nav-cta { display: none; }
+      .btn { white-space: nowrap; }
+      .profile-layout { grid-template-columns: 1fr; padding-top: 40px; gap: 40px; }
+      .rail { position: static; }
+      .toc {
+        display: flex; gap: 6px; overflow-x: auto; max-width: 100%;
+        padding: 2px 0 6px; scrollbar-width: none;
+      }
+      .toc::-webkit-scrollbar { display: none; }
+      .toc a { white-space: nowrap; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); letter-spacing: 0.08em; font-size: 11px; }
+      .toc a::before { display: none; }
+      .toc a.active { border-color: rgba(216, 167, 92, 0.5); color: var(--text); }
+      .content { gap: 64px; }
+    }
+
+    @media (max-width: 640px) {
+      .entry, .threads li { grid-template-columns: 1fr; gap: 6px; }
+      .entry { padding: 20px 18px; gap: 10px; }
+      .entry-date { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; padding-top: 0; }
+      .entry-date small { margin-top: 0; }
+      .entry-date small::before { content: "· "; }
+      .entry h3 { font-size: 1.15rem; }
+      .cert-grid { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: 1fr 1fr; }
+      .stat-row .stat:last-child { grid-column: 1 / -1; }
+      .btn { padding: 12px 16px; }
+    }
+
+    @media (pointer: coarse) {
+      .toc a { min-height: 40px; display: inline-flex; align-items: center; }
+    }
+    /* Justified body copy (paragraphs and bullets only). */
+    @media (min-width: 600px) {
+      .about p,
+      .entry p,
+      .points li,
+      #writing > p,
+      .cta > p {
+        text-align: justify;
+        text-justify: inter-word;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+        hyphenate-limit-chars: 7 3 3;
+      }
+    }
+    strong, b, a { -webkit-hyphens: manual; hyphens: manual; }
+    /* ---- News page ---- */
+    .news-wrap { padding: 56px 0 96px; display: grid; gap: 40px; }
+    .news-hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 32px; align-items: end; }
+    .news-hero h1 { font-size: clamp(2.8rem, 6vw, 5rem); line-height: 0.92; letter-spacing: -0.065em; }
+    .news-hero h1 .serif { color: var(--accent); }
+    .news-hero p { font-size: 17px; max-width: 520px; }
+    .news-hero .eyebrow { display: block; margin-bottom: 14px; }
+    .edition-card {
+      padding: 20px 22px; border-radius: 16px; border: 1px solid var(--line); background: var(--card-strong);
+      display: grid; gap: 6px;
+    }
+    .edition-card strong { font-size: 1.35rem; letter-spacing: -0.03em; color: var(--text); }
+    .edition-card span { color: var(--muted); font-size: 13px; font-weight: 600; }
+    .news-wrap .briefing { margin-top: 0; }
+    .news-wrap .briefing-grid { gap: 16px; }
+    .news-wrap .brief-topic { padding: 24px; }
+    .news-wrap .brief-topic h3 { font-size: 13px; }
+    .news-wrap .brief-item strong { font-size: 16px; }
+    .news-wrap .chain-wrap { margin-top: 0; }
+    .news-foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+      padding-top: 24px; border-top: 1px solid var(--line); }
+    @media (max-width: 860px) { .news-hero { grid-template-columns: 1fr; align-items: start; } }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand" aria-label="Abhijeet Toshniwal home">Abhijeet Toshniwal</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#work">Work</a>
+        <a href="profile.html">Profile</a>
+        <a href="news.html" aria-current="page">News</a>
+        <a href="index.html#story">Story</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn home-link" href="index.html">← Home</a>
+        <a class="btn nav-cta" href="index.html#contact">Book a call</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container news-wrap">
+    <section class="news-hero" aria-labelledby="news-h">
+      <div>
+        <span class="eyebrow">News · refreshed daily at 11:00 AM IST</span>
+        <h1 id="news-h">Today’s <span class="serif">briefing.</span></h1>
+      </div>
+      <div>
+        <p>The day’s top headlines on the four things I write about most: markets, policy, oil and the economy.
+          A new edition lands every morning at 11, and the chain below shows how the lead stories connect.</p>
+      </div>
+    </section>
+
+    <div class="edition-card" aria-live="polite">
+      <strong id="briefingMeta">Loading today’s edition…</strong>
+      <span>Headlines from the 24 hours before 11:00 AM IST · links open the original publisher</span>
+    </div>
+
+    <div class="chain-wrap">
+      <div class="chain-label" id="chainLabel">How I connect the dots</div>
+      <div class="chain" id="chain" aria-label="Chain of effects">
+        <span>A tanker is hit near Hormuz</span><i>→</i><span>the rupee</span><i>→</i><span>inflation</span><i>→</i><span>what a factory pays for its inputs</span>
+      </div>
+    </div>
+
+    <div class="briefing" id="briefing">
+      <div class="briefing-grid" id="briefingGrid">
+        <div class="brief-topic is-loading"><h3>Markets</h3><span class="sk"></span><span class="sk"></span></div>
+        <div class="brief-topic is-loading"><h3>Policy</h3><span class="sk"></span><span class="sk"></span></div>
+        <div class="brief-topic is-loading"><h3>Oil</h3><span class="sk"></span><span class="sk"></span></div>
+        <div class="brief-topic is-loading"><h3>Economy</h3><span class="sk"></span><span class="sk"></span></div>
+      </div>
+      <p class="briefing-note">Curated automatically from Indian and global business publishers. Not investment advice.</p>
+    </div>
+
+    <div class="news-foot">
+      <p>Want my take on these, not just the headlines?</p>
+      <a class="btn" href="https://www.linkedin.com/in/abhijeet-toshniwal-aa3577292/recent-activity/all/" target="_blank"
+        rel="noreferrer">Read my daily posts on LinkedIn →</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bar">
+      <div>© <span id="year"></span> Abhijeet Toshniwal</div>
+      <nav aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="news.html">News</a>
+        <a href="https://www.linkedin.com/in/abhijeet-toshniwal-aa3577292/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var toggle = document.getElementById('themeToggle');
+      function paint() { toggle.textContent = root.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙'; }
+      paint();
+      toggle.addEventListener('click', function () {
+        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) { }
+        paint();
+      });
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+    })();
+
+    // Today's briefing: one edition per day, cut at 11:00 AM IST (see api/news.js).
+    (function () {
+      var grid = document.getElementById('briefingGrid');
+      var meta = document.getElementById('briefingMeta');
+      if (!grid) return;
+      function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : t; return d.innerHTML; }
+      function ago(ts) {
+        var h = Math.round((Date.now() - ts) / 3600000);
+        return h < 1 ? 'just now' : h < 24 ? h + 'h ago' : Math.round(h / 24) + 'd ago';
+      }
+      function fail() {
+        grid.innerHTML = '<div class="brief-topic"><p class="brief-empty">Today’s headlines couldn’t load right now. ' +
+          'My daily take is always on <a class="text-link" href="https://www.linkedin.com/in/abhijeet-toshniwal-aa3577292/recent-activity/all/" target="_blank" rel="noreferrer">LinkedIn</a>.</p></div>';
+      }
+      fetch('/api/news').then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (ed) {
+        if (!ed || !ed.topics || !ed.topics.some(function (t) { return t.items.length; })) return fail();
+        var d = new Date(ed.cutoff);
+        var day = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', timeZone: 'Asia/Kolkata' });
+        meta.textContent = (ed.stale ? 'Last edition · ' : 'Edition of ') + day + ', 11:00 AM IST';
+        grid.innerHTML = ed.topics.map(function (t) {
+          var items = t.items.length ? t.items.map(function (it) {
+            return '<a class="brief-item" href="' + esc(it.link) + '" target="_blank" rel="noreferrer noopener"><strong>' +
+              esc(it.title) + '</strong><span>' + esc(it.source || 'News') + ' · ' + ago(it.published) + '</span></a>';
+          }).join('') : '<p class="brief-empty">No major headlines in this edition.</p>';
+          return '<div class="brief-topic"><h3>' + esc(t.label) + '</h3>' + items + '</div>';
+        }).join('');
+        buildChain(ed);
+      }).catch(fail);
+      function short(t) { return t.length > 70 ? t.slice(0, 67).replace(/\s+\S*$/, '') + '…' : t; }
+      function buildChain(ed) {
+        var order = ['oil', 'markets', 'economy', 'policy'];
+        var links = order.map(function (id) {
+          var t = ed.topics.filter(function (x) { return x.id === id; })[0];
+          return t && t.items[0] ? { label: t.label, it: t.items[0] } : null;
+        }).filter(Boolean);
+        if (links.length < 2) return;
+        var chain = document.getElementById('chain');
+        chain.classList.add('is-live');
+        chain.innerHTML = links.map(function (l) {
+          return '<span><b>' + esc(l.label) + '</b><a href="' + esc(l.it.link) + '" target="_blank" rel="noreferrer noopener">' + esc(short(l.it.title)) + '</a></span>';
+        }).join('<i>↓</i>');
+        document.getElementById('chainLabel').textContent = 'Today’s chain · how the lead stories connect';
+      }
+    })();
+  </script>
+
+  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d9389966144748a5866dee89bfaa3f5b"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+
+</html>
