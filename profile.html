@@ -410,6 +410,21 @@
     @media (pointer: coarse) {
       .toc a { min-height: 40px; display: inline-flex; align-items: center; }
     }
+    /* Justified body copy (paragraphs and bullets only). */
+    @media (min-width: 600px) {
+      .about p,
+      .entry p,
+      .points li,
+      #writing > p,
+      .cta > p {
+        text-align: justify;
+        text-justify: inter-word;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+        hyphenate-limit-chars: 7 3 3;
+      }
+    }
+    strong, b, a { -webkit-hyphens: manual; hyphens: manual; }
   </style>
 </head>
 
