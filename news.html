@@ -426,7 +426,49 @@
     }
     strong, b, a { -webkit-hyphens: manual; hyphens: manual; }
     /* ---- News page ---- */
-    .news-wrap { padding: 56px 0 96px; display: grid; gap: 40px; }
+    .news-wrap { padding: 56px 0 64px; display: grid; gap: 40px; position: relative; z-index: 1; }
+    .band-headlines .news-wrap { padding: 64px 0 96px; }
+
+    /* Background art, borrowed from the homepage with the same treatment:
+       faint with a dark scrim in dark mode, stronger and unscrimmed in
+       light mode. Top band: the market-skyline hero art. Headlines band:
+       the "In my own words" art. */
+    .news-band { position: relative; overflow: hidden; }
+    .news-band + .news-band { border-top: 1px solid var(--line); }
+    .news-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      opacity: 0.22;
+      z-index: 0;
+      pointer-events: none;
+    }
+    :root[data-theme="light"] .news-band::before { opacity: 0.32; }
+    .band-top::before {
+      background-image: linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)), url('assets/backgrounds/hero-desktop.jpg');
+      background-image: linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+        image-set(url('assets/backgrounds/hero-desktop.webp') type('image/webp'), url('assets/backgrounds/hero-desktop.jpg') type('image/jpeg'));
+      background-position: 7% center;
+    }
+    :root[data-theme="light"] .band-top::before {
+      background-image: url('assets/backgrounds/hero-desktop.jpg');
+      background-image: image-set(url('assets/backgrounds/hero-desktop.webp') type('image/webp'), url('assets/backgrounds/hero-desktop.jpg') type('image/jpeg'));
+    }
+    .band-headlines::before {
+      background-image: linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)), url('assets/backgrounds/writing-desktop.jpg');
+      background-image: linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+        image-set(url('assets/backgrounds/writing-desktop.webp') type('image/webp'), url('assets/backgrounds/writing-desktop.jpg') type('image/jpeg'));
+      background-position: center;
+    }
+    :root[data-theme="light"] .band-headlines::before {
+      background-image: url('assets/backgrounds/writing-desktop.jpg');
+      background-image: image-set(url('assets/backgrounds/writing-desktop.webp') type('image/webp'), url('assets/backgrounds/writing-desktop.jpg') type('image/jpeg'));
+    }
+    /* Cards sit on the art, so give them the homepage's solid panel fill. */
+    .news-wrap .brief-topic, .news-wrap .chain, .edition-card { background: var(--panel); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+    .news-hero h1 { text-shadow: 0 2px 18px rgba(11, 13, 18, 0.35); }
+    :root[data-theme="light"] .news-hero h1 { text-shadow: 0 2px 14px rgba(245, 240, 234, 0.6); }
     .news-hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 32px; align-items: end; }
     .news-hero h1 { font-size: clamp(2.8rem, 6vw, 5rem); line-height: 0.92; letter-spacing: -0.065em; }
     .news-hero h1 .serif { color: var(--accent); }
@@ -470,7 +512,9 @@
     </div>
   </header>
 
-  <main class="container news-wrap">
+  <main>
+  <div class="news-band band-top">
+  <div class="container news-wrap">
     <section class="news-hero" aria-labelledby="news-h">
       <div>
         <span class="eyebrow">News · refreshed daily at 11:00 AM IST</span>
@@ -494,6 +538,11 @@
       </div>
     </div>
 
+  </div>
+  </div>
+
+  <div class="news-band band-headlines">
+  <div class="container news-wrap">
     <div class="briefing" id="briefing">
       <div class="briefing-grid" id="briefingGrid">
         <div class="brief-topic is-loading"><h3>Markets</h3><span class="sk"></span><span class="sk"></span></div>
@@ -509,6 +558,8 @@
       <a class="btn" href="https://www.linkedin.com/in/abhijeet-toshniwal-aa3577292/recent-activity/all/" target="_blank"
         rel="noreferrer">Read my daily posts on LinkedIn →</a>
     </div>
+  </div>
+  </div>
   </main>
 
   <footer class="site-footer">
