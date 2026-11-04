@@ -3211,6 +3211,58 @@
     .nt-edition::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #3ccf8e; }
     @media (max-width: 1100px) { .news-teaser { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     @media (max-width: 560px) { .news-teaser { grid-template-columns: 1fr; } .nt-card { min-height: 0; } }
+    /* Homepage Profile snapshot: a compact timeline that hands off to
+       profile.html. Background: the Capabilities art, same treatment. */
+    .section-profile { position: relative; overflow: hidden; }
+    .section-profile::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)), url('assets/backgrounds/capabilities-desktop.jpg');
+      background-image: linear-gradient(rgba(11, 13, 18, 0.55), rgba(11, 13, 18, 0.55)),
+        image-set(url('assets/backgrounds/capabilities-desktop.webp') type('image/webp'), url('assets/backgrounds/capabilities-desktop.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: center;
+      opacity: 0.22;
+      z-index: 0;
+      pointer-events: none;
+    }
+    :root[data-theme="light"] .section-profile::before {
+      background-image: url('assets/backgrounds/capabilities-desktop.jpg');
+      background-image: image-set(url('assets/backgrounds/capabilities-desktop.webp') type('image/webp'), url('assets/backgrounds/capabilities-desktop.jpg') type('image/jpeg'));
+      opacity: 0.32;
+    }
+    .section-profile .container { position: relative; z-index: 1; }
+    .pt-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+    .pt-timeline {
+      list-style: none; margin: 0; padding: 8px 26px; background: var(--panel); border: 1px solid var(--line);
+      border-radius: var(--radius-md); box-shadow: var(--shadow);
+    }
+    .pt-timeline li {
+      display: grid; grid-template-columns: 140px minmax(0, 1fr) auto; gap: 6px 20px; align-items: baseline;
+      padding: 18px 0; border-top: 1px solid var(--line);
+    }
+    .pt-timeline li:first-child { border-top: 0; }
+    .pt-date { color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+    .pt-role { color: var(--text); font-size: 16px; font-weight: 800; letter-spacing: -0.02em; }
+    .pt-org { color: var(--muted); font-size: 14px; font-weight: 600; text-align: right; }
+    .pt-timeline li.is-now .pt-org { color: var(--accent); }
+    .pt-timeline li.is-now .pt-date::after { content: " ●"; color: #3ccf8e; }
+    .pt-side { display: grid; gap: 18px; }
+    .pt-box {
+      display: grid; gap: 2px; padding: 22px; background: var(--panel); border: 1px solid var(--line);
+      border-radius: var(--radius-md); box-shadow: var(--shadow);
+    }
+    .pt-box strong { color: var(--text); font-size: 15px; margin-top: 10px; }
+    .pt-box > span:not(.pt-label) { color: var(--muted); font-size: 13px; }
+    .pt-label { color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+    .pt-cta { justify-self: start; }
+    @media (max-width: 980px) { .pt-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) {
+      .pt-timeline { padding: 4px 18px; }
+      .pt-timeline li { grid-template-columns: 1fr; gap: 2px; }
+      .pt-org { text-align: left; }
+    }
   </style>
 </head>
 
@@ -3246,7 +3298,7 @@
         <a href="#work">Work</a>
         <a href="#story">Story</a>
         <a href="#news">News</a>
-        <a href="profile.html">Profile</a>
+        <a href="#profile">Profile</a>
         <a href="#contact">Contact</a>
         <a href="#contact" class="btn btn-secondary nav-cta-mobile">Book a call</a>
       </nav>
@@ -3579,6 +3631,41 @@
         <div class="nt-foot">
           <span class="nt-edition" id="newsTeaserMeta">Today’s edition</span>
           <a class="btn btn-secondary" href="news.html">Open the full briefing →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section defer-bg section-profile" id="profile" aria-labelledby="profile-teaser-h">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Profile</div>
+            <h2 id="profile-teaser-h">The path <span class="accent-wine">so far.</span></h2>
+          </div>
+          <p>Five roles across manufacturing, banking and growth. The full profile has every role in detail, my
+            education, certifications and skills.</p>
+        </div>
+        <div class="pt-grid">
+          <ol class="pt-timeline" aria-label="Career timeline">
+            <li class="is-now"><span class="pt-date">Nov 2026 — Now</span><span class="pt-role">Marketing Director</span><span class="pt-org">Aurangabad Pipes Pvt. Ltd.</span></li>
+            <li class="is-now"><span class="pt-date">Sep 2026 — Now</span><span class="pt-role">Growth Consultant</span><span class="pt-org">EdgeX Academy</span></li>
+            <li><span class="pt-date">Apr — Sep 2026</span><span class="pt-role">Family Office Specialist</span><span class="pt-org">ICICI Bank, Kolkata</span></li>
+            <li><span class="pt-date">Apr — Jun 2025</span><span class="pt-role">Sales &amp; Marketing Intern</span><span class="pt-org">ICICI Bank, Mumbai</span></li>
+            <li><span class="pt-date">Jan — May 2024</span><span class="pt-role">R&amp;D Engineer (Intern)</span><span class="pt-org">Disha Auto Components</span></li>
+          </ol>
+          <div class="pt-side">
+            <div class="pt-box">
+              <span class="pt-label">Education</span>
+              <strong>PGDM, Marketing &amp; Finance</strong><span>Goa Institute of Management · 2026</span>
+              <strong>B.Tech, Mechanical Engineering</strong><span>VIT Vellore · 2024</span>
+            </div>
+            <div class="pt-box">
+              <span class="pt-label">Certifications</span>
+              <strong>NISM-Series-V-A</strong><span>National Institute of Securities Markets</span>
+              <strong>LinkedIn Marketing &amp; Content</strong><span>+ UPenn, Interactive Brokers</span>
+            </div>
+            <a class="btn btn-secondary pt-cta" href="profile.html">View full profile →</a>
+          </div>
         </div>
       </div>
     </section>
