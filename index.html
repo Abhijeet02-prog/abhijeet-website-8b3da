@@ -783,6 +783,8 @@
       height: 180px;
       background: radial-gradient(circle, rgba(216, 167, 92, 0.35), transparent 60%);
       pointer-events: none;
+      /* Removed with the background photos: it read as a stain on the card. */
+      display: none;
     }
 
     /* On mobile .hero-grid collapses to a single column (see the 980px
@@ -3112,8 +3114,31 @@
 
     .story-main .text-link { display: inline-block; margin-top: 18px; }
 
-    .nav-links a[aria-current="page"] { color: var(--text); }
-    .nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+    /* Scroll-spy: the active section's link is highlighted and a single
+       underline slides between links as the page scrolls. */
+    .nav-links a.active { color: var(--text); }
+    .nav-indicator {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 2px;
+      width: 0;
+      border-radius: 2px;
+      background: var(--accent);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.35s cubic-bezier(.2,.7,.2,1), width 0.35s cubic-bezier(.2,.7,.2,1), opacity 0.2s ease;
+    }
+    @media (min-width: 981px) {
+      .nav-links { position: relative; }
+      .nav-links.has-indicator a::after { display: none; }
+    }
+    @media (max-width: 980px) {
+      .nav-indicator { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .nav-indicator { transition: none; }
+    }
 
     .footer-links {
       display: flex;
@@ -3205,7 +3230,7 @@
       </a>
 
       <nav class="nav-links" id="mainNav" aria-label="Main navigation">
-        <a href="#top" aria-current="page">Home</a>
+        <a href="#top">Home</a>
         <a href="#work">Work</a>
         <a href="profile.html">Profile</a>
         <a href="#story">Story</a>
@@ -3914,29 +3939,6 @@
       setInterval(load, 60000);
     })();
 
-    // Nav: highlight the link for the section currently on screen.
-    (function () {
-      const links = Array.prototype.slice.call(document.querySelectorAll('#mainNav a[href^="#"]:not(.btn)'));
-      if (!links.length || !('IntersectionObserver' in window)) return;
-      const byId = {};
-      links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
-      const sections = Object.keys(byId).map(function (id) { return document.getElementById(id); }).filter(Boolean);
-      function setActive(id) {
-        links.forEach(function (a) {
-          const on = a === byId[id];
-          a.classList.toggle('is-active', on);
-          if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
-        });
-      }
-      const visible = {};
-      const io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { visible[e.target.id] = e.isIntersecting; });
-        const current = sections.filter(function (sec) { return visible[sec.id]; })[0];
-        setActive(current ? current.id : null);
-      }, { rootMargin: '-45% 0px -50% 0px' });
-      sections.forEach(function (sec) { io.observe(sec); });
-    })();
-
     // Contact form: send in the background and confirm on the page,
     // instead of redirecting to the form service. Without JavaScript (or
     // if fetch is unavailable) the form still posts the normal way.
@@ -4044,6 +4046,49 @@
       window.addEventListener('resize', align);
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(align);
       window.addEventListener('load', align);
+    })();
+    // Scroll-spy for the top menu: highlight the section in view and slide
+    // the underline to its link.
+    (function () {
+      var nav = document.getElementById('mainNav');
+      if (!nav) return;
+      var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]:not(.btn)'));
+      var items = links.map(function (a) {
+        var id = a.getAttribute('href').slice(1);
+        return { a: a, el: id === 'top' ? document.querySelector('.hero') : document.getElementById(id) };
+      }).filter(function (x) { return x.el; });
+      if (!items.length) return;
+      var bar = document.createElement('span');
+      bar.className = 'nav-indicator';
+      bar.setAttribute('aria-hidden', 'true');
+      nav.appendChild(bar);
+      nav.classList.add('has-indicator');
+      var current = null;
+      function place(a) {
+        if (!a) { bar.style.opacity = '0'; return; }
+        bar.style.width = a.offsetWidth + 'px';
+        bar.style.transform = 'translate(' + a.offsetLeft + 'px,' + (a.offsetTop + a.offsetHeight + 2) + 'px)';
+        bar.style.opacity = '1';
+      }
+      function update() {
+        var line = window.innerHeight * 0.35;
+        var active = items[0];
+        items.forEach(function (x) { if (x.el.getBoundingClientRect().top <= line) active = x; });
+        // At the very bottom of the page the last section wins.
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) active = items[items.length - 1];
+        if (active !== current) {
+          links.forEach(function (a) { a.classList.toggle('active', a === active.a); });
+          current = active;
+        }
+        place(current.a);
+      }
+      var ticking = false;
+      window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; update(); }); }
+      }, { passive: true });
+      window.addEventListener('resize', update);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(update);
+      update();
     })();
   </script>
 
