@@ -250,31 +250,35 @@
     .stat span { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
 
     /* Timeline list: date column + body. Hovering one entry dims the others. */
-    .timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+    .timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
     .entry {
-      display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 24px;
-      padding: 22px; margin: 0 -22px; border-radius: 16px; border: 1px solid transparent;
+      display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 28px;
+      padding: 24px 26px; border-radius: 16px; border: 1px solid var(--line); background: var(--card);
       transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
     }
     @media (hover: hover) {
-      .timeline:hover .entry { opacity: 0.55; }
-      .timeline:hover .entry:hover { opacity: 1; background: var(--hover); border-color: var(--line); }
+      .timeline:hover .entry { opacity: 0.6; }
+      .timeline:hover .entry:hover { opacity: 1; background: var(--hover); border-color: rgba(216, 167, 92, 0.35); }
     }
-    .entry-date { color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding-top: 4px; }
-    .entry-date small { display: block; margin-top: 4px; font-weight: 600; letter-spacing: 0.02em; text-transform: none; font-size: 12px; opacity: 0.85; }
-    .entry h3 { font-size: 1.2rem; line-height: 1.25; letter-spacing: -0.02em; }
-    .entry h3 .org { color: var(--accent); }
-    .entry .where { margin-top: 4px; font-size: 13px; color: var(--muted); font-weight: 600; }
-    .entry p { margin-top: 12px; font-size: 15px; line-height: 1.65; }
+    .entry-date {
+      color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+      line-height: 1.5; padding-top: 3px;
+    }
+    .entry-date small { display: block; margin-top: 2px; font-weight: 600; letter-spacing: 0.02em; text-transform: none; font-size: 13px; }
+    .entry h3 { font-size: 1.25rem; line-height: 1.3; letter-spacing: -0.02em; color: var(--text); }
+    .org-line { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 10px; margin-top: 4px; }
+    .entry .org { color: var(--accent); font-weight: 700; font-size: 15px; }
+    .entry .where { margin-top: 6px; font-size: 13px; color: var(--muted); font-weight: 600; }
+    .entry p { margin-top: 14px; font-size: 15px; line-height: 1.7; color: var(--soft); opacity: 0.88; max-width: 64ch; }
     .entry p + p { margin-top: 10px; }
 
     .tag-now {
-      display: inline-flex; vertical-align: middle; margin-left: 8px; padding: 3px 8px; border-radius: 999px;
+      display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 999px;
       border: 1px solid rgba(60, 207, 142, 0.4); color: var(--live);
-      font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+      font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.4;
     }
 
-    .tags { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tags { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
     .tags li {
       padding: 5px 12px; border-radius: 999px; background: rgba(216, 167, 92, 0.1); color: var(--accent);
       font-size: 12px; font-weight: 700;
@@ -364,7 +368,11 @@
 
     @media (max-width: 640px) {
       .entry, .threads li { grid-template-columns: 1fr; gap: 6px; }
-      .entry { padding: 18px 0; margin: 0; border-top: 1px solid var(--line); border-radius: 0; }
+      .entry { padding: 20px 18px; gap: 10px; }
+      .entry-date { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; padding-top: 0; }
+      .entry-date small { margin-top: 0; }
+      .entry-date small::before { content: "· "; }
+      .entry h3 { font-size: 1.15rem; }
       .cert-grid { grid-template-columns: 1fr; }
       .stat-row { grid-template-columns: 1fr 1fr; }
       .stat-row .stat:last-child { grid-column: 1 / -1; }
@@ -470,7 +478,8 @@
           <li class="entry">
             <div class="entry-date">Nov 2026 — Now<small>Full-time</small></div>
             <div>
-              <h3>Marketing Director · <span class="org">Aurangabad Pipes Pvt. Ltd.</span><span class="tag-now">Current</span></h3>
+              <h3>Marketing Director</h3>
+              <div class="org-line"><span class="org">Aurangabad Pipes Pvt. Ltd.</span><span class="tag-now">Current</span></div>
               <div class="where">Aurangabad, Maharashtra · On-site</div>
               <p>I look after marketing and new business. We make seamless steel tubes and pipes, hot-finished and
                 cold-drawn, in carbon and alloy steel. They end up in boilers, heat exchangers, process piping, cars
@@ -485,7 +494,8 @@
           <li class="entry">
             <div class="entry-date">Sep 2026 — Now<small>Part-time</small></div>
             <div>
-              <h3>Growth Consultant · <span class="org">EdgeX Academy</span><span class="tag-now">Current</span></h3>
+              <h3>Growth Consultant</h3>
+              <div class="org-line"><span class="org">EdgeX Academy</span><span class="tag-now">Current</span></div>
               <div class="where">Bengaluru (remote)</div>
               <p>EdgeX is a Bengaluru-based EdTech team started by ISB and IIM alumni that helps students and working
                 professionals get ready for business careers. Most of my work is figuring out where to grow next,
@@ -498,7 +508,8 @@
           <li class="entry">
             <div class="entry-date">Apr — Sep 2026<small>Full-time · 6 mos</small></div>
             <div>
-              <h3>Family Office Specialist · <span class="org">ICICI Bank</span></h3>
+              <h3>Family Office Specialist</h3>
+              <div class="org-line"><span class="org">ICICI Bank</span></div>
               <div class="where">Kolkata, West Bengal · Alipore Zone, 28 branches</div>
               <p>Looked after some of the city’s most prominent families and their banking, investment and wealth
                 needs. That meant a lot of listening, building trust over time, and working closely with branch
@@ -510,7 +521,8 @@
           <li class="entry">
             <div class="entry-date">Apr — Jun 2025<small>Internship · 3 mos</small></div>
             <div>
-              <h3>Sales &amp; Marketing Intern · <span class="org">ICICI Bank</span></h3>
+              <h3>Sales &amp; Marketing Intern</h3>
+              <div class="org-line"><span class="org">ICICI Bank</span></div>
               <div class="where">Mumbai, Maharashtra · On-site</div>
               <ul class="tags"><li>Marketing</li><li>Marketing Strategy</li></ul>
             </div>
@@ -518,7 +530,8 @@
           <li class="entry">
             <div class="entry-date">Jan — May 2024<small>Internship · 5 mos</small></div>
             <div>
-              <h3>Research &amp; Development Engineer · <span class="org">Disha Auto Components Pvt. Ltd.</span></h3>
+              <h3>Research &amp; Development Engineer</h3>
+              <div class="org-line"><span class="org">Disha Auto Components Pvt. Ltd.</span></div>
               <div class="where">Aurangabad, Maharashtra · On-site</div>
               <p>Watched parts go from a drawing to a machine to a customer, and learned how much care sits behind
                 every piece that ships.</p>
@@ -534,7 +547,7 @@
           <li class="entry">
             <div class="entry-date">2024 — 2026</div>
             <div>
-              <h3>Goa Institute of Management <span class="org">(GIM)</span></h3>
+              <h3>Goa Institute of Management (GIM)</h3>
               <div class="where">PGDM · Marketing &amp; Finance</div>
               <p>Led the official campus band across 15+ events.</p>
             </div>
@@ -564,15 +577,13 @@
       </section>
 
       <section id="certifications" aria-labelledby="cert-h">
-        <div class="block-head"><h2 id="cert-h">Licenses &amp; certifications</h2><span class="count">8</span></div>
+        <div class="block-head"><h2 id="cert-h">Licenses &amp; certifications</h2><span class="count">5</span></div>
         <div class="cert-grid">
           <article class="cert"><span class="issuer">LinkedIn</span><h3>Content and Creative Design Certification</h3><span class="when">Oct 2026 · valid to Oct 2028</span></article>
           <article class="cert"><span class="issuer">LinkedIn</span><h3>Marketing Measurement Certification</h3><span class="when">Oct 2026 · valid to Oct 2028</span></article>
           <article class="cert"><span class="issuer">NISM</span><h3>NISM-Series-V-A (Mutual Fund Distributors)</h3><span class="when">May 2026 · valid to May 2029</span></article>
           <article class="cert"><span class="issuer">Interactive Brokers</span><h3>Derivatives — Options &amp; Futures</h3><span class="when">Oct 2024</span></article>
           <article class="cert"><span class="issuer">University of Pennsylvania</span><h3>Introduction to Marketing</h3><span class="when">Sep 2024</span></article>
-          <article class="cert"><span class="issuer">LinkedIn</span><h3>Financial Accounting, Parts 1 &amp; 2</h3><span class="when">Aug 2024</span></article>
-          <article class="cert"><span class="issuer">LinkedIn</span><h3>Develop Your Skills as a Marketing Professional</h3><span class="when">Aug 2024</span></article>
         </div>
       </section>
 
