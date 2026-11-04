@@ -2942,34 +2942,6 @@
       }
     }
 
-    /* ---- Nov 2026: background photos removed (for now) --------------
-       Every section's ::before photo is switched off here in one place,
-       instead of deleting each rule, so the art can come back by deleting
-       this block. Text shadows that only existed to lift copy off the
-       photos go too. The body's soft radial gradients stay. */
-    .hero::before,
-    .defer-bg::before,
-    :root[data-theme="light"] .hero::before,
-    :root[data-theme="light"] .defer-bg::before {
-      background-image: none !important;
-      display: none !important;
-    }
-
-    .hero-copy h1,
-    .hero-copy .lead,
-    .section-head h2,
-    .section-head p,
-    .eyebrow,
-    :root[data-theme="light"] .hero-copy h1,
-    :root[data-theme="light"] .hero-copy .lead {
-      text-shadow: none !important;
-    }
-
-    /* Hairline between sections now that photos no longer separate them. */
-    main > .section {
-      border-top: 1px solid var(--line);
-    }
-
     /* "Now" status badge above the hero eyebrow. */
     .now-badge {
       display: flex;
