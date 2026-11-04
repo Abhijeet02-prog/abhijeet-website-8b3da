@@ -3263,6 +3263,18 @@
       .pt-timeline li { grid-template-columns: 1fr; gap: 2px; }
       .pt-org { text-align: left; }
     }
+    /* Homepage hero background (Nov 2026): pipes, flute and tennis ball.
+       The subject sits on the right of the image and the left is open dark
+       space, so it is anchored right to keep that space behind the headline. */
+    .hero::before,
+    :root[data-theme="light"] .hero::before {
+      background-image: url('assets/backgrounds/home-hero.jpg');
+      background-image: image-set(url('assets/backgrounds/home-hero.webp') type('image/webp'), url('assets/backgrounds/home-hero.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right center;
+    }
+    .hero::before { opacity: 0.85; }
+    :root[data-theme="light"] .hero::before { opacity: 0.25; }
   </style>
 </head>
 
