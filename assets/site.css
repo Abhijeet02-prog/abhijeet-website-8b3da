@@ -404,3 +404,12 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px
 .timeline a { min-width: 44px; }
 html:not(.js) .lens-tabs { display: none; }
 .car dd ul.chips { padding-left: 0; margin-top: 2px; }
+/* Post rows: date and LinkedIn link on the left, article link on the right */
+.posts li.post-row { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 6px 28px; padding: 22px 0; }
+.post-row .post-meta { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.post-row .li-link { font-size: .82rem; font-weight: 600; color: var(--accent-ink); display: inline-block; min-height: 24px; padding-block: 3px; }
+.posts li.post-row a.post { display: block; padding: 0; }
+@media (max-width: 640px) {
+  .posts li.post-row { grid-template-columns: 1fr; gap: 4px; }
+  .post-row .post-meta { flex-direction: row; align-items: baseline; gap: 14px; }
+}
