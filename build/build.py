@@ -40,7 +40,7 @@ def head(title, desc, path, og, ld, og_type="website", extra=""):
 <script>{THEME_JS}</script>
 <link rel="preload" href="/assets/inter-400.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="/assets/lora-var.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=2">
+<link rel="stylesheet" href="/assets/site.css?v=3">
 <script src="/assets/site.js?v=2" defer></script>
 <meta name="theme-color" content="#f6f3ed" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#111316" media="(prefers-color-scheme: dark)">
@@ -155,8 +155,9 @@ def post_row(a, external=False):
     if external:
         return (f'<li><a class="post" href="{li_post(a["urn"])}" rel="noopener" data-track="insight_linkedin"><time datetime="{a["date"]}">{short_date(a["date"])}</time>'
                 f'<div><span class="tag">{a["topic"]}</span><span class="ext">On LinkedIn ↗</span><h3>{E(a["title"])}</h3><p>{E(a["summary"])}</p></div></a></li>')
-    return (f'<li><a class="post" href="/insights/{a["slug"]}" data-track="insight_open"><time datetime="{a["date"]}">{short_date(a["date"])}</time>'
-            f'<div><span class="tag">{a["topic"]}</span><h3>{E(a["title"])}</h3><p>{E(a["summary"])}</p></div></a></li>')
+    return (f'<li class="post-row"><div class="post-meta"><time datetime="{a["date"]}">{short_date(a["date"])}</time>'
+            f'<a class="li-link" href="{li_post(a["urn"])}" rel="noopener" data-track="insight_linkedin">LinkedIn \u2197<span class="visually-hidden">: the original post, {E(a["title"])}</span></a></div>'
+            f'<a class="post" href="/insights/{a["slug"]}" data-track="insight_open"><span class="tag">{a["topic"]}</span><h3>{E(a["title"])}</h3><p>{E(a["summary"])}</p></a></li>')
 
 def media_block(all_three=False):
     vids = [("keyboard", "Keyboard, playing at home"), ("flute", "Flute, on stage"), ("the-artistic-room", "The artistic room: guitar and keys")]
@@ -250,8 +251,8 @@ def page_home():
   <div class="frame section-grid">
     <p class="section-label">Latest writing</p>
     <div class="section-body">
-      <h2 id="h-latest">Analysis, in plain words</h2>
-      <p class="section-intro">I write most days about oil, gold, IPOs, the RBI, banking, crypto and geopolitics, and now and then about sport.</p>
+      <h2 id="h-latest">My take on the news</h2>
+      <p class="section-intro">News moves fast. Most days I trace what it means for markets, money and business: oil, gold, IPOs, the RBI, banking, crypto, geopolitics and, now and then, sport. Each piece first appeared on LinkedIn.</p>
       <ul class="posts">{latest}</ul>
       <p style="margin-top:24px"><a class="text-link arrow" href="/insights">All insights</a> <span class="note">&nbsp;·&nbsp; A separate daily briefing of other publishers' headlines refreshes at 11:00 AM IST.</span></p>
     </div>
@@ -495,16 +496,16 @@ def page_insights():
 <div class="frame page-head">
   <p class="eyebrow">Insights</p>
   <h1>Markets, economy and business, traced end to end</h1>
-  <p class="section-intro">My own analysis comes first. Below it, kept separate, is an automatic briefing of other publishers' headlines and a delayed market snapshot.</p>
-  <ul class="anchor-nav" aria-label="On this page"><li><a href="#analysis">My analysis</a></li><li><a href="#more">More on LinkedIn</a></li><li><a href="#briefing">Daily briefing</a></li><li><a href="#markets">Market snapshot</a></li></ul>
+  <p class="section-intro">My reading of the news comes first. Below it, kept separate, is an automatic briefing of other publishers' headlines and a delayed market snapshot.</p>
+  <ul class="anchor-nav" aria-label="On this page"><li><a href="#analysis">My take on the news</a></li><li><a href="#more">More on LinkedIn</a></li><li><a href="#briefing">Daily briefing</a></li><li><a href="#markets">Market snapshot</a></li></ul>
 </div>
 
 <section class="section" id="analysis" aria-labelledby="h-analysis" style="border-top:0;padding-top:8px">
   <div class="frame section-grid">
-    <p class="section-label">My analysis</p>
+    <p class="section-label">My take</p>
     <div class="section-body">
-      <h2 id="h-analysis">Original analysis</h2>
-      <p class="section-intro">Written by me and first published on LinkedIn. Views are personal and are not investment advice.</p>
+      <h2 id="h-analysis">My take on the news</h2>
+      <p class="section-intro">News moves fast. I trace what it means for markets, money and business. Each piece first appeared on LinkedIn, and the reporting it builds on is credited at the end. Views are personal and are not investment advice.</p>
       <ul class="posts">{own}</ul>
     </div>
   </div>
@@ -530,7 +531,7 @@ def page_insights():
       <div class="panel" aria-live="polite">
         <div class="panel-head"><h3 id="briefingMeta">Loading today's edition</h3><span class="status" id="briefingStatus">Loading</span></div>
         <div class="brief-grid" id="briefingGrid">{"".join(sk.format(t=t) for t in ["Markets", "Policy", "Oil", "Economy"])}</div>
-        <noscript><p class="note">The briefing needs JavaScript. My own analysis above does not.</p></noscript>
+        <noscript><p class="note">The briefing needs JavaScript. My posts above do not.</p></noscript>
       </div>
     </div>
   </div>
@@ -595,7 +596,7 @@ def page_article(i, a):
   <header class="article-head">
     <p class="eyebrow"><a href="/insights" style="text-decoration:none">Insights</a> · {E(a["topic"])}</p>
     <h1 id="a-title">{E(a["title"])}</h1>
-    <p class="byline"><span>By <a href="/about">{NAME}</a></span><span>First published on LinkedIn, <time datetime="{iso}">{fmt_date(a["date"])}</time></span></p>
+    <p class="byline"><span>By <a href="/about">{NAME}</a></span><span>First published <a href="{li_post(a["urn"])}" rel="noopener" data-track="insight_linkedin">on LinkedIn</a>, <time datetime="{iso}">{fmt_date(a["date"])}</time></span></p>
   </header>
   <div class="prose">
     {render_body(a["body"])}
