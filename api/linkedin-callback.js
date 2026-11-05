@@ -25,8 +25,11 @@ export default async function handler(req, res) {
         const tokenData = await tokenRes.json();
         if (!tokenRes.ok || !tokenData.access_token) return page(res, `<h1>Token exchange failed</h1><pre>${escapeHtml(JSON.stringify(tokenData, null, 2))}</pre>`, 500);
         const profileData = await (await fetch("https://api.linkedin.com/v2/userinfo", { headers: { Authorization: `Bearer ${tokenData.access_token}` } })).json();
-        await getRedis().set("linkedin-token:primary", { access_token: tokenData.access_token, refresh_token: tokenData.refresh_token || null, expires_in: tokenData.expires_in || 3600, obtained_at: Date.now(), profile: profileData || null });
-        return page(res, "<h1>LinkedIn connected</h1><p>The account is ready to post.</p>", 200);
+        const forStats = url.searchParams.get("state") === "stats";
+        await getRedis().set(forStats ? "linkedin-token:stats" : "linkedin-token:primary", { access_token: tokenData.access_token, refresh_token: tokenData.refresh_token || null, expires_in: tokenData.expires_in || 3600, obtained_at: Date.now(), profile: profileData || null });
+        return page(res, forStats
+            ? "<h1>LinkedIn analytics connected</h1><p>Followers and impressions will now update on the website every day at 11:00 AM IST.</p>"
+            : "<h1>LinkedIn connected</h1><p>The account is ready to post.</p>", 200);
     } catch (err) { return page(res, `<h1>Unexpected error</h1><pre>${escapeHtml(String(err))}</pre>`, 500); }
 }
 function page(res, body, status) { res.status(status).setHeader("Content-Type", "text/html").send(`<!doctype html><html><body style="font-family:sans-serif;max-width:560px;margin:60px auto;padding:0 20px">${body}</body></html>`); }
