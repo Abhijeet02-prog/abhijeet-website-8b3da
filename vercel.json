@@ -2,22 +2,73 @@
     "$schema": "https://openapi.vercel.sh/vercel.json",
     "cleanUrls": true,
     "trailingSlash": false,
+    "functions": {
+        "api/linkedin-stats.js": {
+            "includeFiles": "assets/linkedin-stats.json"
+        }
+    },
     "redirects": [
-        { "source": "/index", "destination": "/", "permanent": true },
-        { "source": "/profile", "destination": "/about", "permanent": true },
-        { "source": "/news", "destination": "/insights#briefing", "permanent": true }
+        {
+            "source": "/index",
+            "destination": "/",
+            "permanent": true
+        },
+        {
+            "source": "/profile",
+            "destination": "/about",
+            "permanent": true
+        },
+        {
+            "source": "/news",
+            "destination": "/insights#briefing",
+            "permanent": true
+        }
     ],
     "headers": [
-        { "source": "/assets/(.*)\\.(woff|webp|png|svg|jpg|mp4)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
-        { "source": "/assets/(.*)\\.(css|js)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }] },
-        { "source": "/(.*)", "headers": [
-            { "key": "X-Content-Type-Options", "value": "nosniff" },
-            { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-            { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
-        ] }
+        {
+            "source": "/assets/(.*)\\.(woff|webp|png|svg|jpg|mp4)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                }
+            ]
+        },
+        {
+            "source": "/assets/(.*)\\.(css|js)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=604800"
+                }
+            ]
+        },
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "X-Content-Type-Options",
+                    "value": "nosniff"
+                },
+                {
+                    "key": "Referrer-Policy",
+                    "value": "strict-origin-when-cross-origin"
+                },
+                {
+                    "key": "Permissions-Policy",
+                    "value": "camera=(), microphone=(), geolocation=()"
+                }
+            ]
+        }
     ],
     "crons": [
-        { "path": "/api/instagram-refresh-token", "schedule": "0 6 * * *" },
-        { "path": "/api/news", "schedule": "31 5 * * *" }
+        {
+            "path": "/api/instagram-refresh-token",
+            "schedule": "0 6 * * *"
+        },
+        {
+            "path": "/api/news",
+            "schedule": "31 5 * * *"
+        }
     ]
 }
