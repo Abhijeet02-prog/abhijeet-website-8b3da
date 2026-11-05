@@ -403,3 +403,4 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px
 .text-link, .timeline a, .contact-alt a, .byline a, .article-head .eyebrow a, .facts a { display: inline-block; padding-block: 3px; min-height: 24px; }
 .timeline a { min-width: 44px; }
 html:not(.js) .lens-tabs { display: none; }
+.car dd ul.chips { padding-left: 0; margin-top: 2px; }
