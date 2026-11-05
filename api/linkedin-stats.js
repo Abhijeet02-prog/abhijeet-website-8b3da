@@ -10,13 +10,15 @@
 //     and frozen until the next 11:00.
 //  2. assets/linkedin-stats.json in this repo: the figures as shown on the
 //     LinkedIn profile (follower count, and the impressions figure from the
-//     headline). Updated by the daily 11:00 AM IST job that reads the profile.
+//     headline). Updated by hand, about once a week.
 //  3. Built-in defaults, so the strip is never empty.
 
 import { Redis } from "@upstash/redis";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 
 const IST_OFFSET_MS = 5.5 * 60 * 60 * 1000;
-const DEFAULTS = { followers: 3700, followersLabel: "3,700+", impressions: 250000, impressionsLabel: "250k+" };
+const DEFAULTS = { followers: 3700, followersLabel: "3,700+", impressions: 260000, impressionsLabel: "260k+" };
 
 function getRedis() {
     const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
@@ -73,6 +75,11 @@ async function fromApi(redis) {
 }
 
 async function fromFile(req) {
+    // Read the bundled file first; fetching our own URL fails on protected preview deployments.
+    try {
+        const raw = readFileSync(join(process.cwd(), "assets", "linkedin-stats.json"), "utf8");
+        return JSON.parse(raw);
+    } catch { /* fall back to HTTP */ }
     try {
         const host = req.headers["x-forwarded-host"] || req.headers.host;
         const r = await fetch(`https://${host}/assets/linkedin-stats.json`, { cache: "no-store" });
