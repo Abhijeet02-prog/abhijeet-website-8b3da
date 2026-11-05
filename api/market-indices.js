@@ -97,7 +97,10 @@ async function fetchQuote({ symbol, name }) {
             change = price - prevClose;
         }
 
-        const result = { symbol, name, price, change, changePercent };
+        // When the price was set (exchange time), so the site can show how
+        // fresh it is instead of implying "live".
+        const marketTime = meta.regularMarketTime ? meta.regularMarketTime * 1000 : null;
+        const result = { symbol, name, price, change, changePercent, marketTime };
 
         // Best-effort cache write. Never let a Redis problem fail the
         // actual request — worst case we just don't have a fallback ready
@@ -112,7 +115,7 @@ async function fetchQuote({ symbol, name }) {
         // even when Yahoo itself is briefly unreachable, not just when the
         // market is closed.
         const cached = await readLastGood(symbol);
-        if (cached) return { ...cached, name };
+        if (cached) return { ...cached, name, cached: true };
         return { symbol, name, price: null, change: null, changePercent: null, error: String(err) };
     }
 }
