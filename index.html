@@ -3536,8 +3536,8 @@
             <a class="btn btn-secondary" href="profile.html">View full profile →</a>
           </div>
           <ul class="proof-strip" aria-label="Highlights">
-            <li><strong>3,700+</strong><span>LinkedIn followers</span></li>
-            <li><strong>250k+</strong><span>Post impressions</span></li>
+            <li><strong id="statFollowers">3,700+</strong><span>LinkedIn followers</span></li>
+            <li><strong id="statImpressions">250k+</strong><span>Post impressions</span></li>
             <li><strong>Daily</strong><span>Writing on markets &amp; economy</span></li>
           </ul>
         </div>
@@ -4423,6 +4423,17 @@
         var day = new Date(ed.cutoff).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', timeZone: 'Asia/Kolkata' });
         meta.textContent = (ed.stale ? 'Last edition · ' : 'Edition of ') + day + ', 11:00 AM IST';
       }).catch(fail);
+    })();
+    // LinkedIn followers and impressions (refreshed daily at 11:00 AM IST;
+    // see api/linkedin-stats.js). The numbers in the HTML are the fallback.
+    (function () {
+      var f = document.getElementById('statFollowers');
+      var i = document.getElementById('statImpressions');
+      if (!f || !i) return;
+      fetch('/api/linkedin-stats').then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (s) {
+        if (s && s.followersLabel) f.textContent = s.followersLabel;
+        if (s && s.impressionsLabel) i.textContent = s.impressionsLabel;
+      }).catch(function () {});
     })();
   </script>
 
