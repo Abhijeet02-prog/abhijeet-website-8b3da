@@ -40,7 +40,7 @@ def head(title, desc, path, og, ld, og_type="website", extra=""):
 <script>{THEME_JS}</script>
 <link rel="preload" href="/assets/inter-400.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="/assets/lora-var.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=4">
+<link rel="stylesheet" href="/assets/site.css?v=5">
 <script src="/assets/site.js?v=2" defer></script>
 <meta name="theme-color" content="#f6f3ed" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#111316" media="(prefers-color-scheme: dark)">
@@ -63,7 +63,7 @@ def head(title, desc, path, og, ld, og_type="website", extra=""):
 <a class="skip-link" href="#main">Skip to content</a>
 """
 
-NAV = [("/work", "Work"), ("/about", "About"), ("/insights", "Insights"), ("/contact", "Contact")]
+NAV = [("/", "Home"), ("/work", "Work"), ("/about", "About"), ("/insights", "Insights"), ("/contact", "Contact")]
 SUN = '<svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6" stroke-linecap="round"/></svg>'
 MOON = '<svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" stroke-linejoin="round"/></svg>'
 MENU = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg>'
@@ -146,8 +146,8 @@ def evidence_items():
         ("5", "New-to-bank families brought in, typically with investable surplus above ₹100 Cr.", "ICICI Bank, Alipore Zone", "/work#icici-bank"),
         ("100", "MBA institutions mapped into a prioritised campus pipeline for EdgeX Academy.", "A pipeline, not signed partnerships", "/work#edgex-academy"),
         ("12% → 7%", "Supply-chain cost targeted by a rebuilt cost model for Reliance ResQ.", "A project target, not a realised result", "/work#reliance-resq"),
-        ("8 hrs → 10 min", "Paint curing time targeted by a conveyor concept I designed at Disha Auto Components.", "A design target", "/work#disha-auto"),
-        ("42+", "Import-export clients analysed for churn at ICICI Bank, with three fixes proposed.", "Internship, 2025", "/work#icici-internship"),
+        ("28", "Branches in ICICI Bank's Alipore Zone for which I was the Family Office point of contact.", "ICICI Bank, Kolkata, 2026", "/work#icici-bank"),
+        ("260k+", "Impressions on my LinkedIn posts about markets, the economy and business.", "LinkedIn, November 2026", "/insights"),
     ]
     return "".join(f'<div><b>{a}</b><p>{b} <a href="{l}" class="visually-hidden">Details: {E(b)}</a></p><span class="qual">{q}</span></div>' for a, b, q, l in items)
 
@@ -197,7 +197,7 @@ def page_home():
     </div>
     <aside class="hero-aside" aria-label="Career path and reach">
       <ol class="journey">
-        <li><span class="n">01</span><div><b>Engineer</b><span>Mechanical engineering, VIT · R&amp;D on a shop floor</span></div></li>
+        <li><span class="n">01</span><div><b>Engineer</b><span>Mechanical engineering, VIT Vellore</span></div></li>
         <li><span class="n">02</span><div><b>Banker</b><span>Family office, ICICI Bank · 10 UHNW families</span></div></li>
         <li class="now"><span class="n">03</span><div><b>Marketer</b><span>Aurangabad Pipes · EdgeX Academy</span></div></li>
       </ol>
@@ -329,7 +329,7 @@ def page_work():
         {"@type": "WebPage", "@id": SITE + "/work#webpage", "url": SITE + "/work", "name": f"Work | {NAME}", "about": {"@id": SITE + "/#person"}, "isPartOf": {"@id": SITE + "/#website"}},
         {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": SITE + "/"}, {"@type": "ListItem", "position": 2, "name": "Work", "item": SITE + "/work"}]}]}
     h = head(f"Work | {NAME}", "Selected work by Abhijeet Toshniwal, organised by problem: industrial marketing at Aurangabad Pipes, campus growth at EdgeX Academy, family office work at ICICI Bank, and engineering and supply-chain projects.", "/work", "og-work.png", ld)
-    jump = "".join(f'<li><a href="#{r["id"]}">{E(r["org"])}{" (intern)" if r["id"]=="icici-internship" else ""}</a></li>' for r in ROLES)
+    jump = "".join(f'<li><a href="#{r["id"]}">{E(r["org"])}</a></li>' for r in ROLES)
     caps = [
         ("B2B and industrial marketing", "Positioning, brand and outreach for engineered products sold to OEMs, EPC projects and plants."),
         ("Growth strategy", "Choosing the market, the channel and the first move, then turning it into a plan a team can repeat."),
@@ -347,7 +347,7 @@ def page_work():
 <div class="frame page-head">
   <p class="eyebrow">Work</p>
   <h1>Selected work, organised by the problem it solved</h1>
-  <p class="section-intro">Each entry separates what I did from what was a target, a proposal or a pipeline. Two roles are current; the rest are earlier jobs, internships and projects.</p>
+  <p class="section-intro">Each entry separates what I did from what was a target, a proposal or a pipeline. Two roles are current; the others are an earlier job and a project.</p>
   <ul class="anchor-nav" aria-label="Jump to">{jump}</ul>
 </div>
 <div class="frame">{"".join(role_entry(r) for r in ROLES)}</div>
@@ -399,8 +399,8 @@ def page_about():
     <div class="section-body prose">
       <h2 id="h-story" class="visually-hidden">My story</h2>
       <p>I'm an engineer who became a banker who became a marketer. Somewhere along the way I realised I'm most useful when I'm joining dots that other people treat as separate.</p>
-      <p>I grew up in a business environment, close to manufacturing companies such as Disha Auto Components and Aurangabad Pipes. That is where I first saw how a shop floor, a balance sheet and long-standing customer relationships hold a company together, and where I did my first real work as an engineer.</p>
-      <p>I studied mechanical engineering at VIT Vellore, then marketing and finance at Goa Institute of Management. As an R&amp;D intern at Disha Auto Components I watched parts go from a drawing to a machine to a customer. Then came ICICI Bank: a sales and marketing internship in Mumbai, and later Kolkata, as a Family Office Specialist across 28 branches in the Alipore Zone, looking after the money of families who don't hand out trust easily.</p>
+      <p>I grew up in a business environment, close to manufacturing companies such as Disha Auto Components and Aurangabad Pipes. That is where I first saw how a shop floor, a balance sheet and long-standing customer relationships hold a company together.</p>
+      <p>I studied mechanical engineering at VIT Vellore, then marketing and finance at Goa Institute of Management. Then came ICICI Bank in Kolkata, as a Family Office Specialist across 28 branches in the Alipore Zone, looking after the money of families who don't hand out trust easily.</p>
       <p>Today I'm the Marketing Director at Aurangabad Pipes Pvt. Ltd. We make seamless steel tubes and pipes, hot-finished and cold-drawn, in carbon and alloy steel. My job is easy to say and hard to do: get more people in India and abroad to know us, trust us and buy from us. On the side, I help EdgeX Academy grow, mostly by building campus partnerships.</p>
       <p>Most days I write about oil, gold, IPOs, the RBI, banking, crypto, geopolitics and, now and then, sport. People ask why I don't pick a lane. I don't see separate lanes. When a tanker gets hit near Hormuz, it shows up in the rupee, then in inflation, then in what a factory pays for its inputs. I like tracing that chain and putting it in plain words.</p>
       <p>Different cities, different rooms, one lesson: people buy from people they trust.</p>
