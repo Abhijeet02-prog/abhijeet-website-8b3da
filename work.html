@@ -9,7 +9,7 @@
 <script>(function(){var d=document.documentElement;d.classList.add('js');var t=null;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}d.setAttribute('data-theme',t)})();</script>
 <link rel="preload" href="/assets/inter-400.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="/assets/lora-var.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=3">
+<link rel="stylesheet" href="/assets/site.css?v=5">
 <script src="/assets/site.js?v=2" defer></script>
 <meta name="theme-color" content="#f6f3ed" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#111316" media="(prefers-color-scheme: dark)">
@@ -34,7 +34,7 @@
   <div class="frame">
     <a class="wordmark" href="/" aria-label="Abhijeet Toshniwal, home">Abhijeet Toshniwal<span>.</span></a>
     <nav class="nav" aria-label="Main">
-      <ul class="nav-list" id="navList"><li><a href="/work" aria-current="page">Work</a></li><li><a href="/about">About</a></li><li><a href="/insights">Insights</a></li><li><a href="/contact">Contact</a></li></ul>
+      <ul class="nav-list" id="navList"><li><a href="/">Home</a></li><li><a href="/work" aria-current="page">Work</a></li><li><a href="/about">About</a></li><li><a href="/insights">Insights</a></li><li><a href="/contact">Contact</a></li></ul>
       <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" aria-pressed="false"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6" stroke-linecap="round"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" stroke-linejoin="round"/></svg></button>
       <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navList"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg></button>
     </nav>
@@ -45,8 +45,8 @@
 <div class="frame page-head">
   <p class="eyebrow">Work</p>
   <h1>Selected work, organised by the problem it solved</h1>
-  <p class="section-intro">Each entry separates what I did from what was a target, a proposal or a pipeline. Two roles are current; the rest are earlier jobs, internships and projects.</p>
-  <ul class="anchor-nav" aria-label="Jump to"><li><a href="#aurangabad-pipes">Aurangabad Pipes Pvt. Ltd.</a></li><li><a href="#edgex-academy">EdgeX Academy</a></li><li><a href="#icici-bank">ICICI Bank</a></li><li><a href="#icici-internship">ICICI Bank (intern)</a></li><li><a href="#reliance-resq">Reliance Retail</a></li><li><a href="#disha-auto">Disha Auto Components Pvt. Ltd.</a></li></ul>
+  <p class="section-intro">Each entry separates what I did from what was a target, a proposal or a pipeline. Two roles are current; the others are an earlier job and a project.</p>
+  <ul class="anchor-nav" aria-label="Jump to"><li><a href="#aurangabad-pipes">Aurangabad Pipes Pvt. Ltd.</a></li><li><a href="#edgex-academy">EdgeX Academy</a></li><li><a href="#icici-bank">ICICI Bank</a></li><li><a href="#reliance-resq">Reliance Retail</a></li></ul>
 </div>
 <div class="frame"><article class="entry" id="aurangabad-pipes" aria-labelledby="t-aurangabad-pipes">
   <div class="entry-head">
@@ -87,19 +87,6 @@
     <dt>Skills</dt><dd><ul class="chips"><li>Wealth management</li><li>Relationship management</li><li>Finance</li></ul></dd>
     <dt>Next step</dt><dd><a class="text-link" href="/contact?topic=consulting" data-track="cta_route_consulting">Discuss a growth or money question</a></dd>
   </dl>
-</article><article class="entry" id="icici-internship" aria-labelledby="t-icici-internship">
-  <div class="entry-head">
-    <h2 id="t-icici-internship">Sales and Marketing Intern</h2>
-    <p class="entry-meta"><span class="entry-org">ICICI Bank</span> · Apr 2025 to Jun 2025 · Internship · On-site, Mumbai</p>
-  </div>
-  <dl class="car">
-    <dt>Problem</dt><dd>Understand why import-export clients drift away, and what would keep them.</dd>
-    <dt>Context</dt><dd><p>A summer internship with ICICI Bank in Mumbai, working with import-export clients.</p></dd>
-    <dt>My role</dt><dd><ul><li>Analysed churn across 42+ import-export clients.</li><li>Proposed three fixes to reduce regulatory pendency.</li></ul></dd>
-    <dt>Result or target</dt><dd>Three proposed fixes. <span class="qual">Proposals, not implemented changes</span></dd>
-    <dt>Skills</dt><dd><ul class="chips"><li>Marketing</li><li>Marketing strategy</li></ul></dd>
-    
-  </dl>
 </article><article class="entry" id="reliance-resq" aria-labelledby="t-reliance-resq">
   <div class="entry-head">
     <h2 id="t-reliance-resq">Live project, Reliance ResQ</h2>
@@ -111,19 +98,6 @@
     <dt>My role</dt><dd><ul><li>Rebuilt the supply-chain cost model around distribution-centre monetisation and centralised just-in-time inventory.</li></ul></dd>
     <dt>Result or target</dt><dd>A cost model targeting a reduction in supply-chain cost from 12% to 7%. <span class="qual">A modelled target, not a realised result</span></dd>
     <dt>Skills</dt><dd><ul class="chips"><li>Supply chain</li><li>Cost modelling</li></ul></dd>
-    
-  </dl>
-</article><article class="entry" id="disha-auto" aria-labelledby="t-disha-auto">
-  <div class="entry-head">
-    <h2 id="t-disha-auto">Research and Development Engineer (Intern)</h2>
-    <p class="entry-meta"><span class="entry-org">Disha Auto Components Pvt. Ltd.</span> · Jan 2024 to May 2024 · Internship · On-site, Aurangabad</p>
-  </div>
-  <dl class="car">
-    <dt>Problem</dt><dd>Speed up a slow step on the production line.</dd>
-    <dt>Context</dt><dd><p>Watched parts go from a drawing to a machine to a customer, and learned how much care sits behind every piece that ships.</p></dd>
-    <dt>My role</dt><dd><ul><li>Designed a conveyor concept to cut paint curing time from 8 hours to 10 minutes.</li><li>Automated stencilling on the production line.</li></ul></dd>
-    <dt>Result or target</dt><dd>A conveyor concept aimed at cutting paint curing from 8 hours to 10 minutes; automated stencilling. <span class="qual">The curing figure is a design target</span></dd>
-    <dt>Skills</dt><dd><ul class="chips"><li>Research and development</li><li>CAD/CAM</li></ul></dd>
     
   </dl>
 </article></div>
