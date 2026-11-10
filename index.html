@@ -3513,6 +3513,30 @@
       .hero-portrait { width: 76px; height: 76px; }
       .hero-person-text strong { font-size: 1.1rem; }
     }
+      /* Oval portrait, top-right of the card (Nov 2026) */
+    .hero-person { flex-direction: row-reverse; justify-content: space-between; align-items: center; margin: 0 4px 18px 4px; }
+    .hero-portrait { width: 112px; height: 140px; border-radius: 50%; object-position: 50% 28%; }
+    .hero-person-text strong { font-size: 1.4rem; }
+    @media (max-width: 640px) { .hero-portrait { width: 88px; height: 110px; } }
+      /* Readable small labels. */
+    .ab-grid em, .hero-panel em { font-size: 11px; }
+      /* ID-card style portrait: tilted oval with a brass sweep (Nov 2026) */
+    .hero-person { flex-direction: column; align-items: center; justify-content: flex-start; gap: 6px; margin: 0 0 16px; text-align: center; }
+    .hero-person-text { align-items: center; }
+    .hero-oval { display: block; width: min(100%, 340px); height: auto; filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.28)); }
+    :root[data-theme="light"] .hero-oval { filter: drop-shadow(0 14px 24px rgba(60, 40, 20, 0.18)); }
+    @media (max-width: 640px) { .hero-oval { width: min(100%, 280px); } }
+      /* Alignment clean-up (Nov 2026) */
+    .news-teaser > .nt-card:only-child { grid-column: 1 / -1; min-height: 0; flex-direction: row; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .news-teaser > .nt-card:only-child .nt-src { margin-top: 0; margin-left: auto; }
+    .pt-grid { align-items: stretch; }
+    .pt-side { grid-template-rows: 1fr auto; }
+    .pt-box { align-content: start; }
+    .pt-timeline { display: flex; flex-direction: column; justify-content: center; }
+    .contact-wrap { align-items: stretch; }
+    .contact-details { align-content: stretch; grid-auto-rows: auto; }
+    .contact-details .email-box:last-child { align-content: start; }
+    .based-in { color: var(--text) !important; font-weight: 700; margin: 0; }
   </style>
 </head>
 
@@ -3607,11 +3631,11 @@
 
         <div class="hero-panel" aria-label="Current role and track record">
           <div class="hero-person">
-            <picture><source srcset="assets/abhijeet-portrait.webp" type="image/webp"><img class="hero-portrait" src="assets/abhijeet-portrait.jpg" width="480" height="480" alt="Abhijeet Toshniwal" fetchpriority="high" decoding="async"></picture>
             <div class="hero-person-text">
               <strong>Abhijeet Toshniwal</strong>
               <span>Engineer → Marketer · Aurangabad</span>
             </div>
+            <picture><source srcset="assets/abhijeet-portrait-oval.webp" type="image/webp"><img class="hero-oval" src="assets/abhijeet-portrait-oval.png" width="479" height="398" alt="Abhijeet Toshniwal" fetchpriority="high" decoding="async"></picture>
           </div>
           <a class="mini-card now-role" href="profile.html#experience">
             <div class="mini-top">
@@ -3892,6 +3916,18 @@
             <div class="label">Email</div>
             <a href="mailto:abhijeettoshniwal14@gmail.com">abhijeettoshniwal14@gmail.com</a>
             <p>Available for consulting, mentorship, collaboration, and thoughtful conversations.</p>
+          </div>
+
+          <div class="email-box">
+            <div class="label">WhatsApp</div>
+            <a href="https://wa.me/918149441411?text=Hi%20Abhijeet%2C%20I%20found%20your%20website%20and%20wanted%20to%20connect." target="_blank" rel="noopener">+91 81494 41411</a>
+            <p>Quickest for a short question or to set up a call.</p>
+          </div>
+
+          <div class="email-box">
+            <div class="label">Based in</div>
+            <p class="based-in">Aurangabad, Maharashtra, India</p>
+            <p>Working with people across India and overseas.</p>
           </div>
 
           <div class="email-box">

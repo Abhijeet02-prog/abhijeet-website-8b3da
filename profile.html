@@ -43,7 +43,7 @@
       --hover: rgba(255, 255, 255, 0.035);
       --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
       --radius-md: 18px;
-      --container: 1240px;
+      --container: 1440px;
       --gutter: clamp(16px, 4.5vw, 72px);
       --header-h: 78px;
     }
@@ -582,6 +582,21 @@
     }
     @media (min-width: 981px) and (max-height: 760px) { .rail-portrait { width: 80px; height: 80px; } }
     @media (max-width: 640px) { .rail-id { gap: 16px; } .rail-portrait { width: 84px; height: 84px; } }
+      /* Oval portrait (Nov 2026) */
+    .rail-portrait { width: 96px; height: 120px; border-radius: 50%; object-position: 50% 28%; }
+    @media (min-width: 981px) and (max-height: 760px) { .rail-portrait { width: 76px; height: 96px; } }
+    @media (max-width: 640px) { .rail-portrait { width: 80px; height: 100px; } }
+      /* Let the portrait glow breathe inside the fixed left column. */
+    @media (min-width: 981px) { .rail { padding: 28px; margin: -28px; top: calc(var(--header-h) - 4px); height: calc(100vh - var(--header-h) + 4px); height: calc(100dvh - var(--header-h) + 4px); } }
+      /* Same content width as the home page so headers and edges line up across pages. */
+    @media (min-width: 1800px) { :root { --container: 1600px; } }
+    @media (min-width: 2400px) { :root { --container: 1760px; } }
+    .tag-now { font-size: 11px; }
+      /* ID-card style portrait in the left column (Nov 2026) */
+    .rail-id { gap: 14px; }
+    .rail-oval { display: block; width: 168px; height: auto; flex: none; filter: drop-shadow(0 12px 22px rgba(60, 40, 20, 0.2)); }
+    @media (min-width: 981px) and (max-height: 760px) { .rail-oval { width: 132px; } }
+    @media (max-width: 640px) { .rail-oval { width: 136px; } }
   </style>
 </head>
 
@@ -612,7 +627,7 @@
     <aside class="rail" aria-label="Profile summary">
       <div>
         <div class="rail-id">
-          <picture><source srcset="assets/abhijeet-portrait.webp" type="image/webp"><img class="rail-portrait" src="assets/abhijeet-portrait.jpg" width="480" height="480" alt="Abhijeet Toshniwal" decoding="async"></picture>
+          <picture><source srcset="assets/abhijeet-portrait-oval.webp" type="image/webp"><img class="rail-oval" src="assets/abhijeet-portrait-oval.png" width="479" height="398" alt="Abhijeet Toshniwal" decoding="async"></picture>
           <div>
             <div class="eyebrow" style="margin-bottom:10px">Profile</div>
             <h1>Abhijeet Toshniwal</h1>

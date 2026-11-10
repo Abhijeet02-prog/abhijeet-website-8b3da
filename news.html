@@ -43,7 +43,7 @@
       --hover: rgba(255, 255, 255, 0.035);
       --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
       --radius-md: 18px;
-      --container: 1240px;
+      --container: 1440px;
       --gutter: clamp(16px, 4.5vw, 72px);
       --header-h: 78px;
     }
@@ -564,6 +564,9 @@
       background-size: cover;
       background-position: right bottom;
     }
+      /* Same content width as the home page so headers and edges line up across pages. */
+    @media (min-width: 1800px) { :root { --container: 1600px; } }
+    @media (min-width: 2400px) { :root { --container: 1760px; } }
   </style>
 </head>
 
