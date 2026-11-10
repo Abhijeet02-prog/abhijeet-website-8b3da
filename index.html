@@ -3537,6 +3537,15 @@
     .contact-details { align-content: stretch; grid-auto-rows: auto; }
     .contact-details .email-box:last-child { align-content: start; }
     .based-in { color: var(--text) !important; font-weight: 700; margin: 0; }
+      /* Portrait beside the headline (Nov 2026): oval aligned to the top of the headline, role card below. */
+    .hero-side { display: flex; flex-direction: column; min-width: 0; }
+    @media (min-width: 981px) { .hero-panel { margin-top: 0 !important; } .hero-side { margin-top: var(--h1-offset, 0px); } }
+    .hero-person { margin: 0 0 18px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+    .hero-oval { display: block; width: min(100%, 360px); height: auto; filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.35)); }
+    :root[data-theme="light"] .hero-oval { filter: drop-shadow(0 16px 26px rgba(60, 40, 20, 0.2)); }
+    .hero-person-text { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .hero-person-text strong { font-size: 1.35rem; }
+    @media (max-width: 980px) { .hero-side { margin-top: 28px; } .hero-oval { width: min(78%, 320px); } }
   </style>
 </head>
 
@@ -3629,14 +3638,15 @@
           </ul>
         </div>
 
-        <div class="hero-panel" aria-label="Current role and track record">
-          <div class="hero-person">
-            <div class="hero-person-text">
+        <div class="hero-side">
+          <figure class="hero-person">
+            <picture><source srcset="assets/abhijeet-portrait-oval.webp" type="image/webp"><img class="hero-oval" src="assets/abhijeet-portrait-oval.png" width="600" height="649" alt="Abhijeet Toshniwal" fetchpriority="high" decoding="async"></picture>
+            <figcaption class="hero-person-text">
               <strong>Abhijeet Toshniwal</strong>
               <span>Engineer → Marketer · Aurangabad</span>
-            </div>
-            <picture><source srcset="assets/abhijeet-portrait-oval.webp" type="image/webp"><img class="hero-oval" src="assets/abhijeet-portrait-oval.png" width="479" height="398" alt="Abhijeet Toshniwal" fetchpriority="high" decoding="async"></picture>
-          </div>
+            </figcaption>
+          </figure>
+        <div class="hero-panel" aria-label="Current role and track record">
           <a class="mini-card now-role" href="profile.html#experience">
             <div class="mini-top">
               <span class="now-label"><span class="now-dot" aria-hidden="true"></span>Current role</span>
@@ -3670,6 +3680,7 @@
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </section>

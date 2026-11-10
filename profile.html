@@ -597,6 +597,28 @@
     .rail-oval { display: block; width: 168px; height: auto; flex: none; filter: drop-shadow(0 12px 22px rgba(60, 40, 20, 0.2)); }
     @media (min-width: 981px) and (max-height: 760px) { .rail-oval { width: 132px; } }
     @media (max-width: 640px) { .rail-oval { width: 136px; } }
+      .rail-oval { width: 140px; }
+    @media (min-width: 981px) and (max-height: 820px) { .rail-oval { width: 112px; } }
+    @media (max-width: 640px) { .rail-oval { width: 116px; } }
+      /* One readable glass style for every block on the right (Nov 2026).
+       Transparent enough to show the background, blurred so text stays crisp. */
+    .content .about, .content .entry, .content .skill-groups > div, .content #writing, .content .cta {
+      background: rgba(var(--shade), 0.58);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(16px) saturate(1.05);
+      -webkit-backdrop-filter: blur(16px) saturate(1.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    }
+    .content .about { padding: 28px 30px; }
+    .content .skill-groups > div { padding: 22px 24px; }
+    .content #writing, .content .cta { padding: 28px 30px; }
+    .timeline:hover .entry { opacity: 1; }
+    /* Calmer page background so the glass stays readable. */
+    body::after { background: linear-gradient(90deg, rgba(var(--shade), 0.92) 0%, rgba(var(--shade), 0.82) 40%, rgba(var(--shade), 0.7) 100%); }
+    @media (max-width: 980px) { body::after { background: rgba(var(--shade), 0.84); } }
+    .content p, .content li { color: var(--soft); }
+    .content .where, .content .entry-date, .content .count { color: var(--muted); }
   </style>
 </head>
 
@@ -627,7 +649,7 @@
     <aside class="rail" aria-label="Profile summary">
       <div>
         <div class="rail-id">
-          <picture><source srcset="assets/abhijeet-portrait-oval.webp" type="image/webp"><img class="rail-oval" src="assets/abhijeet-portrait-oval.png" width="479" height="398" alt="Abhijeet Toshniwal" decoding="async"></picture>
+          <picture><source srcset="assets/abhijeet-portrait-oval.webp" type="image/webp"><img class="rail-oval" src="assets/abhijeet-portrait-oval.png" width="600" height="649" alt="Abhijeet Toshniwal" decoding="async"></picture>
           <div>
             <div class="eyebrow" style="margin-bottom:10px">Profile</div>
             <h1>Abhijeet Toshniwal</h1>
