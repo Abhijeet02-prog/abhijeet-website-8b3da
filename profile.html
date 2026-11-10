@@ -518,6 +518,14 @@
       .nav-toggle { display: flex; }
       .home-link { display: none !important; }
     }
+      /* Custom page poster (Nov 2026). */
+    body::before,
+    :root[data-theme="light"] body::before {
+      background-image: url('assets/backgrounds/poster-profile.jpg');
+      background-image: image-set(url('assets/backgrounds/poster-profile.webp') type('image/webp'), url('assets/backgrounds/poster-profile.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right bottom;
+    }
   </style>
 </head>
 

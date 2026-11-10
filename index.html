@@ -3450,6 +3450,56 @@
       .section-head { flex-direction: column; align-items: flex-start; gap: 14px; }
       .section-head p { max-width: 680px; }
     }
+      /* Custom section posters (Nov 2026): original artwork per section. */
+    .hero::before,
+    :root[data-theme="light"] .hero::before {
+      background-image: url('assets/backgrounds/poster-hero.jpg');
+      background-image: image-set(url('assets/backgrounds/poster-hero.webp') type('image/webp'), url('assets/backgrounds/poster-hero.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right center;
+    }
+    #work::before,
+    :root[data-theme="light"] #work::before {
+      background-image: url('assets/backgrounds/poster-work.jpg');
+      background-image: image-set(url('assets/backgrounds/poster-work.webp') type('image/webp'), url('assets/backgrounds/poster-work.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right center;
+    }
+    #story::before,
+    :root[data-theme="light"] #story::before {
+      background-image: url('assets/backgrounds/poster-story.jpg');
+      background-image: image-set(url('assets/backgrounds/poster-story.webp') type('image/webp'), url('assets/backgrounds/poster-story.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right center;
+    }
+    .section-quotes::before,
+    :root[data-theme="light"] .section-quotes::before {
+      background-image: url('assets/backgrounds/poster-quotes.jpg');
+      background-image: image-set(url('assets/backgrounds/poster-quotes.webp') type('image/webp'), url('assets/backgrounds/poster-quotes.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right center;
+    }
+    .section-news::before,
+    :root[data-theme="light"] .section-news::before {
+      background-image: url('assets/backgrounds/poster-news.jpg');
+      background-image: image-set(url('assets/backgrounds/poster-news.webp') type('image/webp'), url('assets/backgrounds/poster-news.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right center;
+    }
+    .section-profile::before,
+    :root[data-theme="light"] .section-profile::before {
+      background-image: url('assets/backgrounds/poster-profile.jpg');
+      background-image: image-set(url('assets/backgrounds/poster-profile.webp') type('image/webp'), url('assets/backgrounds/poster-profile.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right center;
+    }
+    #contact::before,
+    :root[data-theme="light"] #contact::before {
+      background-image: url('assets/backgrounds/poster-contact.jpg');
+      background-image: image-set(url('assets/backgrounds/poster-contact.webp') type('image/webp'), url('assets/backgrounds/poster-contact.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right center;
+    }
   </style>
 </head>
 
