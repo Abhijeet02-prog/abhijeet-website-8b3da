@@ -534,7 +534,7 @@
         overflow: hidden;
         gap: 22px;
       }
-      .rail nav { margin-top: auto; }
+      .rail nav { margin-top: 8px; }
       .rail .toc { gap: 2px; }
       .rail .toc a { padding-block: 6px; }
       .profile-layout { padding-top: 24px; }
@@ -544,9 +544,9 @@
     @media (min-width: 981px) and (max-height: 860px) {
       .rail { gap: 16px; }
       .rail h1 { font-size: clamp(1.9rem, 2.6vw, 2.5rem); }
-      .rail .headline { display: none; }
       .rail .now-card { padding-block: 12px; }
     }
+    @media (min-width: 981px) and (max-height: 820px) { .rail .headline { display: none; } }
     @media (min-width: 981px) and (max-height: 700px) {
       .rail .meta-row, .rail .journey { display: none; }
     }
@@ -573,6 +573,15 @@
       background-size: cover;
       background-position: right bottom;
     }
+      /* Portrait (Nov 2026) */
+    .rail-id { display: flex; align-items: center; gap: 20px; }
+    .rail-portrait {
+      width: 104px; height: 104px; border-radius: 50%; object-fit: cover; object-position: 50% 30%;
+      border: 3px solid var(--accent); box-shadow: 0 0 0 6px rgba(216, 167, 92, 0.16), 0 14px 32px rgba(0, 0, 0, 0.25);
+      background: #efeae2; flex: none;
+    }
+    @media (min-width: 981px) and (max-height: 760px) { .rail-portrait { width: 80px; height: 80px; } }
+    @media (max-width: 640px) { .rail-id { gap: 16px; } .rail-portrait { width: 84px; height: 84px; } }
   </style>
 </head>
 
@@ -602,8 +611,13 @@
   <div class="container profile-layout">
     <aside class="rail" aria-label="Profile summary">
       <div>
-        <div class="eyebrow" style="margin-bottom:14px">Profile</div>
-        <h1>Abhijeet Toshniwal</h1>
+        <div class="rail-id">
+          <picture><source srcset="assets/abhijeet-portrait.webp" type="image/webp"><img class="rail-portrait" src="assets/abhijeet-portrait.jpg" width="480" height="480" alt="Abhijeet Toshniwal" decoding="async"></picture>
+          <div>
+            <div class="eyebrow" style="margin-bottom:10px">Profile</div>
+            <h1>Abhijeet Toshniwal</h1>
+          </div>
+        </div>
         <ol class="journey" aria-label="Career path">
           <li>Engineer</li>
           <li class="is-now">Marketer</li>

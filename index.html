@@ -3499,6 +3499,20 @@
       background-size: cover;
       background-position: right center;
     }
+      /* Portrait (Nov 2026) */
+    .hero-person { display: flex; align-items: center; gap: 18px; margin: 0 0 18px 4px; }
+    .hero-portrait {
+      width: 96px; height: 96px; border-radius: 50%; object-fit: cover; object-position: 50% 30%;
+      border: 3px solid var(--accent); box-shadow: 0 0 0 6px rgba(216, 167, 92, 0.16), 0 14px 32px rgba(0, 0, 0, 0.35);
+      background: #efeae2; flex: none;
+    }
+    .hero-person-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+    .hero-person-text strong { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text); }
+    .hero-person-text span { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+    @media (max-width: 640px) {
+      .hero-portrait { width: 76px; height: 76px; }
+      .hero-person-text strong { font-size: 1.1rem; }
+    }
   </style>
 </head>
 
@@ -3569,7 +3583,7 @@
         <div class="hero-copy">
           <a class="now-badge" href="profile.html#experience">
             <span class="now-dot" aria-hidden="true"></span>
-            <span>Now · Marketing Director, Aurangabad Pipes</span>
+            <span>Marketing Director, Aurangabad Pipes</span>
           </a>
           <div class="eyebrow">Engineer → Marketer</div>
           <h1>
@@ -3592,6 +3606,13 @@
         </div>
 
         <div class="hero-panel" aria-label="Current role and track record">
+          <div class="hero-person">
+            <picture><source srcset="assets/abhijeet-portrait.webp" type="image/webp"><img class="hero-portrait" src="assets/abhijeet-portrait.jpg" width="480" height="480" alt="Abhijeet Toshniwal" fetchpriority="high" decoding="async"></picture>
+            <div class="hero-person-text">
+              <strong>Abhijeet Toshniwal</strong>
+              <span>Engineer → Marketer · Aurangabad</span>
+            </div>
+          </div>
           <a class="mini-card now-role" href="profile.html#experience">
             <div class="mini-top">
               <span class="now-label"><span class="now-dot" aria-hidden="true"></span>Current role</span>
