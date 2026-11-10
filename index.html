@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&display=swap"
     rel="stylesheet" />
   <style>
     :root {
@@ -31,8 +31,8 @@
       --muted: #a9b1bf;
       --soft: #dfe6f0;
       --accent: #d8a75c;
-      --accent-2: #8ec5ff;
-      --accent-3: #c7f9cc;
+      --accent-2: #d07a6e;
+      --accent-3: #d8a75c;
       --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
       --radius-lg: 28px;
       --radius-md: 18px;
@@ -55,8 +55,8 @@
       --muted: #4b5563;
       --soft: #1f2937;
       --accent: #b7741f;
-      --accent-2: #21548c;
-      --accent-3: #1a5a46;
+      --accent-2: #8b2e2e;
+      --accent-3: #b7741f;
       --shadow: 0 18px 50px rgba(17, 24, 39, 0.09);
     }
 
@@ -72,7 +72,7 @@
       margin: 0;
       background:
         radial-gradient(circle at top left, rgba(216, 167, 92, 0.14), transparent 30%),
-        radial-gradient(circle at bottom right, rgba(142, 197, 255, 0.12), transparent 25%),
+        radial-gradient(circle at bottom right, rgba(160, 60, 60, 0.12), transparent 25%),
         var(--bg);
       color: var(--text);
       font-family: 'Manrope', sans-serif;
@@ -484,7 +484,7 @@
       max-width: 470px;
       padding-right: 24px;
       border-right: 1px solid var(--line);
-      font-family: 'Instrument Serif', Georgia, serif;
+      font-family: 'Fraunces', Georgia, serif;
       font-style: italic;
       font-weight: 400;
       font-size: 16px;
@@ -555,7 +555,7 @@
        only there, but written generically so it can be reused elsewhere. */
     .accent-wine {
       color: #cf5975;
-      font-family: 'Instrument Serif', Georgia, serif;
+      font-family: 'Fraunces', Georgia, serif;
       font-weight: 400;
       font-style: italic;
       letter-spacing: -0.04em;
@@ -577,7 +577,7 @@
          the sitewide --accent (eyebrows, chips, quote marks, etc.) is
          untouched. */
       color: #cf5975;
-      font-family: 'Instrument Serif', Georgia, serif;
+      font-family: 'Fraunces', Georgia, serif;
       font-weight: 400;
       font-style: italic;
       letter-spacing: -0.04em;
@@ -964,7 +964,7 @@
       display: grid;
       place-items: center;
       border-radius: 14px;
-      background: linear-gradient(135deg, rgba(216, 167, 92, 0.2), rgba(142, 197, 255, 0.14));
+      background: linear-gradient(135deg, rgba(216, 167, 92, 0.2), rgba(160, 60, 60, 0.14));
       color: var(--accent);
       font-size: 22px;
       border: 1px solid rgba(216, 167, 92, 0.18);
@@ -1435,7 +1435,7 @@
     }
 
     .quote-mark {
-      font-family: 'Instrument Serif', Georgia, serif;
+      font-family: 'Fraunces', Georgia, serif;
       font-style: italic;
       font-size: 54px;
       color: var(--accent);
@@ -1454,7 +1454,7 @@
     }
 
     .quote-author {
-      font-family: 'Instrument Serif', Georgia, serif;
+      font-family: 'Fraunces', Georgia, serif;
       font-style: italic;
       font-size: 1.05rem;
       font-weight: 400;
@@ -1497,14 +1497,14 @@
       border-radius: 18px;
       border: 1px solid var(--line);
       background:
-        linear-gradient(135deg, rgba(216, 167, 92, 0.18), rgba(142, 197, 255, 0.14)),
+        linear-gradient(135deg, rgba(216, 167, 92, 0.18), rgba(160, 60, 60, 0.14)),
         rgba(255, 255, 255, 0.02);
     }
 
     .section-professional {
       background:
         radial-gradient(circle at top left, rgba(216, 167, 92, 0.12), transparent 25%),
-        radial-gradient(circle at bottom right, rgba(142, 197, 255, 0.10), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(160, 60, 60, 0.10), transparent 28%),
         transparent;
     }
 
@@ -1904,7 +1904,7 @@
       width: 42%;
       height: 54%;
       border-radius: 18px;
-      background: linear-gradient(135deg, rgba(216, 167, 92, 0.22), rgba(142, 197, 255, 0.13), rgba(255, 255, 255, 0.04));
+      background: linear-gradient(135deg, rgba(216, 167, 92, 0.22), rgba(160, 60, 60, 0.13), rgba(255, 255, 255, 0.04));
       border: 1px solid rgba(255, 255, 255, 0.08);
       transform: rotate(7deg);
       pointer-events: none;
@@ -1958,7 +1958,7 @@
     }
 
     .marquee-head h3 .accent-italic {
-      font-family: 'Instrument Serif', Georgia, serif;
+      font-family: 'Fraunces', Georgia, serif;
       font-weight: 400;
       font-style: italic;
       color: var(--accent);
@@ -2130,7 +2130,7 @@
       display: inline-flex;
       align-items: baseline;
       gap: 14px;
-      font-family: 'Instrument Serif', Georgia, serif;
+      font-family: 'Fraunces', Georgia, serif;
       font-style: italic;
       font-weight: 400;
       font-size: clamp(1.05rem, 2.1vw, 1.55rem);
@@ -3460,6 +3460,44 @@
       background-image: image-set(url('assets/backgrounds/home-skyline.webp') type('image/webp'), url('assets/backgrounds/home-skyline.jpg') type('image/jpeg'));
       background-size: cover;
       background-position: right bottom;
+    }
+      /* Fraunces is wider than the old serif: keep its italic light and tight. */
+    .accent, .accent-italic, .accent-wine, .serif { font-variation-settings: 'opsz' 72; letter-spacing: -0.01em; }
+    /* Section backgrounds (approved Nov 2026). */
+    #work::before,
+    :root[data-theme="light"] #work::before {
+      background-image: url('assets/backgrounds/poster-work.jpg');
+      background-image: image-set(url('assets/backgrounds/poster-work.webp') type('image/webp'), url('assets/backgrounds/poster-work.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right center;
+    }
+    #story::before,
+    :root[data-theme="light"] #story::before {
+      background-image: url('assets/backgrounds/poster-story.jpg');
+      background-image: image-set(url('assets/backgrounds/poster-story.webp') type('image/webp'), url('assets/backgrounds/poster-story.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right center;
+    }
+    .section-news::before,
+    :root[data-theme="light"] .section-news::before {
+      background-image: url('assets/backgrounds/poster-news.jpg');
+      background-image: image-set(url('assets/backgrounds/poster-news.webp') type('image/webp'), url('assets/backgrounds/poster-news.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right center;
+    }
+    .section-profile::before,
+    :root[data-theme="light"] .section-profile::before {
+      background-image: url('assets/backgrounds/poster-profile.jpg');
+      background-image: image-set(url('assets/backgrounds/poster-profile.webp') type('image/webp'), url('assets/backgrounds/poster-profile.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right center;
+    }
+    #contact::before,
+    :root[data-theme="light"] #contact::before {
+      background-image: url('assets/backgrounds/poster-contact.jpg');
+      background-image: image-set(url('assets/backgrounds/poster-contact.webp') type('image/webp'), url('assets/backgrounds/poster-contact.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right center;
     }
   </style>
 </head>

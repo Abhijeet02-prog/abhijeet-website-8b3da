@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&display=swap"
     rel="stylesheet" />
   <script>
     (function () {
@@ -73,7 +73,7 @@
       margin: 0;
       background:
         radial-gradient(circle at top left, rgba(216, 167, 92, 0.12), transparent 32%),
-        radial-gradient(circle at bottom right, rgba(142, 197, 255, 0.10), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(160, 60, 60, 0.10), transparent 28%),
         var(--bg);
       color: var(--text);
       font-family: 'Manrope', sans-serif;
@@ -93,7 +93,7 @@
     }
 
     .serif {
-      font-family: 'Instrument Serif', Georgia, serif;
+      font-family: 'Fraunces', Georgia, serif;
       font-weight: 400;
       font-style: italic;
       letter-spacing: -0.02em;
@@ -553,6 +553,16 @@
       .nav-links a[aria-current="page"] { color: var(--accent); }
       .nav-toggle { display: flex; }
       .home-link { display: none !important; }
+    }
+      /* Fraunces is wider than the old serif: keep its italic light and tight. */
+    .accent, .accent-italic, .accent-wine, .serif { font-variation-settings: 'opsz' 72; letter-spacing: -0.01em; }
+    /* Page background (approved Nov 2026). */
+    body::before,
+    :root[data-theme="light"] body::before {
+      background-image: url('assets/backgrounds/poster-news.jpg');
+      background-image: image-set(url('assets/backgrounds/poster-news.webp') type('image/webp'), url('assets/backgrounds/poster-news.jpg') type('image/jpeg'));
+      background-size: cover;
+      background-position: right bottom;
     }
   </style>
 </head>
