@@ -413,3 +413,12 @@ html:not(.js) .lens-tabs { display: none; }
   .posts li.post-row { grid-template-columns: 1fr; gap: 4px; }
   .post-row .post-meta { flex-direction: row; align-items: baseline; gap: 14px; }
 }
+
+/* Justified body text. Headings, quotes, tables, buttons and short labels stay left-aligned. */
+.lead, .section-intro, .prose p, .prose li, .problems p, .evidence p, .lens-note p, .lens-source,
+.car dd, .car dd li, .timeline p, .def-list span, .posts p, .footer-grid p, .split p, .page-head p, .article-foot p {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
