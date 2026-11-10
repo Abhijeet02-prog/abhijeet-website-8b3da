@@ -1,17 +1,29 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <script>document.documentElement.classList.add('js');</script>
-  <title>Abhijeet Toshniwal | Marketing Director, Aurangabad Pipes · Growth Consultant</title>
-  <meta name="description"
-    content="Abhijeet Toshniwal — engineer turned marketer. Marketing Director at Aurangabad Pipes, growth consultant at EdgeX Academy, and a daily writer on markets, the economy and business." />
-  <meta property="og:title" content="Abhijeet Toshniwal" />
-  <meta property="og:description"
-    content="Consultant, investor, writer, and musician building businesses with intent and clarity." />
+  <title>Abhijeet Toshniwal | Marketing Director, Aurangabad Pipes</title>
+  <meta name="description" content="Abhijeet Toshniwal: engineer turned marketer, Marketing Director at Aurangabad Pipes, growth consultant at EdgeX Academy and a daily writer on markets." />
+  <link rel="canonical" href="https://www.abhijeettoshniwal.com/" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta property="og:site_name" content="Abhijeet Toshniwal" />
+  <meta property="og:locale" content="en_IN" />
   <meta property="og:type" content="website" />
+  <meta property="og:title" content="Abhijeet Toshniwal: Marketing Director, Aurangabad Pipes" />
+  <meta property="og:description" content="Engineer turned marketer. Growth, strategy and daily writing on markets and the economy." />
+  <meta property="og:url" content="https://www.abhijeettoshniwal.com/" />
+  <meta property="og:image" content="https://www.abhijeettoshniwal.com/assets/og-home.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Abhijeet Toshniwal: Marketing Director, Aurangabad Pipes" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Abhijeet Toshniwal: Marketing Director, Aurangabad Pipes" />
+  <meta name="twitter:description" content="Engineer turned marketer. Growth, strategy and daily writing on markets and the economy." />
+  <meta name="twitter:image" content="https://www.abhijeettoshniwal.com/assets/og-home.jpg" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://www.abhijeettoshniwal.com/#website", "url": "https://www.abhijeettoshniwal.com/", "name": "Abhijeet Toshniwal", "inLanguage": "en-IN", "publisher": {"@id": "https://www.abhijeettoshniwal.com/#person"}}, {"@type": "Person", "@id": "https://www.abhijeettoshniwal.com/#person", "name": "Abhijeet Toshniwal", "url": "https://www.abhijeettoshniwal.com/", "image": "https://www.abhijeettoshniwal.com/assets/abhijeet-portrait.jpg", "jobTitle": "Marketing Director", "worksFor": {"@type": "Organization", "name": "Aurangabad Pipes Pvt. Ltd.", "url": "https://www.aurangabadpipes.com/"}, "alumniOf": [{"@type": "CollegeOrUniversity", "name": "Goa Institute of Management"}, {"@type": "CollegeOrUniversity", "name": "Vellore Institute of Technology"}], "address": {"@type": "PostalAddress", "addressLocality": "Aurangabad", "addressRegion": "Maharashtra", "addressCountry": "IN"}, "knowsAbout": ["B2B marketing", "Industrial marketing", "Business growth", "Campus partnerships", "Wealth management", "Indian markets and economy", "Music"], "sameAs": ["https://www.linkedin.com/in/abhijeet-toshniwal-aa3577292/", "https://www.instagram.com/abhijeet.acoustic02/", "https://www.instagram.com/thoughts_at_02/"]}]}</script>
   <meta name="theme-color" content="#0b0d12" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -2199,7 +2211,7 @@
       padding: 28px;
     }
 
-    .contact-panel h3 {
+    .contact-panel h3, .contact-panel h2.contact-h {
       font-size: clamp(2.1rem, 3vw, 3.2rem);
       margin-bottom: 16px;
     }
@@ -3580,6 +3592,15 @@
       .brand, .brand span { white-space: normal; line-height: 1.1; overflow-wrap: anywhere; }
       .nav-actions { gap: 8px; flex-shrink: 0; }
     }
+      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+      /* "View full profile" as a clean card-footer link, not a pill (Nov 2026). */
+    .pt-box .pt-cta.btn {
+      align-self: stretch; justify-content: space-between; width: 100%; min-height: 44px;
+      margin-top: auto; padding: 14px 0 0; border: 0; border-top: 1px solid var(--line); border-radius: 0;
+      background: none; box-shadow: none; color: var(--accent); font-size: 0.95rem; font-weight: 700; letter-spacing: 0;
+    }
+    .pt-box .pt-cta.btn:hover { background: none; transform: none; color: var(--text); }
+    .pt-side .pt-box > span:not(.pt-label):last-of-type { margin-bottom: 18px; }
   </style>
 </head>
 
@@ -3654,7 +3675,7 @@
           </a>
           <div class="eyebrow">Engineer → Marketer</div>
           <h1>
-            I build businesses
+            <span class="sr-only">Abhijeet Toshniwal: </span>I build businesses
             <span class="accent">with a creative mind and strategic clarity.</span>
           </h1>
           <p class="lead">
@@ -3912,7 +3933,7 @@
       <div class="container contact-wrap">
         <div class="contact-panel">
           <div class="eyebrow">Start the conversation</div>
-          <h3>Let’s talk about your next move.</h3>
+          <h2 class="contact-h">Let’s talk about your next move.</h2>
           <p>Whether it is a business problem, a strategic conversation, or a creative collaboration, I’d be glad to
             hear what you are building.</p>
 

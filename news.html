@@ -1,16 +1,28 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Today’s Briefing | Abhijeet Toshniwal</title>
-  <meta name="description"
-    content="A daily market and economy briefing, refreshed every morning at 11:00 AM IST: the top headlines on Indian markets, policy, oil and the economy, picked by Abhijeet Toshniwal's site." />
-  <meta property="og:title" content="Today’s Briefing — Abhijeet Toshniwal" />
-  <meta property="og:description"
-    content="Engineer → Marketer. Marketing Director, Aurangabad Pipes. Growth @ EdgeX Academy." />
-  <meta property="og:type" content="profile" />
+  <title>Daily Market and Economy Briefing | Abhijeet Toshniwal</title>
+  <meta name="description" content="A daily briefing, refreshed at 11:00 AM IST, of the top headlines on Indian markets, policy, oil and the economy, each linked to its original publisher." />
+  <link rel="canonical" href="https://www.abhijeettoshniwal.com/news.html" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta property="og:site_name" content="Abhijeet Toshniwal" />
+  <meta property="og:locale" content="en_IN" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Today’s market and economy briefing" />
+  <meta property="og:description" content="Top headlines on Indian markets, policy, oil and the economy, refreshed every morning at 11:00 AM IST." />
+  <meta property="og:url" content="https://www.abhijeettoshniwal.com/news.html" />
+  <meta property="og:image" content="https://www.abhijeettoshniwal.com/assets/og-news.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Today’s market and economy briefing" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Today’s market and economy briefing" />
+  <meta name="twitter:description" content="Top headlines on Indian markets, policy, oil and the economy, refreshed every morning at 11:00 AM IST." />
+  <meta name="twitter:image" content="https://www.abhijeettoshniwal.com/assets/og-news.jpg" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://www.abhijeettoshniwal.com/news.html#webpage", "url": "https://www.abhijeettoshniwal.com/news.html", "name": "Daily Market and Economy Briefing", "isPartOf": {"@id": "https://www.abhijeettoshniwal.com/#website"}, "author": {"@id": "https://www.abhijeettoshniwal.com/#person"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.abhijeettoshniwal.com/"}, {"@type": "ListItem", "position": 2, "name": "Daily briefing", "item": "https://www.abhijeettoshniwal.com/news.html"}]}]}</script>
   <meta name="theme-color" content="#0b0d12" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -334,7 +346,7 @@
     .briefing-meta::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--live); }
     .briefing-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
     .brief-topic { padding: 20px; border-radius: 16px; border: 1px solid var(--line); background: var(--card); display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-    .brief-topic h3 { font-size: 12px; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+    .brief-topic h3, .brief-topic h2 { font-size: 12px; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
     .brief-item { display: block; padding: 10px 0; border-top: 1px solid var(--line); }
     .brief-item:first-of-type { border-top: 0; padding-top: 2px; }
     .brief-item strong { display: block; color: var(--text); font-size: 15px; font-weight: 700; line-height: 1.45; letter-spacing: -0.01em; transition: color 0.2s ease; }
@@ -485,7 +497,7 @@
     .news-wrap .briefing { margin-top: 0; }
     .news-wrap .briefing-grid { gap: 16px; }
     .news-wrap .brief-topic { padding: 24px; }
-    .news-wrap .brief-topic h3 { font-size: 13px; }
+    .news-wrap .brief-topic h3, .news-wrap .brief-topic h2 { font-size: 13px; }
     .news-wrap .brief-item strong { font-size: 16px; }
     .news-wrap .chain-wrap { margin-top: 0; }
     .news-foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
@@ -636,10 +648,10 @@
   <div class="container news-wrap">
     <div class="briefing" id="briefing">
       <div class="briefing-grid" id="briefingGrid">
-        <div class="brief-topic is-loading"><h3>Markets</h3><span class="sk"></span><span class="sk"></span></div>
-        <div class="brief-topic is-loading"><h3>Policy</h3><span class="sk"></span><span class="sk"></span></div>
-        <div class="brief-topic is-loading"><h3>Oil</h3><span class="sk"></span><span class="sk"></span></div>
-        <div class="brief-topic is-loading"><h3>Economy</h3><span class="sk"></span><span class="sk"></span></div>
+        <div class="brief-topic is-loading"><h2>Markets</h2><span class="sk"></span><span class="sk"></span></div>
+        <div class="brief-topic is-loading"><h2>Policy</h2><span class="sk"></span><span class="sk"></span></div>
+        <div class="brief-topic is-loading"><h2>Oil</h2><span class="sk"></span><span class="sk"></span></div>
+        <div class="brief-topic is-loading"><h2>Economy</h2><span class="sk"></span><span class="sk"></span></div>
       </div>
       <p class="briefing-note">Curated automatically from Indian and global business publishers. Not investment advice.</p>
     </div>
@@ -705,7 +717,7 @@
             return '<a class="brief-item" href="' + esc(it.link) + '" target="_blank" rel="noreferrer noopener"><strong>' +
               esc(it.title) + '</strong><span>' + esc(it.source || 'News') + ' · ' + ago(it.published) + '</span></a>';
           }).join('') : '<p class="brief-empty">No major headlines in this edition.</p>';
-          return '<div class="brief-topic"><h3>' + esc(t.label) + '</h3>' + items + '</div>';
+          return '<div class="brief-topic"><h2>' + esc(t.label) + '</h2>' + items + '</div>';
         }).join('');
         buildChain(ed);
       }).catch(fail);
