@@ -3563,6 +3563,23 @@
     .hero-id { --av-w: 128px; gap: 20px; }
     @media (max-width: 640px) { .hero-id { --av-w: 104px; } }
       .hero-id-text span { letter-spacing: 0.08em; font-size: 0.74rem; }
+      /* Profile teaser: one balanced pair of cards, button inside the Education card (Nov 2026). */
+    .pt-side { grid-template-rows: 1fr !important; }
+    .pt-side .pt-box { display: flex; flex-direction: column; height: 100%; }
+    .pt-side .pt-cta { margin-top: auto; align-self: flex-start; }
+    .pt-side .pt-box > span:not(.pt-label) + .pt-cta { margin-top: auto; }
+    .pt-box .pt-cta { position: relative; top: 0; margin-top: 22px; }
+    @media (min-width: 981px) { .pt-side .pt-box .pt-cta { margin-top: auto; } .pt-side .pt-box { padding-bottom: 24px; } }
+      /* Comfortable tap targets for menu and footer links (Nov 2026). */
+    .nav-links a, .footer-links a { display: inline-flex; align-items: center; min-height: 32px; }
+    @media (pointer: coarse) { .nav-links a, .footer-links a { min-height: 44px; padding-inline: 6px; } }
+      /* Header never overflows: the name can wrap and controls tighten on very narrow or zoomed screens. */
+    .nav-wrap { min-width: 0; }
+    .brand { min-width: 0; flex-shrink: 1; }
+    @media (max-width: 380px) {
+      .brand, .brand span { white-space: normal; line-height: 1.1; overflow-wrap: anywhere; }
+      .nav-actions { gap: 8px; flex-shrink: 0; }
+    }
   </style>
 </head>
 
@@ -3884,8 +3901,8 @@
               <span class="pt-label">Education</span>
               <strong>PGDM, Marketing &amp; Finance</strong><span>Goa Institute of Management · 2026</span>
               <strong>B.Tech, Mechanical Engineering</strong><span>VIT Vellore · 2024</span>
+              <a class="btn btn-secondary pt-cta" href="profile.html">View full profile →</a>
             </div>
-            <a class="btn btn-secondary pt-cta" href="profile.html">View full profile →</a>
           </div>
         </div>
       </div>

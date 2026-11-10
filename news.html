@@ -567,6 +567,16 @@
       /* Same content width as the home page so headers and edges line up across pages. */
     @media (min-width: 1800px) { :root { --container: 1600px; } }
     @media (min-width: 2400px) { :root { --container: 1760px; } }
+      /* Comfortable tap targets for menu and footer links (Nov 2026). */
+    .nav-links a, .footer-links a { display: inline-flex; align-items: center; min-height: 32px; }
+    @media (pointer: coarse) { .nav-links a, .footer-links a { min-height: 44px; padding-inline: 6px; } }
+      /* Header never overflows: the name can wrap and controls tighten on very narrow or zoomed screens. */
+    .nav-wrap { min-width: 0; }
+    .brand { min-width: 0; flex-shrink: 1; }
+    @media (max-width: 380px) {
+      .brand, .brand span { white-space: normal; line-height: 1.1; overflow-wrap: anywhere; }
+      .nav-actions { gap: 8px; flex-shrink: 0; }
+    }
   </style>
 </head>
 
