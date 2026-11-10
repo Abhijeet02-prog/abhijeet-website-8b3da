@@ -628,6 +628,12 @@
     .rail-id { --av-w: 92px; gap: 22px; padding-left: 8px; }
     @media (min-width: 981px) and (max-height: 820px) { .rail-id { --av-w: 76px; } }
     @media (max-width: 640px) { .rail-id { --av-w: 76px; } }
+      /* Profile photo = the full oval artwork, simply scaled down (Nov 2026). */
+    .av-img { display: block; flex: none; width: var(--av-w, 120px); }
+    .av-img img { display: block; width: 100%; height: auto; filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25)); }
+    .rail-id { --av-w: 120px; }
+    @media (min-width: 981px) and (max-height: 820px) { .rail-id { --av-w: 100px; } }
+    @media (max-width: 640px) { .rail-id { --av-w: 100px; } }
   </style>
 </head>
 
@@ -658,7 +664,7 @@
     <aside class="rail" aria-label="Profile summary">
       <div>
         <div class="rail-id">
-          <span class="av-oval"><span class="av-clip"><picture><source srcset="assets/abhijeet-portrait.webp" type="image/webp"><img src="assets/abhijeet-portrait.jpg" width="480" height="480" alt="Abhijeet Toshniwal" decoding="async"></picture></span></span>
+          <picture class="av-img"><source srcset="assets/abhijeet-portrait-oval.webp" type="image/webp"><img src="assets/abhijeet-portrait-oval.png" width="600" height="649" alt="Abhijeet Toshniwal" decoding="async"></picture>
           <div>
             <div class="eyebrow" style="margin-bottom:10px">Profile</div>
             <h1>Abhijeet Toshniwal</h1>
