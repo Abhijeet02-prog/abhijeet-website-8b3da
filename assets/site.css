@@ -422,3 +422,31 @@ html:not(.js) .lens-tabs { display: none; }
   hyphens: auto;
   -webkit-hyphens: auto;
 }
+
+/* Running strip of my two lines (home). Pauses on hover; static under reduced motion. */
+.quote-strip { border-block: 1px solid var(--line); overflow: hidden; padding: 18px 0; }
+.qs-track { display: flex; width: max-content; animation: qs-scroll 60s linear infinite; }
+.quote-strip:hover .qs-track, .quote-strip:focus-within .qs-track { animation-play-state: paused; }
+.qs-group { display: flex; align-items: center; flex-shrink: 0; }
+.qs-item { font-family: var(--serif); font-style: italic; font-size: var(--step-1); white-space: nowrap; padding: 0 28px; color: var(--ink); }
+.qs-by { font-family: var(--sans); font-style: normal; font-size: .8rem; font-weight: 600; letter-spacing: .04em; color: var(--muted); margin-left: 8px; }
+.qs-sep { color: var(--accent); font-size: 1rem; }
+@keyframes qs-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .qs-track { animation: none; width: auto; }
+  .qs-group { flex-wrap: wrap; justify-content: center; row-gap: 10px; }
+  .qs-group[aria-hidden="true"] { display: none; }
+  .qs-item { white-space: normal; text-align: center; }
+}
+
+/* Floating LinkedIn and WhatsApp buttons */
+.fab-stack { position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 60; display: flex; flex-direction: column; gap: 12px; }
+.fab { width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center; color: #fff; box-shadow: 0 8px 20px rgba(0,0,0,.18); transition: transform .15s ease; }
+.fab:hover { transform: translateY(-2px); }
+.fab svg { width: 24px; height: 24px; fill: currentColor; }
+.fab-li { background: #0a66c2; }
+.fab-wa { background: #1fa855; }
+.fab:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.site-footer { padding-bottom: 140px; }
+@media (min-width: 900px) { .site-footer { padding-bottom: 72px; } }
+@media (max-width: 640px) { .fab { width: 46px; height: 46px; } .fab svg { width: 22px; height: 22px; } }
