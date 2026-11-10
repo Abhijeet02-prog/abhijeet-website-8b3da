@@ -619,6 +619,15 @@
     @media (max-width: 980px) { body::after { background: rgba(var(--shade), 0.84); } }
     .content p, .content li { color: var(--soft); }
     .content .where, .content .entry-date, .content .count { color: var(--muted); }
+      /* Profile photo: ID-card style tilted oval with a brass edge (Nov 2026).
+       Drawn in CSS so it stays crisp at any size. */
+    .av-oval { display: inline-block; flex: none; width: var(--av-w, 96px); height: calc(var(--av-w, 96px) * 1.25);
+      filter: drop-shadow(-6px 6px 0 var(--accent)) drop-shadow(0 10px 18px rgba(0, 0, 0, 0.22)); }
+    .av-clip { display: block; width: 100%; height: 100%; border-radius: 50%; overflow: hidden; transform: rotate(28deg); background: #efeae2; }
+    .av-clip img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; transform: rotate(-28deg) scale(1.3); }
+    .rail-id { --av-w: 92px; gap: 22px; padding-left: 8px; }
+    @media (min-width: 981px) and (max-height: 820px) { .rail-id { --av-w: 76px; } }
+    @media (max-width: 640px) { .rail-id { --av-w: 76px; } }
   </style>
 </head>
 
@@ -649,7 +658,7 @@
     <aside class="rail" aria-label="Profile summary">
       <div>
         <div class="rail-id">
-          <picture><source srcset="assets/abhijeet-portrait-oval.webp" type="image/webp"><img class="rail-oval" src="assets/abhijeet-portrait-oval.png" width="600" height="649" alt="Abhijeet Toshniwal" decoding="async"></picture>
+          <span class="av-oval"><span class="av-clip"><picture><source srcset="assets/abhijeet-portrait.webp" type="image/webp"><img src="assets/abhijeet-portrait.jpg" width="480" height="480" alt="Abhijeet Toshniwal" decoding="async"></picture></span></span>
           <div>
             <div class="eyebrow" style="margin-bottom:10px">Profile</div>
             <h1>Abhijeet Toshniwal</h1>

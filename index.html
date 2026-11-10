@@ -3546,6 +3546,17 @@
     .hero-person-text { display: flex; flex-direction: column; align-items: center; gap: 4px; }
     .hero-person-text strong { font-size: 1.35rem; }
     @media (max-width: 980px) { .hero-side { margin-top: 28px; } .hero-oval { width: min(78%, 320px); } }
+      /* Profile photo: ID-card style tilted oval with a brass edge (Nov 2026).
+       Drawn in CSS so it stays crisp at any size. */
+    .av-oval { display: inline-block; flex: none; width: var(--av-w, 96px); height: calc(var(--av-w, 96px) * 1.25);
+      filter: drop-shadow(-6px 6px 0 var(--accent)) drop-shadow(0 10px 18px rgba(0, 0, 0, 0.22)); }
+    .av-clip { display: block; width: 100%; height: 100%; border-radius: 50%; overflow: hidden; transform: rotate(28deg); background: #efeae2; }
+    .av-clip img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; transform: rotate(-28deg) scale(1.3); }
+    .hero-id { display: flex; align-items: center; gap: 22px; padding: 6px 6px 22px 10px; --av-w: 92px; }
+    .hero-id-text { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .hero-id-text strong { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text); line-height: 1.15; }
+    .hero-id-text span { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+    @media (max-width: 640px) { .hero-id { --av-w: 76px; gap: 18px; } .hero-id-text strong { font-size: 1.2rem; } }
   </style>
 </head>
 
@@ -3639,14 +3650,14 @@
         </div>
 
         <div class="hero-side">
-          <figure class="hero-person">
-            <picture><source srcset="assets/abhijeet-portrait-oval.webp" type="image/webp"><img class="hero-oval" src="assets/abhijeet-portrait-oval.png" width="600" height="649" alt="Abhijeet Toshniwal" fetchpriority="high" decoding="async"></picture>
-            <figcaption class="hero-person-text">
+        <div class="hero-panel" aria-label="Current role and track record">
+          <div class="hero-id">
+            <span class="av-oval"><span class="av-clip"><picture><source srcset="assets/abhijeet-portrait.webp" type="image/webp"><img src="assets/abhijeet-portrait.jpg" width="480" height="480" alt="Abhijeet Toshniwal" fetchpriority="high" decoding="async"></picture></span></span>
+            <div class="hero-id-text">
               <strong>Abhijeet Toshniwal</strong>
               <span>Engineer → Marketer · Aurangabad</span>
-            </figcaption>
-          </figure>
-        <div class="hero-panel" aria-label="Current role and track record">
+            </div>
+          </div>
           <a class="mini-card now-role" href="profile.html#experience">
             <div class="mini-top">
               <span class="now-label"><span class="now-dot" aria-hidden="true"></span>Current role</span>
