@@ -40,7 +40,7 @@ def head(title, desc, path, og, ld, og_type="website", extra=""):
 <script>{THEME_JS}</script>
 <link rel="preload" href="/assets/inter-400.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="/assets/lora-var.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=3">
+<link rel="stylesheet" href="/assets/site.css?v=4">
 <script src="/assets/site.js?v=2" defer></script>
 <meta name="theme-color" content="#f6f3ed" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#111316" media="(prefers-color-scheme: dark)">
