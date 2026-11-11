@@ -3601,6 +3601,11 @@
     }
     .pt-box .pt-cta.btn:hover { background: none; transform: none; color: var(--text); }
     .pt-side .pt-box > span:not(.pt-label):last-of-type { margin-bottom: 18px; }
+      /* "Open the full briefing": same quiet footer link as "View full profile" (Nov 2026). */
+    .nt-foot { margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--line); }
+    .nt-cta { display: inline-flex; align-items: center; min-height: 44px; color: var(--accent); font-size: 0.95rem; font-weight: 700; text-decoration: none; }
+    .nt-cta:hover { color: var(--text); }
+    .nt-cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
   </style>
 </head>
 
@@ -3896,7 +3901,7 @@
         </div>
         <div class="nt-foot">
           <span class="nt-edition" id="newsTeaserMeta">Today’s edition</span>
-          <a class="btn btn-secondary" href="news.html">Open the full briefing →</a>
+          <a class="nt-cta" href="news.html">Open the full briefing →</a>
         </div>
       </div>
     </section>
